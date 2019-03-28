@@ -1,13 +1,24 @@
 package jeffersonmca.com.github.gerenciadorambiente.modelo;
 
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@Entity
 public class Periodo {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "per_codigo")
     private Integer codigo;
+    
+    @Column(name = "per_ano")
     private Integer ano;
+    
+    @Column(name = "per_semestre")
     private enumSemestre semestre;
 
     public Periodo() {

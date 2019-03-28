@@ -1,17 +1,37 @@
 package jeffersonmca.com.github.gerenciadorambiente.modelo;
 
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 
+@Entity
 public class Turma {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "tur_codigo")
     private Integer codigo;
+    
+    @Column(name = "tur_nome")
     private String nome;
+    
+    @JoinColumn(name = "tur_disCodigo")
     private Disciplina fkDisciplina;
+    
+    @JoinColumn(name = "tur_perCodigo")
     private Periodo fkPeriodo;
+    
+    @JoinColumn(name = "tur_proCodigo")
     private Pessoa fkProfessor;
+    
+    @JoinColumn(name = "tur_aulCodigo")
     private Aula fkAula;
+    
+    @JoinColumn(name = "tur_aluCodigo")
     private Pessoa fkaluno;
 
     public Turma() {

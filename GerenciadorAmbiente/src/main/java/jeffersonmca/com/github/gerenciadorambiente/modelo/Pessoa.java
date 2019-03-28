@@ -1,14 +1,28 @@
 package jeffersonmca.com.github.gerenciadorambiente.modelo;
 
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 
+@Entity
 public class Pessoa {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "pes_codigo")
     private Integer codigo;
+    
+    @Column(name = "pes_nome")
     private String nome;
+    
+    @Column(name = "pes_email")
     private String email;
+    
+    @Column(name = "pes_tipoPessoa")
     private enumTipoPessoa tipoPessoa;
 
     public Pessoa() {

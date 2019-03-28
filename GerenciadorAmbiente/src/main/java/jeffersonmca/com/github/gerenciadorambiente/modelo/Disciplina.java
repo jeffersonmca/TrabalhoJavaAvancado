@@ -1,14 +1,28 @@
 package jeffersonmca.com.github.gerenciadorambiente.modelo;
 
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 
+@Entity
 public class Disciplina {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "dis_codigo")
     private Integer codigo;
+    
+    @Column(name = "dis_nome")
     private String nome;
+    
+    @Column(name = "dis_cargaHoraria")
     private Integer cargaHoraria;
+    
+    @JoinColumn(name = "dis_curCodigo")
     private Curso fkCurso;
 
     public Disciplina() {
