@@ -5,11 +5,11 @@ import javax.persistence.EntityManager;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Periodo;
 import jeffersonmca.com.github.gerenciadorambiente.util.Conexao;
 
-public class PeriodoDAO {
+public class DAOPeriodo {
     
     private EntityManager em;
 
-    public PeriodoDAO() {
+    public DAOPeriodo() {
        em = Conexao.getConexao();
     }
 

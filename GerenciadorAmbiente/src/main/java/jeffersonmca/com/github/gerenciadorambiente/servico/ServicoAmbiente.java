@@ -6,11 +6,11 @@ import jeffersonmca.com.github.gerenciadorambiente.dao.AmbienteDAO;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ServicoExcecao;
 import jeffersonmca.com.github.gerenciadorambiente.validacao.Validacao;
 
-public class AmbienteServico {
+public class ServicoAmbiente {
     
     private AmbienteDAO dao;
 
-    public AmbienteServico() {
+    public ServicoAmbiente() {
        dao = new AmbienteDAO();
     }
     

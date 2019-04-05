@@ -5,11 +5,11 @@ import javax.persistence.EntityManager;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Aula;
 import jeffersonmca.com.github.gerenciadorambiente.util.Conexao;
 
-public class AulaDAO {
+public class DAOAula {
     
     private EntityManager em;
 
-    public AulaDAO() {
+    public DAOAula() {
        em = Conexao.getConexao();
     }
 

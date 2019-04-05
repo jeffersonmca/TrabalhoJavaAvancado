@@ -1,8 +1,8 @@
 package jeffersonmca.com.github.gerenciadorambiente.visao;
 
-public class PeriodoVisao extends javax.swing.JFrame {
+public class VisaoTurma extends javax.swing.JFrame {
 
-    public PeriodoVisao() {
+    public VisaoTurma() {
         initComponents();
     }
 

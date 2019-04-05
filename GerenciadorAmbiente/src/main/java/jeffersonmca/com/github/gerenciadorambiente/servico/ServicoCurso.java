@@ -5,11 +5,11 @@ import jeffersonmca.com.github.gerenciadorambiente.modelo.Curso;
 import jeffersonmca.com.github.gerenciadorambiente.dao.CursoDAO;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ServicoExcecao;
 
-public class CursoServico {
+public class ServicoCurso {
     
     private CursoDAO dao;
 
-    public CursoServico() {
+    public ServicoCurso() {
        dao = new CursoDAO();
     }
     

@@ -5,11 +5,11 @@ import javax.persistence.EntityManager;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Ambiente;
 import jeffersonmca.com.github.gerenciadorambiente.util.Conexao;
 
-public class AmbienteDAO {
+public class DAOAmbiente {
     
     private EntityManager em;
 
-    public AmbienteDAO() {
+    public DAOAmbiente() {
        em = Conexao.getConexao();
     }
 

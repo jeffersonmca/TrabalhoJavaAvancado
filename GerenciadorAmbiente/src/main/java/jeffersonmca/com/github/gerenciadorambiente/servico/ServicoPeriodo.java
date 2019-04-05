@@ -5,11 +5,11 @@ import jeffersonmca.com.github.gerenciadorambiente.modelo.Periodo;
 import jeffersonmca.com.github.gerenciadorambiente.dao.PeriodoDAO;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ServicoExcecao;
 
-public class PeriodoServico {
+public class ServicoPeriodo {
     
     private PeriodoDAO dao;
 
-    public PeriodoServico() {
+    public ServicoPeriodo() {
        dao = new PeriodoDAO();
     }
     

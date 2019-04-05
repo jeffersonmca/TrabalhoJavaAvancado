@@ -5,11 +5,11 @@ import jeffersonmca.com.github.gerenciadorambiente.modelo.Pessoa;
 import jeffersonmca.com.github.gerenciadorambiente.dao.PessoaDAO;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ServicoExcecao;
 
-public class PessoaServico {
+public class ServicoPessoa {
     
     private PessoaDAO dao;
 
-    public PessoaServico() {
+    public ServicoPessoa() {
        dao = new PessoaDAO();
     }
     

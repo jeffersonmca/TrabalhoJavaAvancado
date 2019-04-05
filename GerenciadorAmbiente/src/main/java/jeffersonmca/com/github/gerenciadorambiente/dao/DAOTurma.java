@@ -5,11 +5,11 @@ import javax.persistence.EntityManager;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Turma;
 import jeffersonmca.com.github.gerenciadorambiente.util.Conexao;
 
-public class TurmaDAO {
+public class DAOTurma {
     
     private EntityManager em;
 
-    public TurmaDAO() {
+    public DAOTurma() {
        em = Conexao.getConexao();
     }
 

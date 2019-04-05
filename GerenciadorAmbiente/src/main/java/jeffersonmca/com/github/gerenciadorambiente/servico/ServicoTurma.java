@@ -5,11 +5,11 @@ import jeffersonmca.com.github.gerenciadorambiente.modelo.Turma;
 import jeffersonmca.com.github.gerenciadorambiente.dao.TurmaDAO;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ServicoExcecao;
 
-public class TurmaServico {
+public class ServicoTurma {
     
     private TurmaDAO dao;
 
-    public TurmaServico() {
+    public ServicoTurma() {
        dao = new TurmaDAO();
     }
     

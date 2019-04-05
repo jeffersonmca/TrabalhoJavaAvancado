@@ -5,11 +5,11 @@ import jeffersonmca.com.github.gerenciadorambiente.modelo.Disciplina;
 import jeffersonmca.com.github.gerenciadorambiente.dao.DisciplinaDAO;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ServicoExcecao;
 
-public class DisciplinaServico {
+public class ServicoDisciplina {
     
     private DisciplinaDAO dao;
 
-    public DisciplinaServico() {
+    public ServicoDisciplina() {
        dao = new DisciplinaDAO();
     }
     
