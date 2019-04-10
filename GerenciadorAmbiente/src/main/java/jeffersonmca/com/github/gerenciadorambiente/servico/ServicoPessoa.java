@@ -2,18 +2,18 @@ package jeffersonmca.com.github.gerenciadorambiente.servico;
 
 import java.util.List;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Pessoa;
-import jeffersonmca.com.github.gerenciadorambiente.dao.PessoaDAO;
-import jeffersonmca.com.github.gerenciadorambiente.excecoes.ServicoExcecao;
+import jeffersonmca.com.github.gerenciadorambiente.dao.DAOPessoa;
+import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoServico;
 
 public class ServicoPessoa {
     
-    private PessoaDAO dao;
+    private DAOPessoa dao;
 
     public ServicoPessoa() {
-       dao = new PessoaDAO();
+       dao = new DAOPessoa();
     }
     
-    public void salvar(Pessoa entidade) throws ServicoExcecao {
+    public void salvar(Pessoa entidade) throws ExcecaoServico {
         
         /*Regra de negocio*/
         
@@ -24,7 +24,7 @@ public class ServicoPessoa {
         return dao.getAll();
     }
     
-    public Pessoa getPessoa(Integer codigo) throws ServicoExcecao {
+    public Pessoa getPessoa(Integer codigo) throws ExcecaoServico {
         
         /*Regra de negocio*/
         
@@ -32,7 +32,7 @@ public class ServicoPessoa {
     }
     
     
-    public Pessoa remover(Integer codigo) throws ServicoExcecao {
+    public Pessoa remover(Integer codigo) throws ExcecaoServico {
         
         /*Regra de negocio*/
               

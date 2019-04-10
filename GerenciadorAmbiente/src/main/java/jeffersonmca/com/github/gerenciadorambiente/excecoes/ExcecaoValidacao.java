@@ -1,12 +1,12 @@
 package jeffersonmca.com.github.gerenciadorambiente.excecoes;
 
-public class ValidacaoExcecao extends Exception {
+public class ExcecaoValidacao extends Exception {
     
-    public ValidacaoExcecao() {
+    public ExcecaoValidacao() {
         super();
     }
     
-    public ValidacaoExcecao(String msg) {
+    public ExcecaoValidacao(String msg) {
         super(msg);
     }
 }

@@ -2,29 +2,43 @@ package jeffersonmca.com.github.gerenciadorambiente.servico;
 
 import java.util.List;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Aula;
-import jeffersonmca.com.github.gerenciadorambiente.dao.AulaDAO;
-import jeffersonmca.com.github.gerenciadorambiente.excecoes.ServicoExcecao;
+import jeffersonmca.com.github.gerenciadorambiente.dao.DAOAula;
+import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoServico;
+import jeffersonmca.com.github.gerenciadorambiente.validacao.Validacao;
 
 public class ServicoAula {
     
-    private AulaDAO dao;
+    private DAOAula dao;
 
     public ServicoAula() {
-       dao = new AulaDAO();
+       dao = new DAOAula();
     }
     
-    public void salvar(Aula entidade) throws ServicoExcecao {
+    public void salvar(Aula instancia) throws ExcecaoServico {
         
         /*Regra de negocio*/
-        
-        dao.salvar(entidade);
+        if (Validacao.Identificador(instancia.getCodigo())) {
+            
+            if (!(Validacao.Hora(instancia.getHorarioInicio()))) {
+                
+                 if (!(Validacao.Hora(instancia.getHorarioTermino()))) {
+                     
+                    if (Validacao.NaturalNaoNulo(instancia.getDiaSemana())) {
+
+                        if (Validacao.Alocado(instancia.getLocalizacao())) {
+
+                            dao.salvar(instancia);
+                        }
+                    }
+            }
+        }
     }
 
     public List<Aula> getAll() {
         return dao.getAll();
     }
     
-    public Aula getAula(Integer codigo) throws ServicoExcecao {
+    public Aula getAula(Integer codigo) throws ExcecaoServico {
         
         /*Regra de negocio*/
         
@@ -32,7 +46,7 @@ public class ServicoAula {
     }
     
     
-    public Aula remover(Integer codigo) throws ServicoExcecao {
+    public Aula remover(Integer codigo) throws ExcecaoServico {
         
         /*Regra de negocio*/
               

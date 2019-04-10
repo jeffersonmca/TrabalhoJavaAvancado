@@ -2,18 +2,18 @@ package jeffersonmca.com.github.gerenciadorambiente.servico;
 
 import java.util.List;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Turma;
-import jeffersonmca.com.github.gerenciadorambiente.dao.TurmaDAO;
-import jeffersonmca.com.github.gerenciadorambiente.excecoes.ServicoExcecao;
+import jeffersonmca.com.github.gerenciadorambiente.dao.DAOTurma;
+import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoServico;
 
 public class ServicoTurma {
     
-    private TurmaDAO dao;
+    private DAOTurma dao;
 
     public ServicoTurma() {
-       dao = new TurmaDAO();
+       dao = new DAOTurma();
     }
     
-    public void salvar(Turma entidade) throws ServicoExcecao {
+    public void salvar(Turma entidade) throws ExcecaoServico {
         
         /*Regra de negocio*/
         
@@ -24,7 +24,7 @@ public class ServicoTurma {
         return dao.getAll();
     }
     
-    public Turma getTurma(Integer codigo) throws ServicoExcecao {
+    public Turma getTurma(Integer codigo) throws ExcecaoServico {
         
         /*Regra de negocio*/
         
@@ -32,7 +32,7 @@ public class ServicoTurma {
     }
     
     
-    public Turma remover(Integer codigo) throws ServicoExcecao {
+    public Turma remover(Integer codigo) throws ExcecaoServico {
         
         /*Regra de negocio*/
               

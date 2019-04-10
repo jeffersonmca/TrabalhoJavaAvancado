@@ -2,18 +2,18 @@ package jeffersonmca.com.github.gerenciadorambiente.servico;
 
 import java.util.List;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Periodo;
-import jeffersonmca.com.github.gerenciadorambiente.dao.PeriodoDAO;
-import jeffersonmca.com.github.gerenciadorambiente.excecoes.ServicoExcecao;
+import jeffersonmca.com.github.gerenciadorambiente.dao.DAOPeriodo;
+import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoServico;
 
 public class ServicoPeriodo {
     
-    private PeriodoDAO dao;
+    private DAOPeriodo dao;
 
     public ServicoPeriodo() {
-       dao = new PeriodoDAO();
+       dao = new DAOPeriodo();
     }
     
-    public void salvar(Periodo entidade) throws ServicoExcecao {
+    public void salvar(Periodo entidade) throws ExcecaoServico {
         
         /*Regra de negocio*/
         
@@ -24,7 +24,7 @@ public class ServicoPeriodo {
         return dao.getAll();
     }
     
-    public Periodo getPeriodo(Integer codigo) throws ServicoExcecao {
+    public Periodo getPeriodo(Integer codigo) throws ExcecaoServico {
         
         /*Regra de negocio*/
         
@@ -32,7 +32,7 @@ public class ServicoPeriodo {
     }
     
     
-    public Periodo remover(Integer codigo) throws ServicoExcecao {
+    public Periodo remover(Integer codigo) throws ExcecaoServico {
         
         /*Regra de negocio*/
               

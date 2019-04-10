@@ -1,12 +1,12 @@
 package jeffersonmca.com.github.gerenciadorambiente.excecoes;
 
-public class ServicoExcecao extends Exception {
+public class ExcecaoServico extends Exception {
 
-    public ServicoExcecao() {
+    public ExcecaoServico() {
         super();
     }
     
-    public ServicoExcecao(String msg) {
+    public ExcecaoServico(String msg) {
         super(msg);
     }
 }

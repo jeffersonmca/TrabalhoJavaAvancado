@@ -1,5 +1,11 @@
 package jeffersonmca.com.github.gerenciadorambiente.validacao;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Date;
+import jeffersonmca.com.github.gerenciadorambiente.modelo.enumDiaSemana;
+
 public class Validacao {
 
     public Validacao() { 
@@ -65,4 +71,36 @@ public class Validacao {
         
         return false;
     }
+    public static boolean Data(String data) {
+        // Argumento esta vazio?
+        if (Alocado(data)) {
+            //esta no formato correto
+            try{
+                DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate d = LocalDate.parse(data, formato);
+                return true;
+            }catch(DateTimeParseException erro){
+                return false;
+            }
+        }
+        return false;
+    }
+    public static boolean Hora(Date hora) {
+        
+        // Argumento esta vazio?
+        if (Alocado(hora)) {
+           return true;
+        }
+        
+        return false;
+    }
+    public static boolean DiaSemana(enumDiaSemana diaSemana) {
+        
+        // Argumento esta vazio?
+        if (Alocado(diaSemana)) {               
+            return true;
+        }      
+        return false;
+    }
+    
 }
