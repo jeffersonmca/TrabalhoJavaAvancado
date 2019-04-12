@@ -1,6 +1,8 @@
 package jeffersonmca.com.github.gerenciadorambiente.servico;
 
 import java.util.List;
+
+import jeffersonmca.com.github.gerenciadorambiente.modelo.Ambiente;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Aula;
 import jeffersonmca.com.github.gerenciadorambiente.dao.DAOAula;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoServico;
@@ -17,21 +19,19 @@ public class ServicoAula {
     public void salvar(Aula instancia) throws ExcecaoServico {
         
         /*Regra de negocio*/
-        if (Validacao.Identificador(instancia.getCodigo())) {
+    	if (Validacao.Identificador(instancia.getCodigo())) {
             
-            if (!(Validacao.Hora(instancia.getHorarioInicio()))) {
+    		if (!(Validacao.Hora(instancia.getHorarioInicio()))) {
                 
-                 if (!(Validacao.Hora(instancia.getHorarioTermino()))) {
+    			if (!(Validacao.Hora(instancia.getHorarioTermino()))) {
                      
-                    if (Validacao.NaturalNaoNulo(instancia.getDiaSemana())) {
+    				if (Validacao.Alocado(instancia.getDiaSemana())) {
 
-                        if (Validacao.Alocado(instancia.getLocalizacao())) {
-
-                            dao.salvar(instancia);
-                        }
+                        dao.salvar(instancia);
                     }
-            }
-        }
+    			}
+    		}
+    	}
     }
 
     public List<Aula> getAll() {
@@ -41,15 +41,27 @@ public class ServicoAula {
     public Aula getAula(Integer codigo) throws ExcecaoServico {
         
         /*Regra de negocio*/
-        
-        return dao.getAula(codigo);
+    	if (Validacao.Identificador(codigo)) {
+    		return dao.getAula(codigo);
+    	}
+    	
+    	return null;
     }
     
     
     public Aula remover(Integer codigo) throws ExcecaoServico {
         
         /*Regra de negocio*/
-              
-        return dao.remover(codigo);
-    } 
+    	if (Validacao.Identificador(codigo)) {
+            
+            Aula aux = dao.getAula(codigo);
+            
+            // Esta no BD?
+            if (Validacao.Alocado(aux)) {
+                return dao.remover(codigo);
+            }
+        }
+        
+        return null;
+    }
 }

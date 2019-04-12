@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Disciplina {
@@ -22,6 +24,7 @@ public class Disciplina {
     @Column(name = "dis_cargaHoraria")
     private Integer cargaHoraria;
     
+    @ManyToOne
     @JoinColumn(name = "dis_curCodigo")
     private Curso fkCurso;
 

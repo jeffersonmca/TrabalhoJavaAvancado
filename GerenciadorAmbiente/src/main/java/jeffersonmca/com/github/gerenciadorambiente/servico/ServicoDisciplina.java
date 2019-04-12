@@ -1,7 +1,10 @@
 package jeffersonmca.com.github.gerenciadorambiente.servico;
 
 import java.util.List;
+
+import jeffersonmca.com.github.gerenciadorambiente.modelo.Curso;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Disciplina;
+import jeffersonmca.com.github.gerenciadorambiente.validacao.Validacao;
 import jeffersonmca.com.github.gerenciadorambiente.dao.DAODisciplina;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoServico;
 
@@ -27,15 +30,27 @@ public class ServicoDisciplina {
     public Disciplina getDisciplina(Integer codigo) throws ExcecaoServico {
         
         /*Regra de negocio*/
-        
-        return dao.getDisciplina(codigo);
+    	if (Validacao.Identificador(codigo)) {
+    		return dao.getDisciplina(codigo);
+    	}
+    	
+    	return null;
     }
     
     
     public Disciplina remover(Integer codigo) throws ExcecaoServico {
         
-        /*Regra de negocio*/
-              
-        return dao.remover(codigo);
-    } 
+    	/*Regra de negocio*/
+    	if (Validacao.Identificador(codigo)) {
+            
+            Disciplina aux = dao.getDisciplina(codigo);
+            
+            // Esta no BD?
+            if (Validacao.Alocado(aux)) {
+                return dao.remover(codigo);
+            }
+        }
+        
+        return null;
+    }
 }

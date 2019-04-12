@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Curso {
@@ -19,6 +20,7 @@ public class Curso {
     @Column(name = "cur_codigo")
     private String nome;
     
+    @ManyToOne
     @JoinColumn(name = "cur_perCodigo")
     private Periodo fkPeriodo;
 

@@ -1,5 +1,6 @@
 package jeffersonmca.com.github.gerenciadorambiente.modelo;
 
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,6 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Turma {
@@ -19,142 +24,159 @@ public class Turma {
     @Column(name = "tur_nome")
     private String nome;
     
-    @JoinColumn(name = "tur_disCodigo")
+    @OneToOne
+    @JoinColumn(name = "tur_disCodigo", referencedColumnName = "dis_codigo")
     private Disciplina fkDisciplina;
     
+    @ManyToOne
     @JoinColumn(name = "tur_perCodigo")
     private Periodo fkPeriodo;
     
+    @ManyToOne
     @JoinColumn(name = "tur_proCodigo")
     private Pessoa fkProfessor;
     
-    @JoinColumn(name = "tur_aulCodigo")
-    private Aula fkAula;
+    @OneToMany
+    private List<Aula> aulas;
     
-    @JoinColumn(name = "tur_aluCodigo")
-    private Pessoa fkaluno;
+    @ManyToMany(mappedBy="turmas")
+    private List<Pessoa> alunos;
 
     public Turma() {
         
     }
 
-    public Turma(Integer codigo, String nome, Disciplina fkDisciplina, Periodo fkPeriodo, Pessoa fkProfessor, Aula fkAula, Pessoa fkaluno) {
-        this.codigo = codigo;
-        this.nome = nome;
-        this.fkDisciplina = fkDisciplina;
-        this.fkPeriodo = fkPeriodo;
-        this.fkProfessor = fkProfessor;
-        this.fkAula = fkAula;
-        this.fkaluno = fkaluno;
-    }
+	public Turma(Integer codigo, String nome, Disciplina fkDisciplina, Periodo fkPeriodo, Pessoa fkProfessor,
+			List<Aula> aulas, List<Pessoa> alunos) {
+		this.codigo = codigo;
+		this.nome = nome;
+		this.fkDisciplina = fkDisciplina;
+		this.fkPeriodo = fkPeriodo;
+		this.fkProfessor = fkProfessor;
+		this.aulas = aulas;
+		this.alunos = alunos;
+	}
 
-    public Integer getCodigo() {
-        return codigo;
-    }
+	public Integer getCodigo() {
+		return codigo;
+	}
 
-    public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
-    }
+	public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public Disciplina getFkDisciplina() {
-        return fkDisciplina;
-    }
+	public Disciplina getFkDisciplina() {
+		return fkDisciplina;
+	}
 
-    public void setFkDisciplina(Disciplina fkDisciplina) {
-        this.fkDisciplina = fkDisciplina;
-    }
+	public void setFkDisciplina(Disciplina fkDisciplina) {
+		this.fkDisciplina = fkDisciplina;
+	}
 
-    public Periodo getFkPeriodo() {
-        return fkPeriodo;
-    }
+	public Periodo getFkPeriodo() {
+		return fkPeriodo;
+	}
 
-    public void setFkPeriodo(Periodo fkPeriodo) {
-        this.fkPeriodo = fkPeriodo;
-    }
+	public void setFkPeriodo(Periodo fkPeriodo) {
+		this.fkPeriodo = fkPeriodo;
+	}
 
-    public Pessoa getFkProfessor() {
-        return fkProfessor;
-    }
+	public Pessoa getFkProfessor() {
+		return fkProfessor;
+	}
 
-    public void setFkProfessor(Pessoa fkProfessor) {
-        this.fkProfessor = fkProfessor;
-    }
+	public void setFkProfessor(Pessoa fkProfessor) {
+		this.fkProfessor = fkProfessor;
+	}
 
-    public Aula getFkAula() {
-        return fkAula;
-    }
+	public List<Aula> getAulas() {
+		return aulas;
+	}
 
-    public void setFkAula(Aula fkAula) {
-        this.fkAula = fkAula;
-    }
+	public void setAulas(List<Aula> aulas) {
+		this.aulas = aulas;
+	}
 
-    public Pessoa getFkaluno() {
-        return fkaluno;
-    }
+	public List<Pessoa> getAlunos() {
+		return alunos;
+	}
 
-    public void setFkaluno(Pessoa fkaluno) {
-        this.fkaluno = fkaluno;
-    }
+	public void setAlunos(List<Pessoa> alunos) {
+		this.alunos = alunos;
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 89 * hash + Objects.hashCode(this.codigo);
-        hash = 89 * hash + Objects.hashCode(this.nome);
-        hash = 89 * hash + Objects.hashCode(this.fkDisciplina);
-        hash = 89 * hash + Objects.hashCode(this.fkPeriodo);
-        hash = 89 * hash + Objects.hashCode(this.fkProfessor);
-        hash = 89 * hash + Objects.hashCode(this.fkAula);
-        hash = 89 * hash + Objects.hashCode(this.fkaluno);
-        return hash;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((alunos == null) ? 0 : alunos.hashCode());
+		result = prime * result + ((aulas == null) ? 0 : aulas.hashCode());
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		result = prime * result + ((fkDisciplina == null) ? 0 : fkDisciplina.hashCode());
+		result = prime * result + ((fkPeriodo == null) ? 0 : fkPeriodo.hashCode());
+		result = prime * result + ((fkProfessor == null) ? 0 : fkProfessor.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		return result;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Turma other = (Turma) obj;
-        if (!Objects.equals(this.nome, other.nome)) {
-            return false;
-        }
-        if (!Objects.equals(this.codigo, other.codigo)) {
-            return false;
-        }
-        if (!Objects.equals(this.fkDisciplina, other.fkDisciplina)) {
-            return false;
-        }
-        if (!Objects.equals(this.fkPeriodo, other.fkPeriodo)) {
-            return false;
-        }
-        if (!Objects.equals(this.fkProfessor, other.fkProfessor)) {
-            return false;
-        }
-        if (!Objects.equals(this.fkAula, other.fkAula)) {
-            return false;
-        }
-        if (!Objects.equals(this.fkaluno, other.fkaluno)) {
-            return false;
-        }
-        return true;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Turma))
+			return false;
+		Turma other = (Turma) obj;
+		if (alunos == null) {
+			if (other.alunos != null)
+				return false;
+		} else if (!alunos.equals(other.alunos))
+			return false;
+		if (aulas == null) {
+			if (other.aulas != null)
+				return false;
+		} else if (!aulas.equals(other.aulas))
+			return false;
+		if (codigo == null) {
+			if (other.codigo != null)
+				return false;
+		} else if (!codigo.equals(other.codigo))
+			return false;
+		if (fkDisciplina == null) {
+			if (other.fkDisciplina != null)
+				return false;
+		} else if (!fkDisciplina.equals(other.fkDisciplina))
+			return false;
+		if (fkPeriodo == null) {
+			if (other.fkPeriodo != null)
+				return false;
+		} else if (!fkPeriodo.equals(other.fkPeriodo))
+			return false;
+		if (fkProfessor == null) {
+			if (other.fkProfessor != null)
+				return false;
+		} else if (!fkProfessor.equals(other.fkProfessor))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		return true;
+	}
 
-    @Override
-    public String toString() {
-        return "Turma{\n" + "\tcodigo=" + codigo + ",\n\tnome=" + nome + ",\n\tfkDisciplina=" + fkDisciplina + ",\n\tfkPeriodo=" + fkPeriodo + ",\n\tfkProfessor=" + fkProfessor + ",\n\tfkAula=" + fkAula + ",\n\tfkaluno=" + fkaluno + "\n}";
-    }
+	@Override
+	public String toString() {
+		return "Turma [codigo=" + codigo + ", nome=" + nome + ", fkDisciplina=" + fkDisciplina + ", fkPeriodo="
+				+ fkPeriodo + ", fkProfessor=" + fkProfessor + ", aulas=" + aulas + ", alunos=" + alunos + "]";
+	}
 }

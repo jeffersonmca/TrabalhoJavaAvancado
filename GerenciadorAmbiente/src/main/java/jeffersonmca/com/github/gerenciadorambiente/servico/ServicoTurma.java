@@ -1,7 +1,10 @@
 package jeffersonmca.com.github.gerenciadorambiente.servico;
 
 import java.util.List;
+
+import jeffersonmca.com.github.gerenciadorambiente.modelo.Pessoa;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Turma;
+import jeffersonmca.com.github.gerenciadorambiente.validacao.Validacao;
 import jeffersonmca.com.github.gerenciadorambiente.dao.DAOTurma;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoServico;
 
@@ -27,15 +30,27 @@ public class ServicoTurma {
     public Turma getTurma(Integer codigo) throws ExcecaoServico {
         
         /*Regra de negocio*/
-        
-        return dao.getTurma(codigo);
+    	if (Validacao.Identificador(codigo)) {
+    		return dao.getTurma(codigo);
+    	}
+    	
+    	return null;
     }
     
     
     public Turma remover(Integer codigo) throws ExcecaoServico {
         
         /*Regra de negocio*/
-              
-        return dao.remover(codigo);
+    	if (Validacao.Identificador(codigo)) {
+            
+            Turma aux = dao.getTurma(codigo);
+            
+            // Esta no BD?
+            if (Validacao.Alocado(aux)) {
+                return dao.remover(codigo);
+            }
+        }
+        
+        return null;
     } 
 }

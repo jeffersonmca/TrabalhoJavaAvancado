@@ -71,10 +71,13 @@ public class Validacao {
         
         return false;
     }
+    
     public static boolean Data(String data) {
+    	
         // Argumento esta vazio?
         if (Alocado(data)) {
-            //esta no formato correto
+        	
+            // Esta no formato correto ?
             try{
                 DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 LocalDate d = LocalDate.parse(data, formato);
@@ -83,8 +86,10 @@ public class Validacao {
                 return false;
             }
         }
+        
         return false;
     }
+    
     public static boolean Hora(Date hora) {
         
         // Argumento esta vazio?
@@ -94,13 +99,4 @@ public class Validacao {
         
         return false;
     }
-    public static boolean DiaSemana(enumDiaSemana diaSemana) {
-        
-        // Argumento esta vazio?
-        if (Alocado(diaSemana)) {               
-            return true;
-        }      
-        return false;
-    }
-    
 }

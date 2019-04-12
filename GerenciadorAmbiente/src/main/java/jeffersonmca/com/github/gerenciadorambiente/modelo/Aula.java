@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Aula {
@@ -26,6 +28,7 @@ public class Aula {
     @Column(name = "aul_enumDiaSemana")
     private enumDiaSemana diaSemana;
     
+    @ManyToOne
     @JoinColumn(name = "aul_ambCodigo")
     private Ambiente fkAmbiente;
 

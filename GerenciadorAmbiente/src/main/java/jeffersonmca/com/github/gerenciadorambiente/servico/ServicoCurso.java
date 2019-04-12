@@ -1,7 +1,10 @@
 package jeffersonmca.com.github.gerenciadorambiente.servico;
 
 import java.util.List;
+
+import jeffersonmca.com.github.gerenciadorambiente.modelo.Aula;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Curso;
+import jeffersonmca.com.github.gerenciadorambiente.validacao.Validacao;
 import jeffersonmca.com.github.gerenciadorambiente.dao.DAOCurso;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoServico;
 
@@ -27,15 +30,27 @@ public class ServicoCurso {
     public Curso getCurso(Integer codigo) throws ExcecaoServico {
         
         /*Regra de negocio*/
-        
-        return dao.getCurso(codigo);
+    	if (Validacao.Identificador(codigo)) {
+    		return dao.getCurso(codigo);
+    	}
+    	
+    	return null;
     }
     
     
     public Curso remover(Integer codigo) throws ExcecaoServico {
         
         /*Regra de negocio*/
-              
-        return dao.remover(codigo);
-    } 
+    	if (Validacao.Identificador(codigo)) {
+            
+            Curso aux = dao.getCurso(codigo);
+            
+            // Esta no BD?
+            if (Validacao.Alocado(aux)) {
+                return dao.remover(codigo);
+            }
+        }
+        
+        return null;
+    }
 }
