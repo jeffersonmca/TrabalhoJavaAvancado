@@ -4,7 +4,6 @@ import java.util.List;
 
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Disciplina;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Periodo;
-import jeffersonmca.com.github.gerenciadorambiente.validacao.Validacao;
 import jeffersonmca.com.github.gerenciadorambiente.dao.DAOPeriodo;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoServico;
 
@@ -16,11 +15,12 @@ public class ServicoPeriodo {
        dao = new DAOPeriodo();
     }
     
-    public void salvar(Periodo entidade) throws ExcecaoServico {
+    public void salvar(Periodo instancia) throws ExcecaoServico {
         
         /*Regra de negocio*/
-        
-        dao.salvar(entidade);
+        if (Validacao.Periodo(instancia)) {
+        	dao.salvar(instancia);
+        }
     }
 
     public List<Periodo> getAll() {

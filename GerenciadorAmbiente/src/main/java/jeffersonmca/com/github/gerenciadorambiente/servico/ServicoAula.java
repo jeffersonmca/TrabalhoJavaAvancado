@@ -6,7 +6,6 @@ import jeffersonmca.com.github.gerenciadorambiente.modelo.Ambiente;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Aula;
 import jeffersonmca.com.github.gerenciadorambiente.dao.DAOAula;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoServico;
-import jeffersonmca.com.github.gerenciadorambiente.validacao.Validacao;
 
 public class ServicoAula {
     
@@ -19,19 +18,9 @@ public class ServicoAula {
     public void salvar(Aula instancia) throws ExcecaoServico {
         
         /*Regra de negocio*/
-    	if (Validacao.Identificador(instancia.getCodigo())) {
-            
-    		if (!(Validacao.Hora(instancia.getHorarioInicio()))) {
-                
-    			if (!(Validacao.Hora(instancia.getHorarioTermino()))) {
-                     
-    				if (Validacao.Alocado(instancia.getDiaSemana())) {
-
-                        dao.salvar(instancia);
-                    }
-    			}
-    		}
-    	}
+    	if (Validacao.Aula(instancia)) {
+			dao.salvar(instancia);
+		}
     }
 
     public List<Aula> getAll() {

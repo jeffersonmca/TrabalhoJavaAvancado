@@ -4,7 +4,6 @@ import java.util.List;
 
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Pessoa;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Turma;
-import jeffersonmca.com.github.gerenciadorambiente.validacao.Validacao;
 import jeffersonmca.com.github.gerenciadorambiente.dao.DAOTurma;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoServico;
 
@@ -16,11 +15,12 @@ public class ServicoTurma {
        dao = new DAOTurma();
     }
     
-    public void salvar(Turma entidade) throws ExcecaoServico {
+    public void salvar(Turma instancia) throws ExcecaoServico {
         
         /*Regra de negocio*/
-        
-        dao.salvar(entidade);
+        if (Validacao.Turma(instancia)) {
+        	dao.salvar(instancia);
+        }
     }
 
     public List<Turma> getAll() {

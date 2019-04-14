@@ -4,7 +4,6 @@ import java.util.List;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Ambiente;
 import jeffersonmca.com.github.gerenciadorambiente.dao.DAOAmbiente;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoServico;
-import jeffersonmca.com.github.gerenciadorambiente.validacao.Validacao;
 
 public class ServicoAmbiente {
     
@@ -17,18 +16,8 @@ public class ServicoAmbiente {
     public void salvar(Ambiente instancia) throws ExcecaoServico {
         
         /*Regra de negocio*/
-        if (Validacao.Identificador(instancia.getCodigo())) {
-            
-            if (!(Validacao.Vazio(instancia.getNome()))) {
-                
-                if (Validacao.NaturalNaoNulo(instancia.getCapacidade())) {
-                    
-                    if (Validacao.Alocado(instancia.getLocalizacao())) {
-                        
-                        dao.salvar(instancia);
-                    }
-                }
-            }
+        if (Validacao.Ambiente(instancia)) {                        
+            dao.salvar(instancia);
         }
     }
 

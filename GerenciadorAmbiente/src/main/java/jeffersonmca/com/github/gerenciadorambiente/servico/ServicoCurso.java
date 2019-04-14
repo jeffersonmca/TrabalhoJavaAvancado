@@ -4,7 +4,6 @@ import java.util.List;
 
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Aula;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Curso;
-import jeffersonmca.com.github.gerenciadorambiente.validacao.Validacao;
 import jeffersonmca.com.github.gerenciadorambiente.dao.DAOCurso;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoServico;
 
@@ -16,11 +15,12 @@ public class ServicoCurso {
        dao = new DAOCurso();
     }
     
-    public void salvar(Curso entidade) throws ExcecaoServico {
+    public void salvar(Curso instancia) throws ExcecaoServico {
         
         /*Regra de negocio*/
-        
-        dao.salvar(entidade);
+    	if (Validacao.Curso(instancia)) {
+    		dao.salvar(instancia);
+    	}
     }
 
     public List<Curso> getAll() {
