@@ -5,16 +5,14 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.List;
-
-import jeffersonmca.com.github.gerenciadorambiente.modelo.enumDiaSemana;
-import jeffersonmca.com.github.gerenciadorambiente.modelo.enumTipoPessoa;
+import jeffersonmca.com.github.gerenciadorambiente.modelo.EnumTipoPessoa;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Ambiente;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Aula;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Curso;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Disciplina;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Periodo;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Pessoa;
-import jeffersonmca.com.github.gerenciadorambiente.modelo.Turma
+import jeffersonmca.com.github.gerenciadorambiente.modelo.Turma;
 
 class Validacao {
 
@@ -183,8 +181,12 @@ class Validacao {
 		
 							// Verifica se o ambiente eh valido
 							if (Validacao.Ambiente(instancia.getFkAmbiente())) {
-								
-								return true;
+							
+								// Verifica se a turma eh valida
+								if (Validacao.Turma(instancia.getTurma())) {
+									
+									return true;
+								}
 							}
 		                }
 					}
@@ -313,23 +315,9 @@ class Validacao {
 						if (Validacao.Periodo(instancia.getFkPeriodo())) {
 							
 							// Verifica se o professor eh valido
-							if (Validacao.Professor(instancia.getFkProfessor())) {
-								
-								// Verifica se 
-								if (Validacao.Aulas(instancia.getAulas())) {
-									
-									if (Validacao.Pessoas(instancia.getAlunos())) {
-								
-	//							aulas 
-	//							outro vetor
-	//							
-	//							refatorar enuns
-								
+							if (Validacao.Professor(instancia.getFkProfessor())) {								
 	
-										return true;
-									}
-								
-								}
+								return true;
 							}
 						}
 					}
@@ -345,7 +333,7 @@ class Validacao {
         // 
         if (Pessoa(instancia)) {
         	
-        	if (instancia.getTipoPessoa().toString().equals(enumTipoPessoa.PROFESSOR)) {
+        	if (instancia.getTipoPessoa().toString().equals(EnumTipoPessoa.PROFESSOR)) {
         		
         		return true;
         	}
@@ -359,7 +347,7 @@ class Validacao {
         // 
         if (Pessoa(instancia)) {
         	
-        	if (instancia.getTipoPessoa().toString().equals(enumTipoPessoa.ALUNO)) {
+        	if (instancia.getTipoPessoa().toString().equals(EnumTipoPessoa.ALUNO)) {
         		
         		return true;
         	}

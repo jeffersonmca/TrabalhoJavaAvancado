@@ -13,10 +13,10 @@ public class DAOTurma {
        em = Conexao.getConexao();
     }
 
-    public void salvar(Turma entidade) {
+    public void salvar(Turma instancia) {
         
         em.getTransaction().begin();
-        em.merge(entidade);
+        em.merge(instancia);
         em.getTransaction().commit();
     }
 

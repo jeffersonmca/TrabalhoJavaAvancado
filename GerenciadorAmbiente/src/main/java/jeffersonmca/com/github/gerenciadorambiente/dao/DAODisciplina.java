@@ -13,10 +13,10 @@ public class DAODisciplina {
        em = Conexao.getConexao();
     }
 
-    public void salvar(Disciplina entidade) {
+    public void salvar(Disciplina instancia) {
         
         em.getTransaction().begin();
-        em.merge(entidade);
+        em.merge(instancia);
         em.getTransaction().commit();
     }
 

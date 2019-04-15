@@ -13,10 +13,10 @@ public class DAOAula {
        em = Conexao.getConexao();
     }
 
-    public void salvar(Aula entidade) {
+    public void salvar(Aula instancia) {
         
         em.getTransaction().begin();
-        em.merge(entidade);
+        em.merge(instancia);
         em.getTransaction().commit();
     }
 

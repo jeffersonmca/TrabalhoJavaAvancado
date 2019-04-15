@@ -1,6 +1,5 @@
 package jeffersonmca.com.github.gerenciadorambiente.modelo;
 
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,15 +11,19 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Curso {
  
+	// Constantes contendo o tamanho das colunas no banco de dados
+	private final int TAMANHO_NOME = 80;
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cur_codigo")
     private Integer codigo;
     
-    @Column(name = "cur_codigo")
+    @Column(name = "cur_codigo", nullable = false, length = TAMANHO_NOME)
     private String nome;
     
     @ManyToOne
+    @Column(nullable = false)
     @JoinColumn(name = "cur_perCodigo")
     private Periodo fkPeriodo;
 
@@ -59,39 +62,31 @@ public class Curso {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + Objects.hashCode(this.codigo);
-        hash = 53 * hash + Objects.hashCode(this.nome);
-        hash = 53 * hash + Objects.hashCode(this.fkPeriodo);
-        return hash;
-    }
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		return result;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Curso other = (Curso) obj;
-        if (!Objects.equals(this.nome, other.nome)) {
-            return false;
-        }
-        if (!Objects.equals(this.codigo, other.codigo)) {
-            return false;
-        }
-        if (!Objects.equals(this.fkPeriodo, other.fkPeriodo)) {
-            return false;
-        }
-        return true;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Curso))
+			return false;
+		Curso other = (Curso) obj;
+		if (codigo == null) {
+			if (other.codigo != null)
+				return false;
+		} else if (!codigo.equals(other.codigo))
+			return false;
+		return true;
+	}
 
-    @Override
+	@Override
     public String toString() {
         return "Curso{\n" + "\tcodigo=" + codigo + ",\n\tnome=" + nome + ",\n\tfkPeriodo=" + fkPeriodo + "\n}";
     }

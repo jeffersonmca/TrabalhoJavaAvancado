@@ -1,134 +1,139 @@
 package jeffersonmca.com.github.gerenciadorambiente.modelo;
 
 import java.util.Date;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Aula {
  
+	// Constantes contendo o tamanho das colunas no banco de dados
+	private final int TAMANHO_ENUM = 15;
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "aul_codigo")
-    private Integer codigo;
-    
-    @Column(name = "aul_horarioInicio")
+    private Integer codigo;    
+
+    @Temporal(TemporalType.TIME)
+    @Column(name = "aul_horarioInicio", nullable = false)
     private Date horarioInicio;
-    
-    @Column(name = "aul_horarioTermino")
+
+    @Temporal(TemporalType.TIME)
+    @Column(name = "aul_horarioTermino", nullable = false)
     private Date horarioTermino;
-    
-    @Column(name = "aul_enumDiaSemana")
-    private enumDiaSemana diaSemana;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "aul_enumDiaSemana", nullable = false, length = TAMANHO_ENUM)
+    private EnumDiaSemana diaSemana;
     
     @ManyToOne
+    @Column(nullable = false)
     @JoinColumn(name = "aul_ambCodigo")
     private Ambiente fkAmbiente;
+    
+    @ManyToOne
+    @Column(nullable = false)
+    private Turma turma;
 
     public Aula() {
         
     }
-    
-    public Aula(Integer codigo, Date horarioInicio, Date horarioTermino, enumDiaSemana diaSemana, Ambiente fkAmbiente) {
-        this.codigo = codigo;
-        this.horarioInicio = horarioInicio;
-        this.horarioTermino = horarioTermino;
-        this.diaSemana = diaSemana;
-        this.fkAmbiente = fkAmbiente;
-    }
 
-    public Integer getCodigo() {
-        return codigo;
-    }
+	public Aula(Integer codigo, Date horarioInicio, Date horarioTermino, EnumDiaSemana diaSemana, Ambiente fkAmbiente, Turma turma) {
+		this.codigo = codigo;
+		this.horarioInicio = horarioInicio;
+		this.horarioTermino = horarioTermino;
+		this.diaSemana = diaSemana;
+		this.fkAmbiente = fkAmbiente;
+		this.turma = turma;
+	}
 
-    public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
-    }
+	public Integer getCodigo() {
+		return codigo;
+	}
 
-    public Date getHorarioInicio() {
-        return horarioInicio;
-    }
+	public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
+	}
 
-    public void setHorarioInicio(Date horarioInicio) {
-        this.horarioInicio = horarioInicio;
-    }
+	public Date getHorarioInicio() {
+		return horarioInicio;
+	}
 
-    public Date getHorarioTermino() {
-        return horarioTermino;
-    }
+	public void setHorarioInicio(Date horarioInicio) {
+		this.horarioInicio = horarioInicio;
+	}
 
-    public void setHorarioTermino(Date horarioTermino) {
-        this.horarioTermino = horarioTermino;
-    }
+	public Date getHorarioTermino() {
+		return horarioTermino;
+	}
 
-    public enumDiaSemana getDiaSemana() {
-        return diaSemana;
-    }
+	public void setHorarioTermino(Date horarioTermino) {
+		this.horarioTermino = horarioTermino;
+	}
 
-    public void setDiaSemana(enumDiaSemana diaSemana) {
-        this.diaSemana = diaSemana;
-    }
+	public EnumDiaSemana getDiaSemana() {
+		return diaSemana;
+	}
 
-    public Ambiente getFkAmbiente() {
-        return fkAmbiente;
-    }
+	public void setDiaSemana(EnumDiaSemana diaSemana) {
+		this.diaSemana = diaSemana;
+	}
 
-    public void setFkAmbiente(Ambiente fkAmbiente) {
-        this.fkAmbiente = fkAmbiente;
-    }
-    
-    
+	public Ambiente getFkAmbiente() {
+		return fkAmbiente;
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.codigo);
-        hash = 89 * hash + Objects.hashCode(this.horarioInicio);
-        hash = 89 * hash + Objects.hashCode(this.horarioTermino);
-        hash = 89 * hash + Objects.hashCode(this.diaSemana);
-        hash = 89 * hash + Objects.hashCode(this.fkAmbiente);
-        return hash;
-    }
+	public void setFkAmbiente(Ambiente fkAmbiente) {
+		this.fkAmbiente = fkAmbiente;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Aula other = (Aula) obj;
-        if (!Objects.equals(this.codigo, other.codigo)) {
-            return false;
-        }
-        if (!Objects.equals(this.horarioInicio, other.horarioInicio)) {
-            return false;
-        }
-        if (!Objects.equals(this.horarioTermino, other.horarioTermino)) {
-            return false;
-        }
-        if (this.diaSemana != other.diaSemana) {
-            return false;
-        }
-        if (!Objects.equals(this.fkAmbiente, other.fkAmbiente)) {
-            return false;
-        }
-        return true;
-    }
+	public Turma getTurma() {
+		return turma;
+	}
 
-    @Override
-    public String toString() {
-        return "Aula{\n" + "\tcodigo=" + codigo + ",\n\thorarioInicio=" + horarioInicio + ",\n\thorarioTermino=" + horarioTermino + ",\n\tdiaSemana=" + diaSemana + ",\n\tfkAmbiente=" + fkAmbiente + "\n}";
-    }
+	public void setTurma(Turma turma) {
+		this.turma = turma;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Aula))
+			return false;
+		Aula other = (Aula) obj;
+		if (codigo == null) {
+			if (other.codigo != null)
+				return false;
+		} else if (!codigo.equals(other.codigo))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Aula [codigo=" + codigo + ", horarioInicio=" + horarioInicio + ", horarioTermino=" + horarioTermino
+				+ ", diaSemana=" + diaSemana + ", fkAmbiente=" + fkAmbiente + ", turma=" + turma + "]";
+	}
 }

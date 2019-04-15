@@ -1,7 +1,6 @@
 package jeffersonmca.com.github.gerenciadorambiente.modelo;
 
 import java.util.List;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -16,20 +15,25 @@ import javax.persistence.ManyToMany;
 @Entity
 public class Pessoa {
     
+	// Constantes contendo o tamanho das colunas no banco de dados
+	private final int TAMANHO_NOME = 50;
+	private final int TAMANHO_EMAIL = 75;
+	private final int TAMANHO_ENUM = 15;
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pes_codigo")
     private Integer codigo;
     
-    @Column(name = "pes_nome")
+    @Column(name = "pes_nome", nullable = false, length = TAMANHO_NOME)
     private String nome;
     
-    @Column(name = "pes_email")
+    @Column(name = "pes_email", nullable = false, length = TAMANHO_EMAIL)
     private String email;
     
     @Enumerated(EnumType.STRING)
-    @Column(name = "pes_tipoPessoa")
-    private enumTipoPessoa tipoPessoa;
+    @Column(name = "pes_tipoPessoa", nullable = false, length = TAMANHO_ENUM)
+    private EnumTipoPessoa tipoPessoa;
     
     @ManyToMany
 	@JoinTable(name = "aluno_turma",
@@ -41,7 +45,7 @@ public class Pessoa {
         
     }
 
-	public Pessoa(Integer codigo, String nome, String email, enumTipoPessoa tipoPessoa, List<Turma> turmas) {
+	public Pessoa(Integer codigo, String nome, String email, EnumTipoPessoa tipoPessoa, List<Turma> turmas) {
 		this.codigo = codigo;
 		this.nome = nome;
 		this.email = email;
@@ -73,11 +77,11 @@ public class Pessoa {
 		this.email = email;
 	}
 
-	public enumTipoPessoa getTipoPessoa() {
+	public EnumTipoPessoa getTipoPessoa() {
 		return tipoPessoa;
 	}
 
-	public void setTipoPessoa(enumTipoPessoa tipoPessoa) {
+	public void setTipoPessoa(EnumTipoPessoa tipoPessoa) {
 		this.tipoPessoa = tipoPessoa;
 	}
 
@@ -94,10 +98,6 @@ public class Pessoa {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + ((tipoPessoa == null) ? 0 : tipoPessoa.hashCode());
-		result = prime * result + ((turmas == null) ? 0 : turmas.hashCode());
 		return result;
 	}
 
@@ -114,23 +114,6 @@ public class Pessoa {
 			if (other.codigo != null)
 				return false;
 		} else if (!codigo.equals(other.codigo))
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		if (tipoPessoa != other.tipoPessoa)
-			return false;
-		if (turmas == null) {
-			if (other.turmas != null)
-				return false;
-		} else if (!turmas.equals(other.turmas))
 			return false;
 		return true;
 	}

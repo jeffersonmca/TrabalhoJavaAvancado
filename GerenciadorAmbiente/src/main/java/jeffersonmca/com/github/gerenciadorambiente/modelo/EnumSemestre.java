@@ -1,5 +1,5 @@
 package jeffersonmca.com.github.gerenciadorambiente.modelo;
 
-public enum enumTipoPessoa {
-    ALUNO, PROFESSOR;
+public enum EnumSemestre {
+    PRIMEIRO, SEGUNDO;
 }

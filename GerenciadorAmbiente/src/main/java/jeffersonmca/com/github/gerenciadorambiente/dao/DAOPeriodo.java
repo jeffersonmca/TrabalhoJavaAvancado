@@ -13,10 +13,10 @@ public class DAOPeriodo {
        em = Conexao.getConexao();
     }
 
-    public void salvar(Periodo entidade) {
+    public void salvar(Periodo instancia) {
         
         em.getTransaction().begin();
-        em.merge(entidade);
+        em.merge(instancia);
         em.getTransaction().commit();
     }
 

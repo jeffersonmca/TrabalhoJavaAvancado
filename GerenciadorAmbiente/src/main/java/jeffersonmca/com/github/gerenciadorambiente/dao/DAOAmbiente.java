@@ -13,23 +13,23 @@ public class DAOAmbiente {
        em = Conexao.getConexao();
     }
 
-    public void salvar(Ambiente entidade){
+    public void salvar(Ambiente instancia) {
         
         em.getTransaction().begin();
-        em.merge(entidade);
+        em.merge(instancia);
         em.getTransaction().commit();
     }
 
-    public List<Ambiente> getAll(){
+    public List<Ambiente> getAll() {
         return em.createQuery("Select a from Ambiente a", Ambiente.class).getResultList();
     }
     
-    public Ambiente getAmbiente(Integer codigo){
+    public Ambiente getAmbiente(Integer codigo) {
         return em.find(Ambiente.class, codigo);
     }
     
     
-    public Ambiente remover(Integer codigo){
+    public Ambiente remover(Integer codigo) {
         
         Ambiente aux = getAmbiente(codigo);
         

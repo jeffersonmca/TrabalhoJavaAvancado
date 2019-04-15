@@ -1,7 +1,5 @@
 package jeffersonmca.com.github.gerenciadorambiente.modelo;
 
-import java.util.List;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,34 +7,38 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 
 @Entity
 public class Ambiente {
     
+	// Constantes contendo o tamanho das colunas no banco de dados
+	private final int TAMANHO_NOME = 40;
+	private final int TAMANHO_ENUM = 20;
+	private final int TAMANHO_LOCALIZACAO = 600;
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "amb_codigo")
     private Integer codigo;
-    
-    @Column(name = "amb_nome")
+
+    @Column(name = "amb_nome", nullable = false, length = TAMANHO_NOME)
     private String nome;
     
     @Enumerated(EnumType.STRING)
-    @Column(name = "amb_tipCodigo")
-    private enumTipoAmbiente tipoAmbiente;
+    @Column(name = "amb_tipCodigo", length = TAMANHO_ENUM)
+    private EnumTipoAmbiente tipoAmbiente;
     
     @Column(name = "amb_capacidade")
     private Integer capacidade;
     
-    @Column(name = "amb_localizacao")
+    @Column(name = "amb_localizacao", length = TAMANHO_LOCALIZACAO)
     private String localizacao;
 
     public Ambiente() {
         
     }
 
-    public Ambiente(Integer codigo, String nome, enumTipoAmbiente tipoAmbiente, Integer capacidade, String localizacao) {
+    public Ambiente(Integer codigo, String nome, EnumTipoAmbiente tipoAmbiente, Integer capacidade, String localizacao) {
         this.codigo = codigo;
         this.nome = nome;
         this.tipoAmbiente = tipoAmbiente;
@@ -60,11 +62,11 @@ public class Ambiente {
         this.nome = nome;
     }
 
-    public enumTipoAmbiente getTipoAmbiente() {
+    public EnumTipoAmbiente getTipoAmbiente() {
         return tipoAmbiente;
     }
 
-    public void setTipoAmbiente(enumTipoAmbiente tipoAmbiente) {
+    public void setTipoAmbiente(EnumTipoAmbiente tipoAmbiente) {
         this.tipoAmbiente = tipoAmbiente;
     }
 
@@ -85,47 +87,31 @@ public class Ambiente {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 67 * hash + Objects.hashCode(this.codigo);
-        hash = 67 * hash + Objects.hashCode(this.nome);
-        hash = 67 * hash + Objects.hashCode(this.tipoAmbiente);
-        hash = 67 * hash + Objects.hashCode(this.capacidade);
-        hash = 67 * hash + Objects.hashCode(this.localizacao);
-        return hash;
-    }
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		return result;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Ambiente other = (Ambiente) obj;
-        if (!Objects.equals(this.nome, other.nome)) {
-            return false;
-        }
-        if (!Objects.equals(this.localizacao, other.localizacao)) {
-            return false;
-        }
-        if (!Objects.equals(this.codigo, other.codigo)) {
-            return false;
-        }
-        if (this.tipoAmbiente != other.tipoAmbiente) {
-            return false;
-        }
-        if (!Objects.equals(this.capacidade, other.capacidade)) {
-            return false;
-        }
-        return true;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Ambiente))
+			return false;
+		Ambiente other = (Ambiente) obj;
+		if (codigo == null) {
+			if (other.codigo != null)
+				return false;
+		} else if (!codigo.equals(other.codigo))
+			return false;
+		return true;
+	}
 
-    @Override
+	@Override
     public String toString() {
         return "Ambiente{\n" + "\tcodigo=" + codigo + ",\n\tnome=" + nome + ",\n\ttipoAmbiente=" + tipoAmbiente + ",\n\tcapacidade=" + capacidade + ",\n\tlocalizacao=" + localizacao + "\n}";
     }

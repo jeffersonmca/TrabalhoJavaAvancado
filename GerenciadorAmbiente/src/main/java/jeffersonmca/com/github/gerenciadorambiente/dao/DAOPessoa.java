@@ -13,10 +13,10 @@ public class DAOPessoa {
        em = Conexao.getConexao();
     }
 
-    public void salvar(Pessoa entidade) {
+    public void salvar(Pessoa instancia) {
         
         em.getTransaction().begin();
-        em.merge(entidade);
+        em.merge(instancia);
         em.getTransaction().commit();
     }
 

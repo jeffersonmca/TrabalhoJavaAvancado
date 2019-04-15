@@ -1,6 +1,5 @@
 package jeffersonmca.com.github.gerenciadorambiente.modelo;
 
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,23 +11,26 @@ import javax.persistence.Id;
 @Entity
 public class Periodo {
     
+	// Constantes contendo o tamanho das colunas no banco de dados
+	private final int TAMANHO_ENUM = 10;
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "per_codigo")
     private Integer codigo;
     
-    @Column(name = "per_ano")
+    @Column(name = "per_ano", nullable = false)
     private Integer ano;
     
     @Enumerated(EnumType.STRING)
-    @Column(name = "per_semestre")
-    private enumSemestre semestre;
+    @Column(name = "per_semestre", nullable = false, length = TAMANHO_ENUM)
+    private EnumSemestre semestre;
 
     public Periodo() {
         
     }
 
-    public Periodo(Integer codigo, Integer ano, enumSemestre semestre) {
+    public Periodo(Integer codigo, Integer ano, EnumSemestre semestre) {
         this.codigo = codigo;
         this.ano = ano;
         this.semestre = semestre;
@@ -50,48 +52,40 @@ public class Periodo {
         this.ano = ano;
     }
 
-    public enumSemestre getSemestre() {
+    public EnumSemestre getSemestre() {
         return semestre;
     }
 
-    public void setSemestre(enumSemestre semestre) {
+    public void setSemestre(EnumSemestre semestre) {
         this.semestre = semestre;
     }
 
     @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 19 * hash + Objects.hashCode(this.codigo);
-        hash = 19 * hash + Objects.hashCode(this.ano);
-        hash = 19 * hash + Objects.hashCode(this.semestre);
-        return hash;
-    }
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		return result;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Periodo other = (Periodo) obj;
-        if (!Objects.equals(this.codigo, other.codigo)) {
-            return false;
-        }
-        if (!Objects.equals(this.ano, other.ano)) {
-            return false;
-        }
-        if (this.semestre != other.semestre) {
-            return false;
-        }
-        return true;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Periodo))
+			return false;
+		Periodo other = (Periodo) obj;
+		if (codigo == null) {
+			if (other.codigo != null)
+				return false;
+		} else if (!codigo.equals(other.codigo))
+			return false;
+		return true;
+	}
 
-    @Override
+	@Override
     public String toString() {
         return "Periodo{\n" + "\tcodigo=" + codigo + ",\n\tano=" + ano + ",\n\tsemestre=" + semestre + "\n}";
     }

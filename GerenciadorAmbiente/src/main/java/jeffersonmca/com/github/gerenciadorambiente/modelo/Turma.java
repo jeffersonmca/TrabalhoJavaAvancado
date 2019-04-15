@@ -1,13 +1,13 @@
 package jeffersonmca.com.github.gerenciadorambiente.modelo;
 
 import java.util.List;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -16,45 +16,50 @@ import javax.persistence.OneToOne;
 @Entity
 public class Turma {
     
+	// Constantes contendo o tamanho das colunas no banco de dados
+	private final int TAMANHO_NOME = 100;
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tur_codigo")
     private Integer codigo;
     
-    @Column(name = "tur_nome")
+    @Column(name = "tur_nome", nullable = false, length = TAMANHO_NOME)
     private String nome;
     
     @OneToOne
-    @JoinColumn(name = "tur_disCodigo", referencedColumnName = "dis_codigo")
+    @JoinColumn(name = "tur_disCodigo", referencedColumnName = "dis_codigo", nullable = false)
     private Disciplina fkDisciplina;
     
     @ManyToOne
-    @JoinColumn(name = "tur_perCodigo")
+    @JoinColumn(name = "tur_perCodigo", nullable = false)
     private Periodo fkPeriodo;
     
     @ManyToOne
-    @JoinColumn(name = "tur_proCodigo")
+    @JoinColumn(name = "tur_proCodigo", nullable = false)
     private Pessoa fkProfessor;
     
-    @OneToMany
-    private List<Aula> aulas;
+    @ManyToMany
+	@JoinTable(name = "aluno_turma",
+			joinColumns = @JoinColumn(name = "turma_id"),
+			inverseJoinColumns = @JoinColumn(name = "aluno_id"))
+	private List<Pessoa> alunos;
     
-    @ManyToMany(mappedBy="turmas")
-    private List<Pessoa> alunos;
+    @OneToMany(mappedBy = "turma")
+    private List<Aula> aulas;
 
     public Turma() {
         
     }
 
-	public Turma(Integer codigo, String nome, Disciplina fkDisciplina, Periodo fkPeriodo, Pessoa fkProfessor,
-			List<Aula> aulas, List<Pessoa> alunos) {
+	public Turma(Integer codigo, String nome, Disciplina fkDisciplina, Periodo fkPeriodo, Pessoa fkProfessor, List<Pessoa> alunos, List<Aula> aulas) {
 		this.codigo = codigo;
 		this.nome = nome;
 		this.fkDisciplina = fkDisciplina;
 		this.fkPeriodo = fkPeriodo;
 		this.fkProfessor = fkProfessor;
-		this.aulas = aulas;
 		this.alunos = alunos;
+		this.aulas = aulas;
 	}
 
 	public Integer getCodigo() {
@@ -97,14 +102,6 @@ public class Turma {
 		this.fkProfessor = fkProfessor;
 	}
 
-	public List<Aula> getAulas() {
-		return aulas;
-	}
-
-	public void setAulas(List<Aula> aulas) {
-		this.aulas = aulas;
-	}
-
 	public List<Pessoa> getAlunos() {
 		return alunos;
 	}
@@ -113,17 +110,19 @@ public class Turma {
 		this.alunos = alunos;
 	}
 
+	public List<Aula> getAulas() {
+		return aulas;
+	}
+
+	public void setAulas(List<Aula> aulas) {
+		this.aulas = aulas;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((alunos == null) ? 0 : alunos.hashCode());
-		result = prime * result + ((aulas == null) ? 0 : aulas.hashCode());
 		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-		result = prime * result + ((fkDisciplina == null) ? 0 : fkDisciplina.hashCode());
-		result = prime * result + ((fkPeriodo == null) ? 0 : fkPeriodo.hashCode());
-		result = prime * result + ((fkProfessor == null) ? 0 : fkProfessor.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
 
@@ -136,40 +135,10 @@ public class Turma {
 		if (!(obj instanceof Turma))
 			return false;
 		Turma other = (Turma) obj;
-		if (alunos == null) {
-			if (other.alunos != null)
-				return false;
-		} else if (!alunos.equals(other.alunos))
-			return false;
-		if (aulas == null) {
-			if (other.aulas != null)
-				return false;
-		} else if (!aulas.equals(other.aulas))
-			return false;
 		if (codigo == null) {
 			if (other.codigo != null)
 				return false;
 		} else if (!codigo.equals(other.codigo))
-			return false;
-		if (fkDisciplina == null) {
-			if (other.fkDisciplina != null)
-				return false;
-		} else if (!fkDisciplina.equals(other.fkDisciplina))
-			return false;
-		if (fkPeriodo == null) {
-			if (other.fkPeriodo != null)
-				return false;
-		} else if (!fkPeriodo.equals(other.fkPeriodo))
-			return false;
-		if (fkProfessor == null) {
-			if (other.fkProfessor != null)
-				return false;
-		} else if (!fkProfessor.equals(other.fkProfessor))
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
 			return false;
 		return true;
 	}
@@ -177,6 +146,6 @@ public class Turma {
 	@Override
 	public String toString() {
 		return "Turma [codigo=" + codigo + ", nome=" + nome + ", fkDisciplina=" + fkDisciplina + ", fkPeriodo="
-				+ fkPeriodo + ", fkProfessor=" + fkProfessor + ", aulas=" + aulas + ", alunos=" + alunos + "]";
+				+ fkPeriodo + ", fkProfessor=" + fkProfessor + ", alunos=" + alunos + ", aulas=" + aulas + "]";
 	}
 }
