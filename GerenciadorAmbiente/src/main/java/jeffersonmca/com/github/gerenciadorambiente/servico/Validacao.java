@@ -6,6 +6,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.List;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.EnumTipoPessoa;
+import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoValidacao;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Ambiente;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Aula;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Curso;
@@ -143,7 +144,7 @@ class Validacao {
         return false;
     }
     
-    public static boolean Ambiente(Ambiente instancia) {
+    public static boolean Ambiente(Ambiente instancia) throws ExcecaoValidacao {
         
     	// Argumento esta vazio?
         if (Alocado(instancia)) {
@@ -159,10 +160,10 @@ class Validacao {
 		    }
         }
 			
-		return false;
+		throw new ExcecaoValidacao("Houve erro ao validar o ambiente!");
     }
     
-    public static boolean Aula(Aula instancia) {
+    public static boolean Aula(Aula instancia) throws ExcecaoValidacao {
     	
     	// Argumento esta vazio?
         if (Alocado(instancia)) {
@@ -187,6 +188,9 @@ class Validacao {
 									
 									return true;
 								}
+								
+							}else {
+								throw new ExcecaoValidacao("Houve erro ao validar o ambiente!"); 
 							}
 		                }
 					}
@@ -194,7 +198,7 @@ class Validacao {
 			}
         }
         
-	    return false;
+        throw new ExcecaoValidacao("Houve erro ao validar a aula!");
     }
     
     public static boolean Curso(Curso instancia) {
@@ -356,7 +360,7 @@ class Validacao {
         return false;
     }
     
-    public static boolean Aulas(List<Aula> lista) {
+    public static boolean Aulas(List<Aula> lista) throws ExcecaoValidacao {
         
         // Argumento esta vazio?
         if (!(Vazio(lista))) {
@@ -365,14 +369,14 @@ class Validacao {
         		
 				if (!(Aula(instancia))) {
 					
-					return false;
+					throw new ExcecaoValidacao("Houve erro ao validar a aula!");
 				}
 			}
         	
         	return true;
         }
         
-        return false;
+        throw new ExcecaoValidacao("Houve erro ao validar a aula!");
     }
     
     public static boolean Pessoas(List<Pessoa> lista) {

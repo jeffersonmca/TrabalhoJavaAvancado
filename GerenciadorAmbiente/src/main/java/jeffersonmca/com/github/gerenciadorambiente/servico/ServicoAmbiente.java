@@ -3,7 +3,9 @@ package jeffersonmca.com.github.gerenciadorambiente.servico;
 import java.util.List;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Ambiente;
 import jeffersonmca.com.github.gerenciadorambiente.dao.DAOAmbiente;
+import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoDAO;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoServico;
+import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoValidacao;
 
 public class ServicoAmbiente {
     
@@ -13,12 +15,22 @@ public class ServicoAmbiente {
        dao = new DAOAmbiente();
     }
     
-    public void salvar(Ambiente instancia) throws ExcecaoServico {
+    public void salvar(Ambiente instancia) throws ExcecaoDAO, ExcecaoValidacao, ExcecaoServico {
         
-        /*Regra de negocio*/
-        if (Validacao.Ambiente(instancia)) {                        
-            dao.salvar(instancia);
-        }
+    	try {
+    		
+	        /*Regra de negocio*/
+	        if (Validacao.Ambiente(instancia)) {
+	        	dao.salvar(instancia);
+	        }
+	        
+    	} catch (ExcecaoDAO e) {
+    		throw new ExcecaoDAO(e.getMessage());
+		} catch (ExcecaoValidacao e) {
+			throw new ExcecaoValidacao(e.getMessage());
+		} catch (Exception e) {
+			throw new ExcecaoServico("Houve erro ao requisitar o salvamento do ambiente!");
+		}
     }
 
     public List<Ambiente> getAll() {

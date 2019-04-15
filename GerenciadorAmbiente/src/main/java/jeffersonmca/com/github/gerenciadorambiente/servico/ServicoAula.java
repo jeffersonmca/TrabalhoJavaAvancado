@@ -1,11 +1,11 @@
 package jeffersonmca.com.github.gerenciadorambiente.servico;
 
 import java.util.List;
-
-import jeffersonmca.com.github.gerenciadorambiente.modelo.Ambiente;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Aula;
 import jeffersonmca.com.github.gerenciadorambiente.dao.DAOAula;
+import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoDAO;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoServico;
+import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoValidacao;
 
 public class ServicoAula {
     
@@ -17,10 +17,16 @@ public class ServicoAula {
     
     public void salvar(Aula instancia) throws ExcecaoServico {
         
-        /*Regra de negocio*/
-    	if (Validacao.Aula(instancia)) {
-			dao.salvar(instancia);
-		}
+    	try {
+    		
+	        /*Regra de negocio*/
+	    	if (Validacao.Aula(instancia)) {
+				dao.salvar(instancia);
+			}
+	    	
+    	} catch (ExcecaoDAO | ExcecaoValidacao e) {
+    		throw new ExcecaoServico(e.getMessage());
+    	}
     }
 
     public List<Aula> getAll() {
