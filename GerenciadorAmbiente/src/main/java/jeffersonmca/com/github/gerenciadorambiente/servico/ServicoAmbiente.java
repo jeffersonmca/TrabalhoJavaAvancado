@@ -3,6 +3,7 @@ package jeffersonmca.com.github.gerenciadorambiente.servico;
 import java.util.List;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Ambiente;
 import jeffersonmca.com.github.gerenciadorambiente.dao.DAOAmbiente;
+import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoConexao;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoDAO;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoServico;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoValidacao;
@@ -11,7 +12,7 @@ public class ServicoAmbiente {
     
     private DAOAmbiente dao;
 
-    public ServicoAmbiente() {
+    public ServicoAmbiente() throws ExcecaoConexao{
        dao = new DAOAmbiente();
     }
     
@@ -33,23 +34,29 @@ public class ServicoAmbiente {
 		}
     }
 
-    public List<Ambiente> getAll() {
+    public List<Ambiente> getAll()throws ExcecaoDAO  {
         return dao.getAll();
     }
     
-    public Ambiente getAmbiente(Integer codigo) throws ExcecaoServico {
-        
-        /*Regra de negocio*/
-        if (Validacao.Identificador(codigo)) {
-            return dao.getAmbiente(codigo);
+    public Ambiente getAmbiente(Integer codigo) throws ExcecaoServico,  ExcecaoDAO {
+        try {
+	        /*Regra de negocio*/
+	        if (Validacao.Identificador(codigo)) {
+	            return dao.getAmbiente(codigo);
+	        }
+	        
+	        return null;
+        }catch(ExcecaoDAO e) {
+        	throw new ExcecaoDAO(e.getMessage());
+        }catch(Exception e){
+            throw new ExcecaoServico("Erro ao procurar um ambiente");
         }
-        
-        return null;
     }
     
     
-    public Ambiente remover(Integer codigo) throws ExcecaoServico {
-        
+    public Ambiente remover(Integer codigo) throws ExcecaoDAO, ExcecaoServico {
+        try {
+        	
         /*Regra de negocio*/
         if (Validacao.Identificador(codigo)) {
             
@@ -62,5 +69,10 @@ public class ServicoAmbiente {
         }
         
         return null;
-    }
+        }catch(ExcecaoDAO e) {
+        	throw e;
+        }catch(Exception e) {
+        	throw new ExcecaoServico("Erro ao remover camada servicos");
+        }
+        }
 }
