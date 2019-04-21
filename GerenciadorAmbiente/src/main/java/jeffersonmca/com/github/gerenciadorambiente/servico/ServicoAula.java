@@ -12,67 +12,70 @@ public class ServicoAula {
     
     private DAOAula dao;
 
-    public ServicoAula()throws ExcecaoConexao {
-       dao = new DAOAula();
+    public ServicoAula() throws ExcecaoConexao{
+        dao = new DAOAula();
     }
     
-    public void salvar(Aula instancia) throws ExcecaoServico, ExcecaoDAO, ExcecaoValidacao {
+    public void salvar(Aula instancia) throws ExcecaoDAO, ExcecaoValidacao, ExcecaoServico {
         
-    	try {
-    		
-	        /*Regra de negocio*/
-	    	if (Validacao.Aula(instancia)) {
-				dao.salvar(instancia);
-			}
-	    	
-    	} catch (ExcecaoDAO e) {
-    		throw e;
-    	}catch(ExcecaoValidacao e) {
-    		throw e;
-    	}catch(Exception e) {
-    		throw new ExcecaoServico("Erro ao Salva Aula, camada servico");
-    	}
+        try {
+            
+            /*Regra de negocio*/
+            if (Validacao.Aula(instancia)) {
+                dao.salvar(instancia);
+            }
+            
+        } catch (ExcecaoDAO|ExcecaoValidacao e) {
+            throw e;
+        } catch (Exception e) {
+            throw new ExcecaoServico("Houve erro ao requisitar o salvamento da aula!");
+        }
     }
 
-    public List<Aula> getAll() throws ExcecaoDAO ,ExcecaoValidacao, ExcecaoServico{
+    public List<Aula> getAll() throws ExcecaoDAO {
         return dao.getAll();
     }
     
-    public Aula getAula(Integer codigo) throws ExcecaoServico, ExcecaoDAO{
-        try {
-	        /*Regra de negocio*/
-	    	if (Validacao.Identificador(codigo)){
-	    		return dao.getAula(codigo);
-	    	}
-	    	
-	    	return null;
+    public Aula getAula(Integer codigo) throws ExcecaoServico,  ExcecaoDAO {
         
-        }catch(ExcecaoDAO e) {
-        	throw e;
-        }catch(Exception e) {
-        	throw new ExcecaoServico("Erro ao pegar Aula Camada Servico");
-        }
-        }
-    
-    
-    public Aula remover(Integer codigo) throws ExcecaoServico,ExcecaoDAO {
         try {
-	        /*Regra de negocio*/
-	    	if (Validacao.Identificador(codigo)) {
-	            
-	            Aula aux = dao.getAula(codigo);
-	            
-	            // Esta no BD?
-	            if (Validacao.Alocado(aux)) {
-	                return dao.remover(codigo);
-	            }
-	        }
-	        
-	        return null;
-        }catch (ExcecaoDAO e) {
-			throw e;
-		}catch (Exception e) {
-			throw new ExcecaoServico("Erro ao remover Camada Servico");
-		}
+            
+            /*Regra de negocio*/
+            if (Validacao.Identificador(codigo)) {
+                return dao.getAula(codigo);
+            }
+            
+            return null;
+            
+        }catch(ExcecaoDAO e) {
+            throw e;
+        }catch(Exception e){
+            throw new ExcecaoServico("Houve erro ao requisitar a busca de uma aula!");
+        }
+    }
+    
+    
+    public Aula remover(Integer codigo) throws ExcecaoDAO, ExcecaoServico {
+        
+        try {
+            
+            /*Regra de negocio*/
+            if (Validacao.Identificador(codigo)) {
+
+                Aula aux = dao.getAula(codigo);
+
+                // Esta no BD?
+                if (Validacao.Alocado(aux)) {
+                    return dao.remover(codigo);
+                }
+            }
+
+            return null;
+            
+        }catch(ExcecaoDAO e) {
+            throw e;
+        }catch(Exception e) {
+            throw new ExcecaoServico("Houve erro ao requisitar a remoção de uma aula!");
+        }
     }
 }

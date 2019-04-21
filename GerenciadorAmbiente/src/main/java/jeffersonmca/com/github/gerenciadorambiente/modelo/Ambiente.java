@@ -7,14 +7,20 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class Ambiente {
     
-	// Constantes contendo o tamanho das colunas no banco de dados
-	private final int TAMANHO_NOME = 40;
-	private final int TAMANHO_ENUM = 20;
-	private final int TAMANHO_LOCALIZACAO = 600;
+    // Constantes contendo o tamanho das colunas no banco de dados
+    @Transient
+    private final int TAMANHO_NOME = 40;
+    
+    @Transient
+    private final int TAMANHO_ENUM = 20;
+    
+    @Transient
+    private final int TAMANHO_LOCALIZACAO = 600;
 	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -87,31 +93,31 @@ public class Ambiente {
     }
 
     @Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-		return result;
-	}
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+        return result;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof Ambiente))
-			return false;
-		Ambiente other = (Ambiente) obj;
-		if (codigo == null) {
-			if (other.codigo != null)
-				return false;
-		} else if (!codigo.equals(other.codigo))
-			return false;
-		return true;
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+                return true;
+        if (obj == null)
+                return false;
+        if (!(obj instanceof Ambiente))
+                return false;
+        Ambiente other = (Ambiente) obj;
+        if (codigo == null) {
+                if (other.codigo != null)
+                        return false;
+        } else if (!codigo.equals(other.codigo))
+                return false;
+        return true;
+    }
 
-	@Override
+    @Override
     public String toString() {
         return "Ambiente{\n" + "\tcodigo=" + codigo + ",\n\tnome=" + nome + ",\n\ttipoAmbiente=" + tipoAmbiente + ",\n\tcapacidade=" + capacidade + ",\n\tlocalizacao=" + localizacao + "\n}";
     }

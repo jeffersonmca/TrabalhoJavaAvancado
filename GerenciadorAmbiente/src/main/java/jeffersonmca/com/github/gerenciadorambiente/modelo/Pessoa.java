@@ -11,14 +11,20 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
 
 @Entity
 public class Pessoa {
     
-	// Constantes contendo o tamanho das colunas no banco de dados
-	private final int TAMANHO_NOME = 50;
-	private final int TAMANHO_EMAIL = 75;
-	private final int TAMANHO_ENUM = 15;
+    // Constantes contendo o tamanho das colunas no banco de dados
+    @Transient
+    private final int TAMANHO_NOME = 50;
+    
+    @Transient
+    private final int TAMANHO_EMAIL = 75;
+    
+    @Transient
+    private final int TAMANHO_ENUM = 15;
 	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,91 +42,91 @@ public class Pessoa {
     private EnumTipoPessoa tipoPessoa;
     
     @ManyToMany
-	@JoinTable(name = "aluno_turma",
-			joinColumns = @JoinColumn(name = "aluno_id"),
-			inverseJoinColumns = @JoinColumn(name = "turma_id"))
-	private List<Turma> turmas;
+    @JoinTable(name = "aluno_turma",
+                    joinColumns = @JoinColumn(name = "aluno_id"),
+                    inverseJoinColumns = @JoinColumn(name = "turma_id"))
+    private List<Turma> turmas;
 
     public Pessoa() {
         
     }
 
-	public Pessoa(Integer codigo, String nome, String email, EnumTipoPessoa tipoPessoa, List<Turma> turmas) {
-		this.codigo = codigo;
-		this.nome = nome;
-		this.email = email;
-		this.tipoPessoa = tipoPessoa;
-		this.turmas = turmas;
-	}
+    public Pessoa(Integer codigo, String nome, String email, EnumTipoPessoa tipoPessoa, List<Turma> turmas) {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.email = email;
+        this.tipoPessoa = tipoPessoa;
+        this.turmas = turmas;
+    }
 
-	public Integer getCodigo() {
-		return codigo;
-	}
+    public Integer getCodigo() {
+        return codigo;
+    }
 
-	public void setCodigo(Integer codigo) {
-		this.codigo = codigo;
-	}
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public EnumTipoPessoa getTipoPessoa() {
-		return tipoPessoa;
-	}
+    public EnumTipoPessoa getTipoPessoa() {
+        return tipoPessoa;
+    }
 
-	public void setTipoPessoa(EnumTipoPessoa tipoPessoa) {
-		this.tipoPessoa = tipoPessoa;
-	}
+    public void setTipoPessoa(EnumTipoPessoa tipoPessoa) {
+        this.tipoPessoa = tipoPessoa;
+    }
 
-	public List<Turma> getTurmas() {
-		return turmas;
-	}
+    public List<Turma> getTurmas() {
+        return turmas;
+    }
 
-	public void setTurmas(List<Turma> turmas) {
-		this.turmas = turmas;
-	}
+    public void setTurmas(List<Turma> turmas) {
+        this.turmas = turmas;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-		return result;
-	}
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+        return result;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof Pessoa))
-			return false;
-		Pessoa other = (Pessoa) obj;
-		if (codigo == null) {
-			if (other.codigo != null)
-				return false;
-		} else if (!codigo.equals(other.codigo))
-			return false;
-		return true;
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+                return true;
+        if (obj == null)
+                return false;
+        if (!(obj instanceof Pessoa))
+                return false;
+        Pessoa other = (Pessoa) obj;
+        if (codigo == null) {
+                if (other.codigo != null)
+                        return false;
+        } else if (!codigo.equals(other.codigo))
+                return false;
+        return true;
+    }
 
-	@Override
-	public String toString() {
-		return "Pessoa [codigo=" + codigo + ", nome=" + nome + ", email=" + email + ", tipoPessoa=" + tipoPessoa
-				+ ", turmas=" + turmas + "]";
-	}
+    @Override
+    public String toString() {
+        return "Pessoa [codigo=" + codigo + ", nome=" + nome + ", email=" + email + ", tipoPessoa=" + tipoPessoa
+                        + ", turmas=" + turmas + "]";
+    }
 }

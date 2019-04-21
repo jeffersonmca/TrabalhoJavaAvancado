@@ -1,7 +1,8 @@
 package jeffersonmca.com.github.gerenciadorambiente.excecoes;
 
-public class ExcecaoConexao extends Exception{
-	public ExcecaoConexao() {
+public class ExcecaoConexao extends Exception {
+    
+    public ExcecaoConexao() {
         super();
     }
     

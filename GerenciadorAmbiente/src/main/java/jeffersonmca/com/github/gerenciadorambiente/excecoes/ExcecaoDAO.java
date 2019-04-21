@@ -2,7 +2,7 @@ package jeffersonmca.com.github.gerenciadorambiente.excecoes;
 
 public class ExcecaoDAO extends Exception {
 
-	public ExcecaoDAO() {
+    public ExcecaoDAO() {
         super();
     }
     

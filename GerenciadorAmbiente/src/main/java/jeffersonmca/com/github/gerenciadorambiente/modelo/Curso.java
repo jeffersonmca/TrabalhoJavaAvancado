@@ -7,12 +7,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 @Entity
 public class Curso {
  
-	// Constantes contendo o tamanho das colunas no banco de dados
-	private final int TAMANHO_NOME = 80;
+    // Constantes contendo o tamanho das colunas no banco de dados
+    @Transient
+    private final int TAMANHO_NOME = 80;
 	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,31 +64,31 @@ public class Curso {
     }
 
     @Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-		return result;
-	}
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+        return result;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof Curso))
-			return false;
-		Curso other = (Curso) obj;
-		if (codigo == null) {
-			if (other.codigo != null)
-				return false;
-		} else if (!codigo.equals(other.codigo))
-			return false;
-		return true;
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+                return true;
+        if (obj == null)
+                return false;
+        if (!(obj instanceof Curso))
+                return false;
+        Curso other = (Curso) obj;
+        if (codigo == null) {
+                if (other.codigo != null)
+                        return false;
+        } else if (!codigo.equals(other.codigo))
+                return false;
+        return true;
+    }
 
-	@Override
+    @Override
     public String toString() {
         return "Curso{\n" + "\tcodigo=" + codigo + ",\n\tnome=" + nome + ",\n\tfkPeriodo=" + fkPeriodo + "\n}";
     }
