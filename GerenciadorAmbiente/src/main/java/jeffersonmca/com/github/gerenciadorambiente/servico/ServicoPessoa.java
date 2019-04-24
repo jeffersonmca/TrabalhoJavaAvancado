@@ -32,17 +32,17 @@ public class ServicoPessoa {
         }
     }
 
-    public List<Pessoa> getAll() throws ExcecaoDAO {
-        return dao.getAll();
+    public List<Pessoa> buscarTodos() throws ExcecaoDAO {
+        return dao.buscarTodos();
     }
     
-    public Pessoa getPessoa(Integer codigo) throws ExcecaoServico,  ExcecaoDAO {
+    public Pessoa buscarPorCodigo(Integer codigo) throws ExcecaoServico,  ExcecaoDAO {
         
         try {
             
             /*Regra de negocio*/
             if (Validacao.Identificador(codigo)) {
-                return dao.getPessoa(codigo);
+                return dao.buscarPorCodigo(codigo);
             }
             
             return null;
@@ -62,7 +62,7 @@ public class ServicoPessoa {
             /*Regra de negocio*/
             if (Validacao.Identificador(codigo)) {
 
-                Pessoa aux = dao.getPessoa(codigo);
+                Pessoa aux = dao.buscarPorCodigo(codigo);
 
                 // Esta no BD?
                 if (Validacao.Alocado(aux)) {

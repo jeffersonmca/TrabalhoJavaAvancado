@@ -32,17 +32,17 @@ public class ServicoTurma {
         }
     }
 
-    public List<Turma> getAll() throws ExcecaoDAO {
-        return dao.getAll();
+    public List<Turma> buscarTodos() throws ExcecaoDAO {
+        return dao.buscarTodos();
     }
     
-    public Turma getTurma(Integer codigo) throws ExcecaoServico,  ExcecaoDAO {
+    public Turma buscarPorCodigo(Integer codigo) throws ExcecaoServico,  ExcecaoDAO {
         
         try {
             
             /*Regra de negocio*/
             if (Validacao.Identificador(codigo)) {
-                return dao.getTurma(codigo);
+                return dao.buscarPorCodigo(codigo);
             }
             
             return null;
@@ -62,7 +62,7 @@ public class ServicoTurma {
             /*Regra de negocio*/
             if (Validacao.Identificador(codigo)) {
 
-                Turma aux = dao.getTurma(codigo);
+                Turma aux = dao.buscarPorCodigo(codigo);
 
                 // Esta no BD?
                 if (Validacao.Alocado(aux)) {

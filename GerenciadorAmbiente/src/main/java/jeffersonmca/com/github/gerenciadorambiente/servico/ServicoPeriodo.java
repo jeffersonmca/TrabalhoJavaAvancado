@@ -32,17 +32,17 @@ public class ServicoPeriodo {
         }
     }
 
-    public List<Periodo> getAll() throws ExcecaoDAO {
-        return dao.getAll();
+    public List<Periodo> buscarTodos() throws ExcecaoDAO {
+        return dao.buscarTodos();
     }
     
-    public Periodo getPeriodo(Integer codigo) throws ExcecaoServico,  ExcecaoDAO {
+    public Periodo buscarPorCodigo(Integer codigo) throws ExcecaoServico,  ExcecaoDAO {
         
         try {
             
             /*Regra de negocio*/
             if (Validacao.Identificador(codigo)) {
-                return dao.getPeriodo(codigo);
+                return dao.buscarPorCodigo(codigo);
             }
             
             return null;
@@ -62,7 +62,7 @@ public class ServicoPeriodo {
             /*Regra de negocio*/
             if (Validacao.Identificador(codigo)) {
 
-                Periodo aux = dao.getPeriodo(codigo);
+                Periodo aux = dao.buscarPorCodigo(codigo);
 
                 // Esta no BD?
                 if (Validacao.Alocado(aux)) {

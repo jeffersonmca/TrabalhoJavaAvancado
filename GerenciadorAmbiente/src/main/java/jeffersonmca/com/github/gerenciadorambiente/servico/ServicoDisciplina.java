@@ -32,17 +32,17 @@ public class ServicoDisciplina {
         }
     }
 
-    public List<Disciplina> getAll() throws ExcecaoDAO {
-        return dao.getAll();
+    public List<Disciplina> buscarTodos() throws ExcecaoDAO {
+        return dao.buscarTodos();
     }
     
-    public Disciplina getDisciplina(Integer codigo) throws ExcecaoServico,  ExcecaoDAO {
+    public Disciplina buscarPorCodigo(Integer codigo) throws ExcecaoServico,  ExcecaoDAO {
         
         try {
             
             /*Regra de negocio*/
             if (Validacao.Identificador(codigo)) {
-                return dao.getDisciplina(codigo);
+                return dao.buscarPorCodigo(codigo);
             }
             
             return null;
@@ -62,7 +62,7 @@ public class ServicoDisciplina {
             /*Regra de negocio*/
             if (Validacao.Identificador(codigo)) {
 
-                Disciplina aux = dao.getDisciplina(codigo);
+                Disciplina aux = dao.buscarPorCodigo(codigo);
 
                 // Esta no BD?
                 if (Validacao.Alocado(aux)) {

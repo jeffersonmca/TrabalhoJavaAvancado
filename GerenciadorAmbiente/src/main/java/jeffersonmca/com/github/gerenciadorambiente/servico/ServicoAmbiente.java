@@ -32,17 +32,17 @@ public class ServicoAmbiente {
         }
     }
 
-    public List<Ambiente> getAll() throws ExcecaoDAO {
-        return dao.getAll();
+    public List<Ambiente> buscarTodos() throws ExcecaoDAO {
+        return dao.buscarTodos();
     }
     
-    public Ambiente getAmbiente(Integer codigo) throws ExcecaoServico,  ExcecaoDAO {
+    public Ambiente buscarPorCodigo(Integer codigo) throws ExcecaoServico,  ExcecaoDAO {
         
         try {
             
             /*Regra de negocio*/
             if (Validacao.Identificador(codigo)) {
-                return dao.getAmbiente(codigo);
+                return dao.buscarPorCodigo(codigo);
             }
             
             return null;
@@ -62,7 +62,7 @@ public class ServicoAmbiente {
             /*Regra de negocio*/
             if (Validacao.Identificador(codigo)) {
 
-                Ambiente aux = dao.getAmbiente(codigo);
+                Ambiente aux = dao.buscarPorCodigo(codigo);
 
                 // Esta no BD?
                 if (Validacao.Alocado(aux)) {

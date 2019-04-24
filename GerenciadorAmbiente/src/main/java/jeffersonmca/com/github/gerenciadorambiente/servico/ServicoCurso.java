@@ -32,17 +32,17 @@ public class ServicoCurso {
         }
     }
 
-    public List<Curso> getAll() throws ExcecaoDAO {
-        return dao.getAll();
+    public List<Curso> buscarTodos() throws ExcecaoDAO {
+        return dao.buscarTodos();
     }
     
-    public Curso getCurso(Integer codigo) throws ExcecaoServico,  ExcecaoDAO {
+    public Curso buscarPorCodigo(Integer codigo) throws ExcecaoServico,  ExcecaoDAO {
         
         try {
             
             /*Regra de negocio*/
             if (Validacao.Identificador(codigo)) {
-                return dao.getCurso(codigo);
+                return dao.buscarPorCodigo(codigo);
             }
             
             return null;
@@ -62,7 +62,7 @@ public class ServicoCurso {
             /*Regra de negocio*/
             if (Validacao.Identificador(codigo)) {
 
-                Curso aux = dao.getCurso(codigo);
+                Curso aux = dao.buscarPorCodigo(codigo);
 
                 // Esta no BD?
                 if (Validacao.Alocado(aux)) {
