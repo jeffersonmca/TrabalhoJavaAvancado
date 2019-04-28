@@ -1,12 +1,22 @@
 package jeffersonmca.com.github.gerenciadorambiente.visao;
 
 import java.awt.Cursor;
+import javax.swing.UIManager;
+import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoAmbiente;
+import jeffersonmca.com.github.gerenciadorambiente.util.Conexao;
 
 public class VisaoLogin extends javax.swing.JFrame {
 
-    public VisaoLogin() {        
+    public VisaoLogin() {
+        
         initComponents();
-        this.setLocationRelativeTo(null);
+        //Conexao.getConexao();
+        ServicoAmbiente servico = new ServicoAmbiente();
+        
+        try {
+         //   servico.buscarPorCodigo(1);
+        } catch (Exception e) {
+        }
     }
 
     /**
@@ -26,10 +36,11 @@ public class VisaoLogin extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         labelRecebimento = new javax.swing.JLabel();
         panelBotoes = new javax.swing.JPanel();
-        buttonSenha = new javax.swing.JButton();
+        buttonSair = new javax.swing.JButton();
         buttonEntrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(null);
 
         panelInformacoes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -68,18 +79,23 @@ public class VisaoLogin extends javax.swing.JFrame {
         panelBotoes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         panelBotoes.setLayout(null);
 
-        buttonSenha.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
-        buttonSenha.setText("Sair");
-        buttonSenha.addMouseListener(new java.awt.event.MouseAdapter() {
+        buttonSair.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
+        buttonSair.setText("Sair");
+        buttonSair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonSenhaMouseEntered(evt);
+                buttonSairMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                buttonSenhaMouseExited(evt);
+                buttonSairMouseExited(evt);
             }
         });
-        panelBotoes.add(buttonSenha);
-        buttonSenha.setBounds(190, 10, 60, 40);
+        buttonSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSairActionPerformed(evt);
+            }
+        });
+        panelBotoes.add(buttonSair);
+        buttonSair.setBounds(190, 10, 60, 40);
 
         buttonEntrar.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
         buttonEntrar.setText("Entrar");
@@ -91,6 +107,11 @@ public class VisaoLogin extends javax.swing.JFrame {
                 buttonEntrarMouseExited(evt);
             }
         });
+        buttonEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEntrarActionPerformed(evt);
+            }
+        });
         panelBotoes.add(buttonEntrar);
         buttonEntrar.setBounds(250, 10, 90, 40);
 
@@ -98,6 +119,7 @@ public class VisaoLogin extends javax.swing.JFrame {
         panelBotoes.setBounds(0, 320, 350, 60);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonEntrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonEntrarMouseExited
@@ -108,13 +130,24 @@ public class VisaoLogin extends javax.swing.JFrame {
         this.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_buttonEntrarMouseEntered
 
-    private void buttonSenhaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSenhaMouseEntered
+    private void buttonSairMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSairMouseEntered
         this.setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_buttonSenhaMouseEntered
+    }//GEN-LAST:event_buttonSairMouseEntered
 
-    private void buttonSenhaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSenhaMouseExited
+    private void buttonSairMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSairMouseExited
         this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-    }//GEN-LAST:event_buttonSenhaMouseExited
+    }//GEN-LAST:event_buttonSairMouseExited
+
+    private void buttonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSairActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_buttonSairActionPerformed
+
+    private void buttonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEntrarActionPerformed
+        
+        //Login login = new Login();
+        Principal telaPrincipal = new Principal();
+        telaPrincipal.setVisible(true);
+    }//GEN-LAST:event_buttonEntrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -125,22 +158,23 @@ public class VisaoLogin extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
+        try {          
+            UIManager.setLookAndFeel(            
+                    UIManager.getSystemLookAndFeelClassName()
+            );
+            
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VisaoLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VisaoLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VisaoLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VisaoLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
@@ -153,7 +187,7 @@ public class VisaoLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonEntrar;
-    private javax.swing.JButton buttonSenha;
+    private javax.swing.JButton buttonSair;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelRecebimento;
     private javax.swing.JLabel labelSenha;

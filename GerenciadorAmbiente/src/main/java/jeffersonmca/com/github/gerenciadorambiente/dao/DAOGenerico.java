@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import javax.persistence.EntityManager;
-import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoConexao;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoDAO;
 import jeffersonmca.com.github.gerenciadorambiente.util.Conexao;
 
@@ -13,9 +12,10 @@ public abstract class DAOGenerico<I, ID extends Serializable> implements IDAOGen
     protected EntityManager em;
     private Class<I> entidade;
     
-    public DAOGenerico() throws ExcecaoConexao {
-        
+    public DAOGenerico() {
+      System.out.println("vai criar");
       em = Conexao.getConexao();
+      System.out.println("criou");  
       
       entidade = (Class<I>)((ParameterizedType)getClass()
               .getGenericSuperclass())

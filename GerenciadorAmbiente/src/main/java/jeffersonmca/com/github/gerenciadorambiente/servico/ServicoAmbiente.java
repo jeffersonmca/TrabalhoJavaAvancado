@@ -3,7 +3,6 @@ package jeffersonmca.com.github.gerenciadorambiente.servico;
 import java.util.List;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Ambiente;
 import jeffersonmca.com.github.gerenciadorambiente.dao.DAOAmbiente;
-import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoConexao;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoDAO;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoServico;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoValidacao;
@@ -12,7 +11,7 @@ public class ServicoAmbiente {
     
     private DAOAmbiente dao;
 
-    public ServicoAmbiente() throws ExcecaoConexao{
+    public ServicoAmbiente() {
         dao = new DAOAmbiente();
     }
     
