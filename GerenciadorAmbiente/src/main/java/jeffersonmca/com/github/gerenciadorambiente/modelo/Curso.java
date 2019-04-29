@@ -21,12 +21,11 @@ public class Curso {
     @Column(name = "cur_codigo")
     private Integer codigo;
     
-    @Column(name = "cur_codigo", nullable = false, length = TAMANHO_NOME)
+    @Column(name = "cur_nome", nullable = false, length = TAMANHO_NOME)
     private String nome;
     
     @ManyToOne
-    @Column(nullable = false)
-    @JoinColumn(name = "cur_perCodigo")
+    @JoinColumn(name = "cur_perCodigo", nullable = false)
     private Periodo fkPeriodo;
 
     public Curso() {

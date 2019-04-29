@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jeffersonmca.com.github.gerenciadorambiente.visao.ambiente;
 
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Ambiente;
@@ -12,32 +7,16 @@ import javax.swing.JOptionPane;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoDAO;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoServico;
 
-/**
- *
- * @author devai
- */
 public class AmbienteListagem extends javax.swing.JFrame {
 
     private ServicoAmbiente service;
     private List<Ambiente> dados;
     private AmbienteTableModel tabModel;
     
-    
-    /**
-     * Creates new form ClienteListagem
-     */
     public AmbienteListagem() {
         
         initComponents();
-        
-//        try {
-//            service = new ServicoAmbiente();
-//            
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(this, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-//        }
-//        
-//        atualizaDados();        
+        atualizaDados();
     }
 
     private void atualizaDados(){

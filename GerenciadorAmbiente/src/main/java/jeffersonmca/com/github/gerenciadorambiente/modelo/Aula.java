@@ -39,12 +39,11 @@ public class Aula {
     private EnumDiaSemana diaSemana;
     
     @ManyToOne
-    @Column(nullable = false)
-    @JoinColumn(name = "aul_ambCodigo")
+    @JoinColumn(name = "aul_ambCodigo", nullable = false)
     private Ambiente fkAmbiente;
     
     @ManyToOne
-    @Column(nullable = false)
+    @JoinColumn(nullable = false)
     private Turma turma;
 
     public Aula() {

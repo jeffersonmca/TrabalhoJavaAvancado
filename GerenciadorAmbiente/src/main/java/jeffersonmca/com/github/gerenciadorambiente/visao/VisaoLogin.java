@@ -3,18 +3,17 @@ package jeffersonmca.com.github.gerenciadorambiente.visao;
 import java.awt.Cursor;
 import javax.swing.UIManager;
 import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoAmbiente;
-import jeffersonmca.com.github.gerenciadorambiente.util.Conexao;
 
 public class VisaoLogin extends javax.swing.JFrame {
 
     public VisaoLogin() {
         
         initComponents();
-        //Conexao.getConexao();
+        
         ServicoAmbiente servico = new ServicoAmbiente();
         
         try {
-         //   servico.buscarPorCodigo(1);
+            servico.buscarPorCodigo(1);
         } catch (Exception e) {
         }
     }
@@ -41,7 +40,6 @@ public class VisaoLogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
-        getContentPane().setLayout(null);
 
         panelInformacoes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         panelInformacoes.setLayout(null);
@@ -50,20 +48,17 @@ public class VisaoLogin extends javax.swing.JFrame {
         labelSenha.setText("Senha:");
         labelSenha.setName("labelUsuario"); // NOI18N
         panelInformacoes.add(labelSenha);
-        labelSenha.setBounds(20, 60, 90, 26);
+        labelSenha.setBounds(20, 60, 90, 22);
 
         labelUsuario.setFont(new java.awt.Font("Noto Sans", 1, 18)); // NOI18N
         labelUsuario.setText("Usuário:");
         labelUsuario.setName(""); // NOI18N
         panelInformacoes.add(labelUsuario);
-        labelUsuario.setBounds(20, 30, 90, 26);
+        labelUsuario.setBounds(20, 30, 90, 22);
         panelInformacoes.add(textUsuario);
-        textUsuario.setBounds(110, 30, 190, 27);
+        textUsuario.setBounds(110, 30, 190, 19);
         panelInformacoes.add(passwordSenha);
-        passwordSenha.setBounds(110, 60, 190, 27);
-
-        getContentPane().add(panelInformacoes);
-        panelInformacoes.setBounds(0, 220, 350, 100);
+        passwordSenha.setBounds(110, 60, 190, 19);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.setLayout(null);
@@ -72,9 +67,6 @@ public class VisaoLogin extends javax.swing.JFrame {
         labelRecebimento.setText("Bem Vindo!");
         jPanel1.add(labelRecebimento);
         labelRecebimento.setBounds(100, 100, 140, 40);
-
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 350, 220);
 
         panelBotoes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         panelBotoes.setLayout(null);
@@ -95,7 +87,7 @@ public class VisaoLogin extends javax.swing.JFrame {
             }
         });
         panelBotoes.add(buttonSair);
-        buttonSair.setBounds(190, 10, 60, 40);
+        buttonSair.setBounds(180, 10, 70, 40);
 
         buttonEntrar.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
         buttonEntrar.setText("Entrar");
@@ -115,8 +107,23 @@ public class VisaoLogin extends javax.swing.JFrame {
         panelBotoes.add(buttonEntrar);
         buttonEntrar.setBounds(250, 10, 90, 40);
 
-        getContentPane().add(panelBotoes);
-        panelBotoes.setBounds(0, 320, 350, 60);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelInformacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(panelInformacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(panelBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         pack();
         setLocationRelativeTo(null);
@@ -143,8 +150,6 @@ public class VisaoLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonSairActionPerformed
 
     private void buttonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEntrarActionPerformed
-        
-        //Login login = new Login();
         Principal telaPrincipal = new Principal();
         telaPrincipal.setVisible(true);
     }//GEN-LAST:event_buttonEntrarActionPerformed
@@ -153,29 +158,16 @@ public class VisaoLogin extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {          
+
+        try {
+            
             UIManager.setLookAndFeel(            
                     UIManager.getSystemLookAndFeelClassName()
             );
             
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException|InstantiationException|IllegalAccessException|javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

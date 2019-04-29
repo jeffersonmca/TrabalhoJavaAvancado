@@ -28,8 +28,7 @@ public class Disciplina {
     private Integer cargaHoraria;
     
     @ManyToOne
-    @Column(nullable = false)
-    @JoinColumn(name = "dis_curCodigo")
+    @JoinColumn(name = "dis_curCodigo", nullable = false)
     private Curso fkCurso;
 
     public Disciplina() {
