@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -34,13 +35,21 @@ public class AmbienteEdita extends javax.swing.JDialog {
         
         this.servico = servico;
         
+        PreencheComboBox();
         PreencheCampos(ambiente);
+    }
+    
+    private void PreencheComboBox() {
+        
+        for (EnumTipoAmbiente item : EnumTipoAmbiente.values()) {
+            ComboBoxTipoAmbiente.addItem(item.getDescricao());
+        }
     }
     
     private void PreencheCampos(Ambiente ambiente) {
         codigo = ambiente.getCodigo();
         textNome.setText(ambiente.getNome());
-        textTipoAmbiente.setText(ambiente.getTipoAmbiente().toString());
+        ComboBoxTipoAmbiente.setSelectedItem(ambiente.getTipoAmbiente().getDescricao());
         textCapacidade.setText(ambiente.getCapacidade().toString());
         textLocalizacao.setText(ambiente.getLocalizacao());
     }
@@ -59,10 +68,10 @@ public class AmbienteEdita extends javax.swing.JDialog {
         jLabel2 = new JLabel();
         jLabel3 = new JLabel();
         textNome = new JTextField();
-        textTipoAmbiente = new JTextField();
         textCapacidade = new JTextField();
         textLocalizacao = new JTextField();
         jLabel4 = new JLabel();
+        ComboBoxTipoAmbiente = new JComboBox<>();
         panelBotoes = new JPanel();
         buttonSalvar = new JButton();
         buttonCancelar = new JButton();
@@ -91,12 +100,12 @@ public class AmbienteEdita extends javax.swing.JDialog {
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                     .addComponent(textLocalizacao, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textTipoAmbiente, GroupLayout.PREFERRED_SIZE, 264, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textNome, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textCapacidade, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                    .addComponent(textNome, GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                    .addComponent(textCapacidade, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ComboBoxTipoAmbiente, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -104,11 +113,11 @@ public class AmbienteEdita extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(textNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                .addGap(23, 23, 23)
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(textTipoAmbiente, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                    .addComponent(ComboBoxTipoAmbiente, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(textCapacidade, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
@@ -185,7 +194,7 @@ public class AmbienteEdita extends javax.swing.JDialog {
         
         Ambiente a = new Ambiente(codigo,
                                   textNome.getText(),
-                                  EnumTipoAmbiente.valueOf(textTipoAmbiente.getText()),
+                                  EnumTipoAmbiente.valueOf(ComboBoxTipoAmbiente.getSelectedItem().toString()),
                                   Integer.parseInt(textCapacidade.getText()),
                                   textLocalizacao.getText()
         );
@@ -217,6 +226,7 @@ public class AmbienteEdita extends javax.swing.JDialog {
 
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private JComboBox<String> ComboBoxTipoAmbiente;
     private JButton buttonCancelar;
     private JButton buttonSalvar;
     private JLabel jLabel1;
@@ -228,6 +238,5 @@ public class AmbienteEdita extends javax.swing.JDialog {
     private JTextField textCapacidade;
     private JTextField textLocalizacao;
     private JTextField textNome;
-    private JTextField textTipoAmbiente;
     // End of variables declaration//GEN-END:variables
 }

@@ -10,11 +10,18 @@ public class VisaoLogin extends javax.swing.JFrame {
         
         initComponents();
         
-        ServicoAmbiente servico = new ServicoAmbiente();
-        
         try {
-            servico.buscarPorCodigo(1);
-        } catch (Exception e) {
+            
+            this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+        
+            // Iniciando a conexao com o BD
+            ServicoAmbiente servico = new ServicoAmbiente();             
+            try {
+                servico.buscarPorCodigo(1);
+            } catch (Exception e) {}
+            
+        } finally {
+            this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
     }
 
@@ -48,17 +55,17 @@ public class VisaoLogin extends javax.swing.JFrame {
         labelSenha.setText("Senha:");
         labelSenha.setName("labelUsuario"); // NOI18N
         panelInformacoes.add(labelSenha);
-        labelSenha.setBounds(20, 60, 90, 22);
+        labelSenha.setBounds(20, 60, 90, 26);
 
         labelUsuario.setFont(new java.awt.Font("Noto Sans", 1, 18)); // NOI18N
         labelUsuario.setText("Usuário:");
         labelUsuario.setName(""); // NOI18N
         panelInformacoes.add(labelUsuario);
-        labelUsuario.setBounds(20, 30, 90, 22);
+        labelUsuario.setBounds(20, 30, 90, 26);
         panelInformacoes.add(textUsuario);
-        textUsuario.setBounds(110, 30, 190, 19);
+        textUsuario.setBounds(110, 30, 190, 27);
         panelInformacoes.add(passwordSenha);
-        passwordSenha.setBounds(110, 60, 190, 19);
+        passwordSenha.setBounds(110, 60, 190, 27);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.setLayout(null);
@@ -150,6 +157,11 @@ public class VisaoLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonSairActionPerformed
 
     private void buttonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEntrarActionPerformed
+        
+        // Fecha a tela de login
+        this.dispose();
+        
+        // Abre a tela principal do programa
         Principal telaPrincipal = new Principal();
         telaPrincipal.setVisible(true);
     }//GEN-LAST:event_buttonEntrarActionPerformed

@@ -1,5 +1,6 @@
 package jeffersonmca.com.github.gerenciadorambiente.visao.ambiente;
 
+import java.awt.Cursor;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Ambiente;
 import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoAmbiente;
 import java.util.List;
@@ -16,19 +17,32 @@ public class AmbienteListagem extends javax.swing.JFrame {
     public AmbienteListagem() {
         
         initComponents();
+        service = new ServicoAmbiente();
         atualizaDados();
     }
 
     private void atualizaDados(){
         
         try {
-            dados = service.buscarTodos();
-        } catch (ExcecaoDAO e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-        }
+            
+            this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+
+            try {
+                dados = service.buscarTodos();
+            } catch (ExcecaoDAO e) {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                return ;
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Houve um erro ao buscar todos os registros.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return ;
+            }
+
+            tabModel = new AmbienteTableModel(dados);
+            jTable1.setModel(tabModel);
         
-        tabModel = new AmbienteTableModel(dados);
-        jTable1.setModel(tabModel);        
+        } finally {
+            this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
     }
     
     

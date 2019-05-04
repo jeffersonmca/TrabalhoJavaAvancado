@@ -97,13 +97,13 @@
                       <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="textLocalizacao" alignment="0" min="-2" pref="110" max="-2" attributes="0"/>
-                      <Component id="textTipoAmbiente" alignment="0" min="-2" pref="264" max="-2" attributes="0"/>
-                      <Component id="textNome" alignment="0" min="-2" pref="190" max="-2" attributes="0"/>
+                      <Component id="textNome" alignment="0" pref="190" max="32767" attributes="0"/>
                       <Component id="textCapacidade" alignment="0" min="-2" pref="110" max="-2" attributes="0"/>
+                      <Component id="ComboBoxTipoAmbiente" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="79" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -115,12 +115,12 @@
                       <Component id="textNome" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="textTipoAmbiente" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="ComboBoxTipoAmbiente" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="textCapacidade" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -153,8 +153,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="textNome">
         </Component>
-        <Component class="javax.swing.JTextField" name="textTipoAmbiente">
-        </Component>
         <Component class="javax.swing.JTextField" name="textCapacidade">
         </Component>
         <Component class="javax.swing.JTextField" name="textLocalizacao">
@@ -163,6 +161,16 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Localiza&#xe7;&#xe3;o:"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="ComboBoxTipoAmbiente">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

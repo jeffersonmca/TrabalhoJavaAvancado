@@ -3,10 +3,11 @@ package jeffersonmca.com.github.gerenciadorambiente.visao.ambiente;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -28,6 +29,15 @@ public class AmbienteIncluir extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.servico = servico;
+        
+        PreencheComboBox();
+    }
+    
+    private void PreencheComboBox() {
+        
+        for (EnumTipoAmbiente item : EnumTipoAmbiente.values()) {
+            ComboBoxTipoAmbiente.addItem(item.getDescricao());
+        }
     }
 
     /**
@@ -39,41 +49,41 @@ public class AmbienteIncluir extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
-        buttonSalvar = new javax.swing.JButton();
-        buttonCancelar = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        textNome = new javax.swing.JTextField();
-        textTipoAmbiente = new javax.swing.JTextField();
-        textCapacidade = new javax.swing.JTextField();
-        textLocalizacao = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        jPanel2 = new JPanel();
+        buttonSalvar = new JButton();
+        buttonCancelar = new JButton();
+        jPanel1 = new JPanel();
+        jLabel1 = new JLabel();
+        jLabel2 = new JLabel();
+        jLabel3 = new JLabel();
+        textNome = new JTextField();
+        textCapacidade = new JTextField();
+        textLocalizacao = new JTextField();
+        jLabel4 = new JLabel();
+        ComboBoxTipoAmbiente = new JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Incluir registro");
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2.setBorder(BorderFactory.createEtchedBorder());
 
         buttonSalvar.setText("Salvar");
-        buttonSalvar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        buttonSalvar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 buttonSalvarActionPerformed(evt);
             }
         });
         jPanel2.add(buttonSalvar);
 
         buttonCancelar.setText("Cancelar");
-        buttonCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        buttonCancelar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 buttonCancelarActionPerformed(evt);
             }
         });
         jPanel2.add(buttonCancelar);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setBorder(BorderFactory.createEtchedBorder());
 
         jLabel1.setText("Nome:");
 
@@ -83,68 +93,64 @@ public class AmbienteIncluir extends javax.swing.JDialog {
 
         jLabel4.setText("Localização:");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(textLocalizacao, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textTipoAmbiente, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textCapacidade, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                    .addComponent(textLocalizacao, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textNome, GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                    .addComponent(textCapacidade, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ComboBoxTipoAmbiente, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(textNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(23, 23, 23)
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(textTipoAmbiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ComboBoxTipoAmbiente, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(textCapacidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textLocalizacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textCapacidade, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(textLocalizacao, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 1, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(418, 289));
+        setSize(new Dimension(418, 289));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -153,10 +159,9 @@ public class AmbienteIncluir extends javax.swing.JDialog {
         Ambiente a = new Ambiente();
         
         a.setNome(textNome.getText());
-        a.setTipoAmbiente(EnumTipoAmbiente.valueOf(textTipoAmbiente.getText()));
+        a.setTipoAmbiente((EnumTipoAmbiente) ComboBoxTipoAmbiente.getSelectedItem());
         a.setCapacidade(Integer.parseInt(textCapacidade.getText()));
         a.setLocalizacao(textLocalizacao.getText());
-        
         
         try {
             servico.salvar(a);
@@ -176,17 +181,17 @@ public class AmbienteIncluir extends javax.swing.JDialog {
 
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonCancelar;
-    private javax.swing.JButton buttonSalvar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField textCapacidade;
-    private javax.swing.JTextField textLocalizacao;
-    private javax.swing.JTextField textNome;
-    private javax.swing.JTextField textTipoAmbiente;
+    private JComboBox<String> ComboBoxTipoAmbiente;
+    private JButton buttonCancelar;
+    private JButton buttonSalvar;
+    private JLabel jLabel1;
+    private JLabel jLabel2;
+    private JLabel jLabel3;
+    private JLabel jLabel4;
+    private JPanel jPanel1;
+    private JPanel jPanel2;
+    private JTextField textCapacidade;
+    private JTextField textLocalizacao;
+    private JTextField textNome;
     // End of variables declaration//GEN-END:variables
 }

@@ -13,9 +13,8 @@ public abstract class DAOGenerico<I, ID extends Serializable> implements IDAOGen
     private Class<I> entidade;
     
     public DAOGenerico() {
-      System.out.println("vai criar");
+        
       em = Conexao.getConexao();
-      System.out.println("criou");  
       
       entidade = (Class<I>)((ParameterizedType)getClass()
               .getGenericSuperclass())
@@ -67,7 +66,7 @@ public abstract class DAOGenerico<I, ID extends Serializable> implements IDAOGen
     public List<I> buscarTodos() throws ExcecaoDAO {
         
         try {
-            String sql = "select i from " + entidade.getName() + " i";
+            String sql = "select i from " + entidade.getName() + " i ";
             return em.createQuery(sql).getResultList();
         } catch (Exception e) {
             throw new ExcecaoDAO("Houve erro ao pegar todos os registros!");
