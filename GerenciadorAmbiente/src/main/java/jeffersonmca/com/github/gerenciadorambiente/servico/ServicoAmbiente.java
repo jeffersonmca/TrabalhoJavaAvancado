@@ -15,6 +15,22 @@ public class ServicoAmbiente {
         dao = new DAOAmbiente();
     }
     
+    public void editar(Ambiente instancia) throws ExcecaoDAO, ExcecaoValidacao, ExcecaoServico {
+        
+    	try {
+    		
+            /*Regra de negocio*/
+            if (Validacao.AmbienteEdita(instancia)) {
+                dao.salvar(instancia);
+            }
+	        
+    	} catch (ExcecaoDAO|ExcecaoValidacao e) {
+            throw e;
+        } catch (Exception e) {
+            throw new ExcecaoServico("Houve erro ao requisitar o salvamento do ambiente!");
+        }
+    }
+    
     public void salvar(Ambiente instancia) throws ExcecaoDAO, ExcecaoValidacao, ExcecaoServico {
         
     	try {

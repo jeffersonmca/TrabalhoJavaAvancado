@@ -48,7 +48,7 @@ public class AmbienteTableModel  extends AbstractTableModel {
             switch (colIndex){
                 case 0 : dados.get(colIndex).setCodigo((Integer)value);
                 case 1 : dados.get(colIndex).setNome((String)value);
-                case 2 : dados.get(colIndex).setTipoAmbiente(EnumTipoAmbiente.valueOf(value.toString()));
+                case 2 : dados.get(colIndex).setTipoAmbiente((EnumTipoAmbiente) value);
                 case 3 : dados.get(colIndex).setCapacidade((Integer)value);
                 case 4 : dados.get(colIndex).setLocalizacao((String)value);
             }

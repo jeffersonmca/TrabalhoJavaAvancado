@@ -101,6 +101,6 @@ public class Disciplina {
 
     @Override
     public String toString() {
-        return "Disciplina{\n" + "\tcodigo=" + codigo + ",\n\tnome=" + nome + ",\n\tcargaHoraria=" + cargaHoraria + ",\n\tfkCurso=" + fkCurso + "\n}";
+        return this.nome;
     }
 }

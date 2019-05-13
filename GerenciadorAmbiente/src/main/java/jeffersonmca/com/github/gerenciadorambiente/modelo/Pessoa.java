@@ -126,7 +126,6 @@ public class Pessoa {
 
     @Override
     public String toString() {
-        return "Pessoa [codigo=" + codigo + ", nome=" + nome + ", email=" + email + ", tipoPessoa=" + tipoPessoa
-                        + ", turmas=" + turmas + "]";
+        return this.nome;
     }
 }

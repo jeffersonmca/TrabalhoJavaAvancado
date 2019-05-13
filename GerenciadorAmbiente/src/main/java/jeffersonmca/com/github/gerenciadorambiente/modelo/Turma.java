@@ -147,7 +147,6 @@ public class Turma {
 
     @Override
     public String toString() {
-        return "Turma [codigo=" + codigo + ", nome=" + nome + ", fkDisciplina=" + fkDisciplina + ", fkPeriodo="
-                        + fkPeriodo + ", fkProfessor=" + fkProfessor + ", alunos=" + alunos + ", aulas=" + aulas + "]";
+        return this.nome;
     }
 }

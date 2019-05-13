@@ -148,6 +148,21 @@ class Validacao {
         
     	// Argumento esta vazio?
         if (Alocado(instancia)) {
+
+            // Verifica se existe um nome
+            if (!(Validacao.Vazio(instancia.getNome()))) {
+
+                return true;
+            }
+        }
+			
+        throw new ExcecaoValidacao("Houve erro ao validar o ambiente!");
+    }
+    
+    public static boolean AmbienteEdita(Ambiente instancia) throws ExcecaoValidacao {
+        
+    	// Argumento esta vazio?
+        if (Alocado(instancia)) {
         	
             // Verifica se o identificador eh valido
             if (Validacao.Identificador(instancia.getCodigo())) {

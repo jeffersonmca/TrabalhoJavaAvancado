@@ -119,6 +119,6 @@ public class Ambiente {
 
     @Override
     public String toString() {
-        return "Ambiente{\n" + "\tcodigo=" + codigo + ",\n\tnome=" + nome + ",\n\ttipoAmbiente=" + tipoAmbiente + ",\n\tcapacidade=" + capacidade + ",\n\tlocalizacao=" + localizacao + "\n}";
+        return this.nome;
     }
 }

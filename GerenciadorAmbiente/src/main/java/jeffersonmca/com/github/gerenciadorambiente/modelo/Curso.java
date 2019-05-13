@@ -89,6 +89,6 @@ public class Curso {
 
     @Override
     public String toString() {
-        return "Curso{\n" + "\tcodigo=" + codigo + ",\n\tnome=" + nome + ",\n\tfkPeriodo=" + fkPeriodo + "\n}";
+        return this.nome;
     }
 }
