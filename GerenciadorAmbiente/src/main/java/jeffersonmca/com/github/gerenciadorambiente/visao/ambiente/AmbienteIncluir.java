@@ -23,6 +23,7 @@ import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoValidacao;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Ambiente;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.EnumTipoAmbiente;
 import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoAmbiente;
+import jeffersonmca.com.github.gerenciadorambiente.servico.Validacao;
 
 public class AmbienteIncluir extends javax.swing.JDialog {
 

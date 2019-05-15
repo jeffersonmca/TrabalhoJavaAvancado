@@ -15,9 +15,9 @@ import jeffersonmca.com.github.gerenciadorambiente.modelo.Periodo;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Pessoa;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Turma;
 
-class Validacao {
+public class Validacao {
 
-    public Validacao() { 
+    public Validacao() {
         
     }
     

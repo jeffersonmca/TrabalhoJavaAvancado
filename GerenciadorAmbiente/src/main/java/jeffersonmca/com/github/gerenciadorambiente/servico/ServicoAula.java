@@ -12,7 +12,7 @@ public class ServicoAula {
     
     private DAOAula dao;
 
-    public ServicoAula() throws ExcecaoConexao{
+    public ServicoAula() {
         dao = new DAOAula();
     }
     

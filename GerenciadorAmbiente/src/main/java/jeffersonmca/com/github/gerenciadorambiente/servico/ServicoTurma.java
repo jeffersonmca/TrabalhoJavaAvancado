@@ -3,7 +3,6 @@ package jeffersonmca.com.github.gerenciadorambiente.servico;
 import java.util.List;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Turma;
 import jeffersonmca.com.github.gerenciadorambiente.dao.DAOTurma;
-import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoConexao;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoDAO;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoServico;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoValidacao;
@@ -12,7 +11,7 @@ public class ServicoTurma {
     
     private DAOTurma dao;
 
-    public ServicoTurma() throws ExcecaoConexao{
+    public ServicoTurma() {
         dao = new DAOTurma();
     }
     
