@@ -85,7 +85,7 @@ public class AulaEdita extends javax.swing.JDialog {
         
         DefaultComboBoxModel dcbmTurma =
                new DefaultComboBoxModel(vetor2);
-        ComboBoxAmbiente.setModel(dcbmTurma);
+        ComboBoxTurma.setModel(dcbmTurma);
     }
     
     private void PreencheCampos(Aula aula) {

@@ -75,7 +75,7 @@ public class AulaIncluir extends javax.swing.JDialog {
         
         DefaultComboBoxModel dcbmTurma =
                new DefaultComboBoxModel(vetor2);
-        ComboBoxAmbiente.setModel(dcbmTurma);
+        ComboBoxTurma.setModel(dcbmTurma);
     }
     
     @SuppressWarnings("unchecked")

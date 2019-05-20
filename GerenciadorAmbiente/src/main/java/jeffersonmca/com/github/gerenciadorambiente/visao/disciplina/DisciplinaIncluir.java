@@ -38,7 +38,7 @@ public class DisciplinaIncluir extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.servico = servico;
-        
+        this.curServico = new ServicoCurso();
         PreencheComboBox();
     }
     
@@ -172,7 +172,7 @@ public class DisciplinaIncluir extends javax.swing.JDialog {
         if (Validacao.Vazio(textNome.getText())) {
             
             JOptionPane.showMessageDialog(this, 
-                    "Informe o nome do curso",
+                    "Informe o nome da disciplina",
                     "Inclusão",
                     JOptionPane.ERROR_MESSAGE);
             return;

@@ -44,6 +44,7 @@ public class CursoEdita extends javax.swing.JDialog {
         initComponents();
         
         this.servico = servico;
+        this.perServico = new ServicoPeriodo();
         
         PreencheComboBox();
         PreencheCampos(curso);

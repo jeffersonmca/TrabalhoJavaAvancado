@@ -52,9 +52,9 @@ public class TurmaIncluir extends javax.swing.JDialog {
         initComponents();
         
         this.servico = servico;
-        disServico = new ServicoDisciplina();
-        perServico = new ServicoPeriodo();
-        proServico = new ServicoPessoa();
+        this.disServico = new ServicoDisciplina();
+        this.perServico = new ServicoPeriodo();
+        this.proServico = new ServicoPessoa();
         
         PreencheComboBox();
     }

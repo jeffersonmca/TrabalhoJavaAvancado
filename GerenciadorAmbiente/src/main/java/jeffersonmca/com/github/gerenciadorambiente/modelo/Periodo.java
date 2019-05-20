@@ -89,6 +89,6 @@ public class Periodo {
 
     @Override
     public String toString() {
-        return  this.semestre.getDescricao() + "-" + this.ano;
+        return  this.semestre.getDescricao() + " - " + this.ano;
     }
 }

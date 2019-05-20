@@ -223,7 +223,7 @@ public class Validacao {
         if (Alocado(instancia)) {
 		        
             // Verifica se existe um nome
-            if (Validacao.Vazio(instancia.getNome())) {
+            if (!Validacao.Vazio(instancia.getNome())) {
 
                 // Verifica se o periodo eh valido
                 if (Validacao.Periodo(instancia.getFkPeriodo())) {
@@ -255,7 +255,7 @@ public class Validacao {
         if (Alocado(instancia)) {
 
             // Verifica se existe um nome
-            if (Validacao.Vazio(instancia.getNome())) {
+            if (!Validacao.Vazio(instancia.getNome())) {
 
                 // Verifica se a carga horaria eh maior que zero
                 if (Validacao.NaturalNaoNulo(instancia.getCargaHoraria())) {
@@ -323,12 +323,12 @@ public class Validacao {
         if (Alocado(instancia)) {
 
             // Verifica se existe um nome
-            if (Validacao.Vazio(instancia.getNome())) {
+            if (!Validacao.Vazio(instancia.getNome())) {
 
                 // Verifica se o email eh valido
-                if (Validacao.Vazio(instancia.getEmail())) {
-
-                    // Verifica se o semestre esta preenchido
+                if (!Validacao.Vazio(instancia.getEmail())) {
+                    
+                    // Verifica se o tipo pessoa esta preenchido
                     if (!(Validacao.Vazio(instancia.getTipoPessoa()))) {
                         return true;
                     }
@@ -359,7 +359,7 @@ public class Validacao {
         if (Alocado(instancia)) {
 
             // Verifica se existe um nome
-            if (Validacao.Vazio(instancia.getNome())) {
+            if (!Validacao.Vazio(instancia.getNome())) {
 
                 // Verifica se a disciplina eh valida
                 if (Validacao.Disciplina(instancia.getFkDisciplina())) {
@@ -397,8 +397,8 @@ public class Validacao {
         
         // 
         if (Pessoa(instancia)) {
-        	
-            if (instancia.getTipoPessoa().toString().equals(EnumTipoPessoa.PROFESSOR)) {
+            
+            if (instancia.getTipoPessoa().equals(EnumTipoPessoa.PROFESSOR)) {
                 return true;
             }
         }
@@ -411,7 +411,7 @@ public class Validacao {
         // 
         if (Pessoa(instancia)) {
         	
-            if (instancia.getTipoPessoa().toString().equals(EnumTipoPessoa.ALUNO)) {
+            if (instancia.getTipoPessoa().equals(EnumTipoPessoa.ALUNO)) {
                 return true;
             }
         }

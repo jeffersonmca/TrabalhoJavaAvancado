@@ -192,7 +192,7 @@ public class TurmaListagem extends javax.swing.JFrame {
         } 
         
         if (JOptionPane.showConfirmDialog(this,
-                "Confirma a remoção da turma?",
+                "Confirma a remoção da " + aux.getNome() + "?",
                 "Remoção", 
                   JOptionPane.YES_NO_OPTION
                       )

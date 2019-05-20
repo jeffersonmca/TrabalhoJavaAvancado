@@ -47,6 +47,7 @@ public class DisciplinaEdita extends javax.swing.JDialog {
         initComponents();
         
         this.servico = servico;
+        this.curServico = new ServicoCurso();
         
         PreencheComboBox();
         PreencheCampos(disciplina);

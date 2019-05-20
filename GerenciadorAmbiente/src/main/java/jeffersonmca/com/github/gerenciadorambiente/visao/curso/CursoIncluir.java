@@ -38,7 +38,7 @@ public class CursoIncluir extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.servico = servico;
-        
+        this.perServico = new ServicoPeriodo();
         PreencheComboBox();
     }
     
