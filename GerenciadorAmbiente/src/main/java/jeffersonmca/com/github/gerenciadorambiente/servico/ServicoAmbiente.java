@@ -1,5 +1,6 @@
 package jeffersonmca.com.github.gerenciadorambiente.servico;
 
+import jeffersonmca.com.github.gerenciadorambiente.util.Validacao;
 import java.util.List;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Ambiente;
 import jeffersonmca.com.github.gerenciadorambiente.dao.DAOAmbiente;
@@ -22,12 +23,14 @@ public class ServicoAmbiente {
             /*Regra de negocio*/
             if (Validacao.AmbienteEdita(instancia)) {
                 dao.salvar(instancia);
+            }else{
+                throw new ExcecaoValidacao("Houve erro ao validar o Ambiente!");
             }
 	        
-    	} catch (ExcecaoDAO|ExcecaoValidacao e) {
+    	} catch (ExcecaoValidacao e) {
             throw e;
         } catch (Exception e) {
-            throw new ExcecaoServico("Houve erro ao requisitar o salvamento do ambiente!");
+            throw new ExcecaoServico("Houve erro ao requisitar o salvamento do Ambiente!");
         }
     }
     
@@ -38,12 +41,14 @@ public class ServicoAmbiente {
             /*Regra de negocio*/
             if (Validacao.Ambiente(instancia)) {
                 dao.salvar(instancia);
+            }else{
+                throw new ExcecaoValidacao("Houve erro ao validar o Ambiente!");
             }
 	        
-    	} catch (ExcecaoDAO|ExcecaoValidacao e) {
+    	} catch (ExcecaoValidacao e) {
             throw e;
         } catch (Exception e) {
-            throw new ExcecaoServico("Houve erro ao requisitar o salvamento do ambiente!");
+            throw new ExcecaoServico("Houve erro ao requisitar o salvamento do Ambiente!");
         }
     }
 

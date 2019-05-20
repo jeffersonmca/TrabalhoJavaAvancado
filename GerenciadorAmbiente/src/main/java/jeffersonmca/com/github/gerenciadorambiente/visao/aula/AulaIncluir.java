@@ -31,7 +31,7 @@ import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoAula;
 import javax.swing.text.MaskFormatter;
 import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoAmbiente;
 import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoTurma;
-import jeffersonmca.com.github.gerenciadorambiente.servico.Validacao;
+import jeffersonmca.com.github.gerenciadorambiente.util.Validacao;
 
 public class AulaIncluir extends javax.swing.JDialog {
 
@@ -209,7 +209,7 @@ public class AulaIncluir extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
                     .addComponent(textHorarioTermino, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         GroupLayout layout = new GroupLayout(getContentPane());
@@ -229,7 +229,7 @@ public class AulaIncluir extends javax.swing.JDialog {
                 .addComponent(jPanel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         );
 
-        setSize(new Dimension(424, 292));
+        setSize(new Dimension(424, 322));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

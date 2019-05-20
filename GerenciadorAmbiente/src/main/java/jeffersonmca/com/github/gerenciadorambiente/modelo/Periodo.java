@@ -89,6 +89,6 @@ public class Periodo {
 
     @Override
     public String toString() {
-        return "Periodo{\n" + "\tcodigo=" + codigo + ",\n\tano=" + ano + ",\n\tsemestre=" + semestre + "\n}";
+        return  this.semestre.getDescricao() + "-" + this.ano;
     }
 }

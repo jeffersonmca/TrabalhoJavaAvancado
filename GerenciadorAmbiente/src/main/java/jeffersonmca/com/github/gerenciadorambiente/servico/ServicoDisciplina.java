@@ -1,5 +1,6 @@
 package jeffersonmca.com.github.gerenciadorambiente.servico;
 
+import jeffersonmca.com.github.gerenciadorambiente.util.Validacao;
 import java.util.List;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Disciplina;
 import jeffersonmca.com.github.gerenciadorambiente.dao.DAODisciplina;
@@ -12,8 +13,26 @@ public class ServicoDisciplina {
     
     private DAODisciplina dao;
 
-    public ServicoDisciplina() throws ExcecaoConexao{
+    public ServicoDisciplina() {
         dao = new DAODisciplina();
+    }
+    
+    public void editar(Disciplina instancia) throws ExcecaoDAO, ExcecaoValidacao, ExcecaoServico {
+        
+        try {
+            
+            /*Regra de negocio*/
+            if (Validacao.DisciplinaEdita(instancia)) {
+                dao.salvar(instancia);
+            }else{
+                throw new ExcecaoValidacao("Houve erro ao validar a Disciplina!");
+            }
+	        
+    	} catch (ExcecaoValidacao e) {
+            throw e;
+        } catch (Exception e) {
+            throw new ExcecaoServico("Houve erro ao requisitar o salvamento da Disciplina!");
+        }
     }
     
     public void salvar(Disciplina instancia) throws ExcecaoDAO, ExcecaoValidacao, ExcecaoServico {
@@ -23,12 +42,14 @@ public class ServicoDisciplina {
             /*Regra de negocio*/
             if (Validacao.Disciplina(instancia)) {
                 dao.salvar(instancia);
+            }else{
+                throw new ExcecaoValidacao("Houve erro ao validar a Disciplina!");
             }
-            
-        } catch (ExcecaoDAO|ExcecaoValidacao e) {
+	        
+    	} catch (ExcecaoValidacao e) {
             throw e;
         } catch (Exception e) {
-            throw new ExcecaoServico("Houve erro ao requisitar o salvamento da disciplina!");
+            throw new ExcecaoServico("Houve erro ao requisitar o salvamento da Disciplina!");
         }
     }
 

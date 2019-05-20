@@ -1,5 +1,6 @@
 package jeffersonmca.com.github.gerenciadorambiente.servico;
 
+import jeffersonmca.com.github.gerenciadorambiente.util.Validacao;
 import java.util.List;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Periodo;
 import jeffersonmca.com.github.gerenciadorambiente.dao.DAOPeriodo;
@@ -12,8 +13,26 @@ public class ServicoPeriodo {
     
     private DAOPeriodo dao;
 
-    public ServicoPeriodo() throws ExcecaoConexao{
+    public ServicoPeriodo() {
         dao = new DAOPeriodo();
+    }
+    
+    public void editar(Periodo instancia) throws ExcecaoDAO, ExcecaoValidacao, ExcecaoServico {
+        
+        try {
+            
+            /*Regra de negocio*/
+            if (Validacao.PeriodoEdita(instancia)) {
+                dao.salvar(instancia);
+            }else{
+                throw new ExcecaoValidacao("Houve erro ao validar o Periodo!");
+            }
+	        
+    	} catch (ExcecaoValidacao e) {
+            throw e;
+        } catch (Exception e) {
+            throw new ExcecaoServico("Houve erro ao requisitar o salvamento do Periodo!");
+        }
     }
     
     public void salvar(Periodo instancia) throws ExcecaoDAO, ExcecaoValidacao, ExcecaoServico {
@@ -23,12 +42,14 @@ public class ServicoPeriodo {
             /*Regra de negocio*/
             if (Validacao.Periodo(instancia)) {
                 dao.salvar(instancia);
+            }else{
+                throw new ExcecaoValidacao("Houve erro ao validar o Periodo!");
             }
-            
-        } catch (ExcecaoDAO|ExcecaoValidacao e) {
+	        
+    	} catch (ExcecaoValidacao e) {
             throw e;
         } catch (Exception e) {
-            throw new ExcecaoServico("Houve erro ao requisitar o salvamento do periodo!");
+            throw new ExcecaoServico("Houve erro ao requisitar o salvamento do Periodo!");
         }
     }
 

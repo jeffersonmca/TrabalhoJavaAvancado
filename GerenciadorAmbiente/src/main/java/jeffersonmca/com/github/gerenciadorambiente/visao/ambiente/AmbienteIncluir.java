@@ -23,7 +23,7 @@ import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoValidacao;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Ambiente;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.EnumTipoAmbiente;
 import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoAmbiente;
-import jeffersonmca.com.github.gerenciadorambiente.servico.Validacao;
+import jeffersonmca.com.github.gerenciadorambiente.util.Validacao;
 
 public class AmbienteIncluir extends javax.swing.JDialog {
 
@@ -145,13 +145,13 @@ public class AmbienteIncluir extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         );
 
-        setSize(new Dimension(424, 265));
+        setSize(new Dimension(424, 291));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -161,7 +161,7 @@ public class AmbienteIncluir extends javax.swing.JDialog {
             
             JOptionPane.showMessageDialog(this, 
                     "Informe o nome do ambiente",
-                    "Edição",
+                    "Inclusão",
                     JOptionPane.ERROR_MESSAGE);
             return;
         }        

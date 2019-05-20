@@ -5,7 +5,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Curso;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-05-04T20:19:31")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-05-20T18:08:04")
 @StaticMetamodel(Disciplina.class)
 public class Disciplina_ { 
 

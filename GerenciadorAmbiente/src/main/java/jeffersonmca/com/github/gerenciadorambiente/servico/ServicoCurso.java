@@ -1,9 +1,9 @@
 package jeffersonmca.com.github.gerenciadorambiente.servico;
 
+import jeffersonmca.com.github.gerenciadorambiente.util.Validacao;
 import java.util.List;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Curso;
 import jeffersonmca.com.github.gerenciadorambiente.dao.DAOCurso;
-import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoConexao;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoDAO;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoServico;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoValidacao;
@@ -12,8 +12,26 @@ public class ServicoCurso {
     
     private DAOCurso dao;
 
-    public ServicoCurso() throws ExcecaoConexao{
+    public ServicoCurso() {
         dao = new DAOCurso();
+    }
+    
+    public void editar(Curso instancia) throws ExcecaoDAO, ExcecaoValidacao, ExcecaoServico {
+        
+        try {
+            
+            /*Regra de negocio*/
+            if (Validacao.CursoEdita(instancia)) {
+                dao.salvar(instancia);
+            }else{
+                throw new ExcecaoValidacao("Houve erro ao validar o Curso!");
+            }
+	        
+    	} catch (ExcecaoValidacao e) {
+            throw e;
+        } catch (Exception e) {
+            throw new ExcecaoServico("Houve erro ao requisitar o salvamento do Curso!");
+        }
     }
     
     public void salvar(Curso instancia) throws ExcecaoDAO, ExcecaoValidacao, ExcecaoServico {
@@ -23,12 +41,14 @@ public class ServicoCurso {
             /*Regra de negocio*/
             if (Validacao.Curso(instancia)) {
                 dao.salvar(instancia);
+            }else{
+                throw new ExcecaoValidacao("Houve erro ao validar o Curso!");
             }
-            
-        } catch (ExcecaoDAO|ExcecaoValidacao e) {
+	        
+    	} catch (ExcecaoValidacao e) {
             throw e;
         } catch (Exception e) {
-            throw new ExcecaoServico("Houve erro ao requisitar o salvamento do curso!");
+            throw new ExcecaoServico("Houve erro ao requisitar o salvamento do Curso!");
         }
     }
 

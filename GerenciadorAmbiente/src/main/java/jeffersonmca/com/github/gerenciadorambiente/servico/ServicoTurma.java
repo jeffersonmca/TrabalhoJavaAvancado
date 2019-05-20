@@ -1,5 +1,6 @@
 package jeffersonmca.com.github.gerenciadorambiente.servico;
 
+import jeffersonmca.com.github.gerenciadorambiente.util.Validacao;
 import java.util.List;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Turma;
 import jeffersonmca.com.github.gerenciadorambiente.dao.DAOTurma;
@@ -15,6 +16,24 @@ public class ServicoTurma {
         dao = new DAOTurma();
     }
     
+    public void editar(Turma instancia) throws ExcecaoDAO, ExcecaoValidacao, ExcecaoServico {
+        
+        try {
+            
+            /*Regra de negocio*/
+            if (Validacao.TurmaEdita(instancia)) {
+                dao.salvar(instancia);
+            }else{
+                throw new ExcecaoValidacao("Houve erro ao validar a Turma!");
+            }
+	        
+    	} catch (ExcecaoValidacao e) {
+            throw e;
+        } catch (Exception e) {
+            throw new ExcecaoServico("Houve erro ao requisitar o salvamento da Turma!");
+        }
+    }
+    
     public void salvar(Turma instancia) throws ExcecaoDAO, ExcecaoValidacao, ExcecaoServico {
         
         try {
@@ -22,12 +41,14 @@ public class ServicoTurma {
             /*Regra de negocio*/
             if (Validacao.Turma(instancia)) {
                 dao.salvar(instancia);
+            }else{
+                throw new ExcecaoValidacao("Houve erro ao validar a Turma!");
             }
-            
-        } catch (ExcecaoDAO|ExcecaoValidacao e) {
+	        
+    	} catch (ExcecaoValidacao e) {
             throw e;
         } catch (Exception e) {
-            throw new ExcecaoServico("Houve erro ao requisitar o salvamento da turma!");
+            throw new ExcecaoServico("Houve erro ao requisitar o salvamento da Turma!");
         }
     }
 

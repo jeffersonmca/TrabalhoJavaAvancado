@@ -1,5 +1,6 @@
 package jeffersonmca.com.github.gerenciadorambiente.servico;
 
+import jeffersonmca.com.github.gerenciadorambiente.util.Validacao;
 import java.util.List;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Pessoa;
 import jeffersonmca.com.github.gerenciadorambiente.dao.DAOPessoa;
@@ -12,8 +13,26 @@ public class ServicoPessoa {
     
     private DAOPessoa dao;
 
-    public ServicoPessoa() throws ExcecaoConexao{
+    public ServicoPessoa() {
         dao = new DAOPessoa();
+    }
+    
+    public void editar(Pessoa instancia) throws ExcecaoDAO, ExcecaoValidacao, ExcecaoServico {
+        
+        try {
+            
+            /*Regra de negocio*/
+            if (Validacao.PessoaEdita(instancia)) {
+                dao.salvar(instancia);
+            }else{
+                throw new ExcecaoValidacao("Houve erro ao validar a Pessoa!");
+            }
+	        
+    	} catch (ExcecaoValidacao e) {
+            throw e;
+        } catch (Exception e) {
+            throw new ExcecaoServico("Houve erro ao requisitar o salvamento da Pessoa!");
+        }
     }
     
     public void salvar(Pessoa instancia) throws ExcecaoDAO, ExcecaoValidacao, ExcecaoServico {
@@ -23,17 +42,23 @@ public class ServicoPessoa {
             /*Regra de negocio*/
             if (Validacao.Pessoa(instancia)) {
                 dao.salvar(instancia);
+            }else{
+                throw new ExcecaoValidacao("Houve erro ao validar a Pessoa!");
             }
-            
-        } catch (ExcecaoDAO|ExcecaoValidacao e) {
+	        
+    	} catch (ExcecaoValidacao e) {
             throw e;
         } catch (Exception e) {
-            throw new ExcecaoServico("Houve erro ao requisitar o salvamento da pessoa!");
+            throw new ExcecaoServico("Houve erro ao requisitar o salvamento da Pessoa!");
         }
     }
 
     public List<Pessoa> buscarTodos() throws ExcecaoDAO {
         return dao.buscarTodos();
+    }
+    
+    public List<Pessoa> buscarTodosProfessores() throws ExcecaoDAO {
+        return dao.buscarTodosProfessores();
     }
     
     public Pessoa buscarPorCodigo(Integer codigo) throws ExcecaoServico,  ExcecaoDAO {

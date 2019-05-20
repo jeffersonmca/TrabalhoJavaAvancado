@@ -51,12 +51,11 @@ public class Pessoa {
         
     }
 
-    public Pessoa(Integer codigo, String nome, String email, EnumTipoPessoa tipoPessoa, List<Turma> turmas) {
+    public Pessoa(Integer codigo, String nome, String email, EnumTipoPessoa tipoPessoa) {
         this.codigo = codigo;
         this.nome = nome;
         this.email = email;
         this.tipoPessoa = tipoPessoa;
-        this.turmas = turmas;
     }
 
     public Integer getCodigo() {

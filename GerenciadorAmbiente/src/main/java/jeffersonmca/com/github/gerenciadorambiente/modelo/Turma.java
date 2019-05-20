@@ -54,14 +54,12 @@ public class Turma {
         
     }
 
-    public Turma(Integer codigo, String nome, Disciplina fkDisciplina, Periodo fkPeriodo, Pessoa fkProfessor, List<Pessoa> alunos, List<Aula> aulas) {
+    public Turma(Integer codigo, String nome, Disciplina fkDisciplina, Periodo fkPeriodo, Pessoa fkProfessor) {
         this.codigo = codigo;
         this.nome = nome;
         this.fkDisciplina = fkDisciplina;
         this.fkPeriodo = fkPeriodo;
         this.fkProfessor = fkProfessor;
-        this.alunos = alunos;
-        this.aulas = aulas;
     }
 
     public Integer getCodigo() {

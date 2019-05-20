@@ -1,4 +1,4 @@
-package jeffersonmca.com.github.gerenciadorambiente.servico;
+package jeffersonmca.com.github.gerenciadorambiente.util;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -144,7 +144,7 @@ public class Validacao {
         return false;
     }
     
-    public static boolean Ambiente(Ambiente instancia) throws ExcecaoValidacao {
+    public static boolean Ambiente(Ambiente instancia) {
         
     	// Argumento esta vazio?
         if (Alocado(instancia)) {
@@ -156,177 +156,42 @@ public class Validacao {
             }
         }
 			
-        throw new ExcecaoValidacao("Houve erro ao validar o ambiente!");
+        return false;
     }
     
-    public static boolean AmbienteEdita(Ambiente instancia) throws ExcecaoValidacao {
-        
-    	// Argumento esta vazio?
-        if (Alocado(instancia)) {
-        	
-            // Verifica se o identificador eh valido
-            if (Validacao.Identificador(instancia.getCodigo())) {
-
-                // Verifica se existe um nome
-                if (!(Validacao.Vazio(instancia.getNome()))) {
-
-                    return true;
-                }
-            }
-        }
-			
-        throw new ExcecaoValidacao("Houve erro ao validar o ambiente!");
-    }
-    
-    public static boolean Aula(Aula instancia) throws ExcecaoValidacao {
+    public static boolean AmbienteEdita(Ambiente instancia) {
     	
     	// Argumento esta vazio?
         if (Alocado(instancia)) {
-        	
+            
             // Verifica se o identificador eh valido
             if (Validacao.Identificador(instancia.getCodigo())) {
+                return Ambiente(instancia);
+            }
+        }
+        
+        return false;
+    }
+    
+    public static boolean Aula(Aula instancia) {
+    	
+    	// Argumento esta vazio?
+        if (Alocado(instancia)) {
+
+            // Verifica se a hora eh valida
+            if (Validacao.Hora(instancia.getHorarioInicio())) {
 
                 // Verifica se a hora eh valida
-                if (Validacao.Hora(instancia.getHorarioInicio())) {
+                if (Validacao.Hora(instancia.getHorarioTermino())) {
 
-                    // Verifica se a hora eh valida
-                    if (Validacao.Hora(instancia.getHorarioTermino())) {
+                    // Verifica se foi o enum esta preenchido
+                    if (!(Validacao.Vazio(instancia.getDiaSemana()))) {
 
-                        // Verifica se foi o enum esta preenchido
-                        if (!(Validacao.Vazio(instancia.getDiaSemana()))) {
+                        // Verifica se o ambiente eh valido
+                        if (Validacao.Ambiente(instancia.getFkAmbiente())) {
 
-                            // Verifica se o ambiente eh valido
-                            if (Validacao.Ambiente(instancia.getFkAmbiente())) {
-
-                                // Verifica se a turma eh valida
-                                if (Validacao.Turma(instancia.getTurma())) {
-                                    return true;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        
-        throw new ExcecaoValidacao("Houve erro ao validar a aula!");
-    }
-    
-    public static boolean Curso(Curso instancia) throws ExcecaoValidacao {
-    	
-    	// Argumento esta vazio?
-        if (Alocado(instancia)) {
-        	
-            // Verifica se o identificador eh valido
-            if (Validacao.Identificador(instancia.getCodigo())) {
-		        
-                // Verifica se existe um nome
-                if (Validacao.Vazio(instancia.getNome())) {
-
-                    // Verifica se o periodo eh valido
-                    if (Validacao.Periodo(instancia.getFkPeriodo())) {
-                        return true;
-                    }
-                }
-            }
-        }
-	    
-        throw new ExcecaoValidacao("Houve erro ao validar o curso!");
-    }
-    
-    public static boolean Disciplina(Disciplina instancia) throws ExcecaoValidacao {
-    	
-    	// Argumento esta vazio?
-        if (Alocado(instancia)) {
-        	
-            // Verifica se o identificador eh valido
-            if (Validacao.Identificador(instancia.getCodigo())) {
-
-                // Verifica se existe um nome
-                if (Validacao.Vazio(instancia.getNome())) {
-
-                    // Verifica se a carga horaria eh maior que zero
-                    if (Validacao.NaturalNaoNulo(instancia.getCargaHoraria())) {
-
-                        // Verifica se o curso eh valido
-                        if (Validacao.Curso(instancia.getFkCurso())) {
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-	    
-        throw new ExcecaoValidacao("Houve erro ao validar a disciplina!");
-    }
-    
-    public static boolean Periodo(Periodo instancia) throws ExcecaoValidacao {
-    	
-    	// Argumento esta vazio?
-        if (Alocado(instancia)) {
-        	
-            // Verifica se o identificador eh valido
-            if (Validacao.Identificador(instancia.getCodigo())) {
-
-                // Verifica se o ano eh maior que zero
-                if (Validacao.NaturalNaoNulo(instancia.getAno())) {
-
-                    // Verifica se o semestre esta preenchido
-                    if (!(Validacao.Vazio(instancia.getSemestre()))) {
-                        return true;
-                    }
-                }
-            }
-        }
-	    
-        throw new ExcecaoValidacao("Houve erro ao validar o periodo!");
-    }
-    
-    public static boolean Pessoa(Pessoa instancia) throws ExcecaoValidacao {
-    	
-    	// Argumento esta vazio?
-        if (Alocado(instancia)) {
-        	
-            // Verifica se o identificador eh valido
-            if (Validacao.Identificador(instancia.getCodigo())) {
-
-                // Verifica se existe um nome
-                if (Validacao.Vazio(instancia.getNome())) {
-
-                    // Verifica se o email eh valido
-                    if (Validacao.Vazio(instancia.getEmail())) {
-
-                        // Verifica se o semestre esta preenchido
-                        if (!(Validacao.Vazio(instancia.getTipoPessoa()))) {
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-	    
-        throw new ExcecaoValidacao("Houve erro ao validar a pessoa!");
-    }
-    
-    public static boolean Turma(Turma instancia) throws ExcecaoValidacao {
-    	
-    	// Argumento esta vazio?
-        if (Alocado(instancia)) {
-        	
-            // Verifica se o identificador eh valido
-            if (Validacao.Identificador(instancia.getCodigo())) {
-
-                // Verifica se existe um nome
-                if (Validacao.Vazio(instancia.getNome())) {
-
-                    // Verifica se a disciplina eh valida
-                    if (Validacao.Disciplina(instancia.getFkDisciplina())) {
-
-                        // Verifica se o periodo eh valido
-                        if (Validacao.Periodo(instancia.getFkPeriodo())) {
-
-                            // Verifica se o professor eh valido
-                            if (Validacao.Professor(instancia.getFkProfessor())) {
+                            // Verifica se a turma eh valida
+                            if (Validacao.Turma(instancia.getTurma())) {
                                 return true;
                             }
                         }
@@ -334,11 +199,201 @@ public class Validacao {
                 }
             }
         }
-	    
-        throw new ExcecaoValidacao("Houve erro ao validar a turma!");
+        
+        return false;
     }
     
-    public static boolean Professor(Pessoa instancia) throws ExcecaoValidacao {
+    public static boolean AulaEdita(Aula instancia) {
+    	
+    	// Argumento esta vazio?
+        if (Alocado(instancia)) {
+            
+            // Verifica se o identificador eh valido
+            if (Validacao.Identificador(instancia.getCodigo())) {
+                return Aula(instancia);
+            }
+        }
+        
+        return false;
+    }
+    
+    public static boolean Curso(Curso instancia) {
+    	
+    	// Argumento esta vazio?
+        if (Alocado(instancia)) {
+		        
+            // Verifica se existe um nome
+            if (Validacao.Vazio(instancia.getNome())) {
+
+                // Verifica se o periodo eh valido
+                if (Validacao.Periodo(instancia.getFkPeriodo())) {
+                    return true;
+                }
+            }
+        }
+	    
+        return false;
+    }
+    
+    public static boolean CursoEdita(Curso instancia) {
+    	
+    	// Argumento esta vazio?
+        if (Alocado(instancia)) {
+            
+            // Verifica se o identificador eh valido
+            if (Validacao.Identificador(instancia.getCodigo())) {
+                return Curso(instancia);
+            }
+        }
+        
+        return false;
+    }
+    
+    public static boolean Disciplina(Disciplina instancia) {
+    	
+    	// Argumento esta vazio?
+        if (Alocado(instancia)) {
+
+            // Verifica se existe um nome
+            if (Validacao.Vazio(instancia.getNome())) {
+
+                // Verifica se a carga horaria eh maior que zero
+                if (Validacao.NaturalNaoNulo(instancia.getCargaHoraria())) {
+
+                    // Verifica se o curso eh valido
+                    if (Validacao.Curso(instancia.getFkCurso())) {
+                        return true;
+                    }
+                }
+            }
+        }
+	    
+        return false;
+    }
+    
+    public static boolean DisciplinaEdita(Disciplina instancia) {
+        
+        // Argumento esta vazio?
+        if (Alocado(instancia)) {
+            
+            // Verifica se o identificador eh valido
+            if (Validacao.Identificador(instancia.getCodigo())) {
+                return Disciplina(instancia);
+            }
+        }
+        
+        return false;
+    }
+    
+    public static boolean Periodo(Periodo instancia) {
+    	
+    	// Argumento esta vazio?
+        if (Alocado(instancia)) {
+
+            // Verifica se o ano eh maior que zero
+            if (Validacao.NaturalNaoNulo(instancia.getAno())) {
+
+                // Verifica se o semestre esta preenchido
+                if (!(Validacao.Vazio(instancia.getSemestre()))) {
+                    return true;
+                }
+            }
+        }
+	    
+        return false;
+    }
+    
+    public static boolean PeriodoEdita(Periodo instancia) {
+        
+        // Argumento esta vazio?
+        if (Alocado(instancia)) {
+            
+            // Verifica se o identificador eh valido
+            if (Validacao.Identificador(instancia.getCodigo())) {
+                return Periodo(instancia);
+            }
+        }
+        
+        return false;
+    }
+    
+    public static boolean Pessoa(Pessoa instancia) {
+    	
+    	// Argumento esta vazio?
+        if (Alocado(instancia)) {
+
+            // Verifica se existe um nome
+            if (Validacao.Vazio(instancia.getNome())) {
+
+                // Verifica se o email eh valido
+                if (Validacao.Vazio(instancia.getEmail())) {
+
+                    // Verifica se o semestre esta preenchido
+                    if (!(Validacao.Vazio(instancia.getTipoPessoa()))) {
+                        return true;
+                    }
+                }
+            }
+        }
+	    
+        return false;
+    }
+    
+    public static boolean PessoaEdita(Pessoa instancia) {
+        
+        // Argumento esta vazio?
+        if (Alocado(instancia)) {
+            
+            // Verifica se o identificador eh valido
+            if (Validacao.Identificador(instancia.getCodigo())) {
+                return Pessoa(instancia);
+            }
+        }
+        
+        return false;
+    }
+    
+    public static boolean Turma(Turma instancia) {
+    	
+    	// Argumento esta vazio?
+        if (Alocado(instancia)) {
+
+            // Verifica se existe um nome
+            if (Validacao.Vazio(instancia.getNome())) {
+
+                // Verifica se a disciplina eh valida
+                if (Validacao.Disciplina(instancia.getFkDisciplina())) {
+
+                    // Verifica se o periodo eh valido
+                    if (Validacao.Periodo(instancia.getFkPeriodo())) {
+
+                        // Verifica se o professor eh valido
+                        if (Validacao.Professor(instancia.getFkProfessor())) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+	    
+        return false;
+    }
+    
+    public static boolean TurmaEdita(Turma instancia) {
+        
+        // Argumento esta vazio?
+        if (Alocado(instancia)) {
+            
+            // Verifica se o identificador eh valido
+            if (Validacao.Identificador(instancia.getCodigo())) {
+                return Turma(instancia);
+            }
+        }
+        
+        return false;
+    }
+    
+    public static boolean Professor(Pessoa instancia) {
         
         // 
         if (Pessoa(instancia)) {
@@ -348,10 +403,10 @@ public class Validacao {
             }
         }
         
-        throw new ExcecaoValidacao("Houve erro ao validar o professor!");
+        return false;
     }
     
-    public static boolean Aluno(Pessoa instancia) throws ExcecaoValidacao {
+    public static boolean Aluno(Pessoa instancia) {
         
         // 
         if (Pessoa(instancia)) {
@@ -361,6 +416,6 @@ public class Validacao {
             }
         }
         
-        throw new ExcecaoValidacao("Houve erro ao validar o aluno!");
+        return false;
     }
 }

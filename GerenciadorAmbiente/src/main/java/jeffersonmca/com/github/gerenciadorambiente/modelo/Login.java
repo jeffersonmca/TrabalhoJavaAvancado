@@ -69,6 +69,6 @@ public class Login {
 
     @Override
     public String toString() {
-        return "Login{" + "id=" + id + ", senha=" + senha + ", usuario=" + usuario + '}';
+        return this.usuario.toString();
     }
 }

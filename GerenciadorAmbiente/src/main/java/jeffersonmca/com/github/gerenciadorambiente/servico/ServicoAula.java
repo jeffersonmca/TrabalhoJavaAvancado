@@ -1,5 +1,6 @@
 package jeffersonmca.com.github.gerenciadorambiente.servico;
 
+import jeffersonmca.com.github.gerenciadorambiente.util.Validacao;
 import java.util.List;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Aula;
 import jeffersonmca.com.github.gerenciadorambiente.dao.DAOAula;
@@ -16,6 +17,24 @@ public class ServicoAula {
         dao = new DAOAula();
     }
     
+    public void editar(Aula instancia) throws ExcecaoDAO, ExcecaoValidacao, ExcecaoServico {
+        
+    	try {
+    		
+            /*Regra de negocio*/
+            if (Validacao.AulaEdita(instancia)) {
+                dao.salvar(instancia);
+            }else{
+                throw new ExcecaoValidacao("Houve erro ao validar a Aula!");
+            }
+	        
+    	} catch (ExcecaoValidacao e) {
+            throw e;
+        } catch (Exception e) {
+            throw new ExcecaoServico("Houve erro ao requisitar o salvamento da Aula!");
+        }
+    }
+    
     public void salvar(Aula instancia) throws ExcecaoDAO, ExcecaoValidacao, ExcecaoServico {
         
         try {
@@ -23,12 +42,14 @@ public class ServicoAula {
             /*Regra de negocio*/
             if (Validacao.Aula(instancia)) {
                 dao.salvar(instancia);
+            }else{
+                throw new ExcecaoValidacao("Houve erro ao validar a Aula!");
             }
-            
-        } catch (ExcecaoDAO|ExcecaoValidacao e) {
+	        
+    	} catch (ExcecaoValidacao e) {
             throw e;
         } catch (Exception e) {
-            throw new ExcecaoServico("Houve erro ao requisitar o salvamento da aula!");
+            throw new ExcecaoServico("Houve erro ao requisitar o salvamento da Aula!");
         }
     }
 
