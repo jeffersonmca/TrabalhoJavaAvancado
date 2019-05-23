@@ -7,7 +7,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.EnumTipoPessoa;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Turma;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-05-20T18:08:04")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-05-23T20:08:54")
 @StaticMetamodel(Pessoa.class)
 public class Pessoa_ { 
 

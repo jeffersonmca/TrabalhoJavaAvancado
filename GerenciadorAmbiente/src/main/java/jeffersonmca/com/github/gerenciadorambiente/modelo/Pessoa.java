@@ -42,7 +42,7 @@ public class Pessoa {
     private EnumTipoPessoa tipoPessoa;
     
     @ManyToMany
-    @JoinTable(name = "aluno_turma",
+    @JoinTable(name = "ALUNO_TURMA",
                     joinColumns = @JoinColumn(name = "aluno_id"),
                     inverseJoinColumns = @JoinColumn(name = "turma_id"))
     private List<Turma> turmas;

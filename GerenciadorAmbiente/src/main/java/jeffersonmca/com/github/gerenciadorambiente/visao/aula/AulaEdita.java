@@ -129,13 +129,15 @@ public class AulaEdita extends javax.swing.JDialog {
         jLabel9 = new JLabel();
         jLabel10 = new JLabel();
         textHorarioInicio = new JTextField();
-        try {
+        try{
             MaskFormatter mf = new MaskFormatter("##:##");
-            JTextField jf = new JFormattedTextField(mf);
-        } catch (Exception e) {
-        }
+            textHorarioInicio = new JFormattedTextField(mf);
+        }catch (Exception e){}
         textHorarioTermino = new JTextField();
-        try {     MaskFormatter mf = new MaskFormatter("##:##");     JTextField jf = new JFormattedTextField(mf); } catch (Exception e) { }
+        try{
+            MaskFormatter mf = new MaskFormatter("##:##");
+            textHorarioTermino = new JFormattedTextField(mf);
+        }catch (Exception e){}
 
         jPanel2.setBorder(BorderFactory.createEtchedBorder());
 
@@ -318,21 +320,24 @@ public class AulaEdita extends javax.swing.JDialog {
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addComponent(panelBotoes, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(panelBotoes, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelBotoes, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         );
 
-        setSize(new Dimension(393, 331));
+        setSize(new Dimension(393, 322));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

@@ -42,7 +42,7 @@ public class Turma {
     private Pessoa fkProfessor;
     
     @ManyToMany
-    @JoinTable(name = "aluno_turma",
+    @JoinTable(name = "ALUNO_TURMA",
                     joinColumns = @JoinColumn(name = "turma_id"),
                     inverseJoinColumns = @JoinColumn(name = "aluno_id"))
     private List<Pessoa> alunos;

@@ -95,13 +95,15 @@ public class AulaIncluir extends javax.swing.JDialog {
         jLabel5 = new JLabel();
         jLabel6 = new JLabel();
         textHorarioInicio = new JTextField();
-        try {
+        try{
             MaskFormatter mf = new MaskFormatter("##:##");
-            JTextField jf = new JFormattedTextField(mf);
-        } catch (Exception e) {
-        }
+            textHorarioInicio = new JFormattedTextField(mf);
+        }catch (Exception e){}
         textHorarioTermino = new JTextField();
-        try {     MaskFormatter mf = new MaskFormatter("##:##");     JTextField jf = new JFormattedTextField(mf); } catch (Exception e) { }
+        try{
+            MaskFormatter mf = new MaskFormatter("##:##");
+            textHorarioTermino = new JFormattedTextField(mf);
+        }catch (Exception e){}
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Incluir registro");
@@ -224,12 +226,13 @@ public class AulaIncluir extends javax.swing.JDialog {
         layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new Dimension(424, 322));
+        setSize(new Dimension(424, 334));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
