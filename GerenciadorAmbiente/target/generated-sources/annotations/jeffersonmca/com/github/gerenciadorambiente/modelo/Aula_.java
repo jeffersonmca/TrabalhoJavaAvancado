@@ -8,7 +8,7 @@ import jeffersonmca.com.github.gerenciadorambiente.modelo.Ambiente;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.EnumDiaSemana;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Turma;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-05-23T20:08:54")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-05-23T21:21:45")
 @StaticMetamodel(Aula.class)
 public class Aula_ { 
 

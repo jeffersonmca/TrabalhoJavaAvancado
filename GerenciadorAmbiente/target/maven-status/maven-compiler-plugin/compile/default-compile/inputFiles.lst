@@ -9,6 +9,7 @@
 /home/jefferson/Downloads/TrabalhoJavaAvancado/GerenciadorAmbiente/src/main/java/jeffersonmca/com/github/gerenciadorambiente/dao/DAOAula.java
 /home/jefferson/Downloads/TrabalhoJavaAvancado/GerenciadorAmbiente/src/main/java/jeffersonmca/com/github/gerenciadorambiente/servico/ServicoTurma.java
 /home/jefferson/Downloads/TrabalhoJavaAvancado/GerenciadorAmbiente/src/main/java/jeffersonmca/com/github/gerenciadorambiente/visao/turma/TurmaIncluir.java
+/home/jefferson/Downloads/TrabalhoJavaAvancado/GerenciadorAmbiente/src/main/java/jeffersonmca/com/github/gerenciadorambiente/visao/turma/aluno/AlunoIncluir.java
 /home/jefferson/Downloads/TrabalhoJavaAvancado/GerenciadorAmbiente/src/main/java/jeffersonmca/com/github/gerenciadorambiente/visao/curso/CursoTableModel.java
 /home/jefferson/Downloads/TrabalhoJavaAvancado/GerenciadorAmbiente/src/main/java/jeffersonmca/com/github/gerenciadorambiente/visao/ambiente/AmbienteEdita.java
 /home/jefferson/Downloads/TrabalhoJavaAvancado/GerenciadorAmbiente/src/main/java/jeffersonmca/com/github/gerenciadorambiente/visao/aula/AulaIncluir.java
@@ -23,6 +24,7 @@
 /home/jefferson/Downloads/TrabalhoJavaAvancado/GerenciadorAmbiente/src/main/java/jeffersonmca/com/github/gerenciadorambiente/visao/ambiente/AmbienteTableModel.java
 /home/jefferson/Downloads/TrabalhoJavaAvancado/GerenciadorAmbiente/src/main/java/jeffersonmca/com/github/gerenciadorambiente/servico/ServicoAula.java
 /home/jefferson/Downloads/TrabalhoJavaAvancado/GerenciadorAmbiente/src/main/java/jeffersonmca/com/github/gerenciadorambiente/visao/VisaoAula.java
+/home/jefferson/Downloads/TrabalhoJavaAvancado/GerenciadorAmbiente/src/main/java/jeffersonmca/com/github/gerenciadorambiente/visao/turma/aluno/AlunoEditar.java
 /home/jefferson/Downloads/TrabalhoJavaAvancado/GerenciadorAmbiente/src/main/java/jeffersonmca/com/github/gerenciadorambiente/modelo/EnumTipoPessoa.java
 /home/jefferson/Downloads/TrabalhoJavaAvancado/GerenciadorAmbiente/src/main/java/jeffersonmca/com/github/gerenciadorambiente/visao/ambiente/AmbienteIncluir.java
 /home/jefferson/Downloads/TrabalhoJavaAvancado/GerenciadorAmbiente/src/main/java/jeffersonmca/com/github/gerenciadorambiente/visao/pessoa/PessoaIncluir.java
@@ -34,6 +36,7 @@
 /home/jefferson/Downloads/TrabalhoJavaAvancado/GerenciadorAmbiente/src/main/java/jeffersonmca/com/github/gerenciadorambiente/util/Validacao.java
 /home/jefferson/Downloads/TrabalhoJavaAvancado/GerenciadorAmbiente/src/main/java/jeffersonmca/com/github/gerenciadorambiente/servico/ServicoPessoa.java
 /home/jefferson/Downloads/TrabalhoJavaAvancado/GerenciadorAmbiente/src/main/java/jeffersonmca/com/github/gerenciadorambiente/visao/turma/TurmaTableModel.java
+/home/jefferson/Downloads/TrabalhoJavaAvancado/GerenciadorAmbiente/src/main/java/jeffersonmca/com/github/gerenciadorambiente/visao/turma/AlunosTableModel.java
 /home/jefferson/Downloads/TrabalhoJavaAvancado/GerenciadorAmbiente/src/main/java/jeffersonmca/com/github/gerenciadorambiente/servico/ServicoCurso.java
 /home/jefferson/Downloads/TrabalhoJavaAvancado/GerenciadorAmbiente/src/main/java/jeffersonmca/com/github/gerenciadorambiente/modelo/Turma.java
 /home/jefferson/Downloads/TrabalhoJavaAvancado/GerenciadorAmbiente/src/main/java/jeffersonmca/com/github/gerenciadorambiente/visao/turma/TurmaEdita.java

@@ -1,20 +1,24 @@
 jeffersonmca/com/github/gerenciadorambiente/visao/curso/CursoTableModel.class
 jeffersonmca/com/github/gerenciadorambiente/visao/pessoa/PessoaListagem$2.class
+jeffersonmca/com/github/gerenciadorambiente/visao/turma/TurmaIncluir$6.class
 jeffersonmca/com/github/gerenciadorambiente/visao/aula/AulaListagem$3.class
 jeffersonmca/com/github/gerenciadorambiente/visao/disciplina/DisciplinaListagem$1.class
 jeffersonmca/com/github/gerenciadorambiente/modelo/Ambiente_.class
 jeffersonmca/com/github/gerenciadorambiente/visao/curso/CursoEdita.class
 jeffersonmca/com/github/gerenciadorambiente/visao/turma/TurmaEdita$3.class
+jeffersonmca/com/github/gerenciadorambiente/visao/turma/aluno/AlunoIncluir$2.class
 jeffersonmca/com/github/gerenciadorambiente/visao/VisaoLogin$3.class
 jeffersonmca/com/github/gerenciadorambiente/visao/aula/AulaEdita$5.class
 jeffersonmca/com/github/gerenciadorambiente/visao/periodo/PeriodoListagem.class
 jeffersonmca/com/github/gerenciadorambiente/visao/curso/CursoIncluir.class
+jeffersonmca/com/github/gerenciadorambiente/visao/turma/aluno/AlunoEditar$2.class
 jeffersonmca/com/github/gerenciadorambiente/visao/curso/CursoIncluir$1.class
 jeffersonmca/com/github/gerenciadorambiente/util/Validacao.class
 jeffersonmca/com/github/gerenciadorambiente/dao/DAOGenerico.class
 jeffersonmca/com/github/gerenciadorambiente/modelo/Aula_.class
 jeffersonmca/com/github/gerenciadorambiente/visao/aula/AulaListagem$4.class
 jeffersonmca/com/github/gerenciadorambiente/visao/turma/TurmaTableModel.class
+jeffersonmca/com/github/gerenciadorambiente/visao/turma/aluno/AlunoEditar$1.class
 jeffersonmca/com/github/gerenciadorambiente/visao/pessoa/PessoaListagem$3.class
 jeffersonmca/com/github/gerenciadorambiente/visao/Principal$3.class
 jeffersonmca/com/github/gerenciadorambiente/visao/VisaoAmbiente.class
@@ -32,6 +36,7 @@ jeffersonmca/com/github/gerenciadorambiente/modelo/EnumDiaSemana.class
 jeffersonmca/com/github/gerenciadorambiente/visao/VisaoCurso.class
 jeffersonmca/com/github/gerenciadorambiente/visao/aula/AulaIncluir$3.class
 jeffersonmca/com/github/gerenciadorambiente/modelo/Turma.class
+jeffersonmca/com/github/gerenciadorambiente/visao/turma/TurmaIncluir$5.class
 jeffersonmca/com/github/gerenciadorambiente/visao/turma/TurmaEdita$4.class
 jeffersonmca/com/github/gerenciadorambiente/visao/VisaoDisciplina.class
 jeffersonmca/com/github/gerenciadorambiente/visao/ambiente/AmbienteListagem$5.class
@@ -56,6 +61,7 @@ jeffersonmca/com/github/gerenciadorambiente/visao/pessoa/PessoaEdita.class
 jeffersonmca/com/github/gerenciadorambiente/visao/Principal$2.class
 jeffersonmca/com/github/gerenciadorambiente/visao/VisaoPessoa.class
 jeffersonmca/com/github/gerenciadorambiente/servico/ServicoAmbiente.class
+jeffersonmca/com/github/gerenciadorambiente/visao/turma/aluno/AlunoIncluir$1.class
 jeffersonmca/com/github/gerenciadorambiente/visao/ambiente/AmbienteIncluir.class
 jeffersonmca/com/github/gerenciadorambiente/visao/aula/AulaIncluir$5.class
 jeffersonmca/com/github/gerenciadorambiente/visao/turma/TurmaListagem$5.class
@@ -71,6 +77,7 @@ jeffersonmca/com/github/gerenciadorambiente/visao/disciplina/DisciplinaEdita.cla
 jeffersonmca/com/github/gerenciadorambiente/visao/aula/AulaTableModel.class
 jeffersonmca/com/github/gerenciadorambiente/visao/turma/TurmaEdita$1.class
 jeffersonmca/com/github/gerenciadorambiente/visao/VisaoLogin$1.class
+jeffersonmca/com/github/gerenciadorambiente/visao/turma/AlunosTableModel.class
 jeffersonmca/com/github/gerenciadorambiente/visao/disciplina/DisciplinaIncluir$2.class
 jeffersonmca/com/github/gerenciadorambiente/visao/pessoa/PessoaListagem$1.class
 jeffersonmca/com/github/gerenciadorambiente/visao/turma/TurmaIncluir$3.class
@@ -104,8 +111,10 @@ jeffersonmca/com/github/gerenciadorambiente/visao/ambiente/AmbienteListagem$3.cl
 jeffersonmca/com/github/gerenciadorambiente/visao/ambiente/AmbienteIncluir$1.class
 jeffersonmca/com/github/gerenciadorambiente/dao/IDAOGenerico.class
 jeffersonmca/com/github/gerenciadorambiente/visao/disciplina/DisciplinaListagem$4.class
+jeffersonmca/com/github/gerenciadorambiente/visao/turma/TurmaIncluir$4.class
 jeffersonmca/com/github/gerenciadorambiente/visao/pessoa/PessoaIncluir.class
 jeffersonmca/com/github/gerenciadorambiente/visao/VisaoPeriodo.class
+jeffersonmca/com/github/gerenciadorambiente/visao/turma/aluno/AlunoIncluir.class
 jeffersonmca/com/github/gerenciadorambiente/visao/pessoa/PessoaListagem$4.class
 jeffersonmca/com/github/gerenciadorambiente/visao/pessoa/PessoaIncluir$2.class
 jeffersonmca/com/github/gerenciadorambiente/visao/turma/TurmaListagem$1.class
@@ -158,6 +167,7 @@ jeffersonmca/com/github/gerenciadorambiente/visao/periodo/PeriodoListagem$2.clas
 jeffersonmca/com/github/gerenciadorambiente/visao/aula/AulaEdita$6.class
 jeffersonmca/com/github/gerenciadorambiente/servico/ServicoPessoa.class
 jeffersonmca/com/github/gerenciadorambiente/modelo/Pessoa_.class
+jeffersonmca/com/github/gerenciadorambiente/visao/turma/aluno/AlunoEditar.class
 jeffersonmca/com/github/gerenciadorambiente/modelo/Periodo_.class
 jeffersonmca/com/github/gerenciadorambiente/dao/DAOAula.class
 jeffersonmca/com/github/gerenciadorambiente/visao/periodo/PeriodoEdita.class
