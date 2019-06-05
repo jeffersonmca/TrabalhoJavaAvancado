@@ -25,75 +25,146 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        cadMenuAmbiente = new javax.swing.JMenuItem();
+        cadMenuAula = new javax.swing.JMenuItem();
+        cadMenuCurso = new javax.swing.JMenuItem();
+        cadMenuDisciplina = new javax.swing.JMenuItem();
+        cadMenuPeriodo = new javax.swing.JMenuItem();
+        cadMenuPessoa = new javax.swing.JMenuItem();
+        cadMenuTurma = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        pesMenuAmbiente = new javax.swing.JMenuItem();
+        pesMenuAula = new javax.swing.JMenuItem();
+        pesMenuCurso = new javax.swing.JMenuItem();
+        pesMenuDisciplina = new javax.swing.JMenuItem();
+        pesMenuPeriodo = new javax.swing.JMenuItem();
+        pesMenuPessoa = new javax.swing.JMenuItem();
+        pesMenuTurma = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        relMenuAmbiente = new javax.swing.JMenuItem();
+        relMenuAula = new javax.swing.JMenuItem();
+        relMenuCurso = new javax.swing.JMenuItem();
+        relMenuDisciplina = new javax.swing.JMenuItem();
+        relMenuPeriodo = new javax.swing.JMenuItem();
+        relMenuPessoa = new javax.swing.JMenuItem();
+        relMenuTurma = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jMenu1.setText("Cadastro");
 
-        jMenuItem1.setText("Ambiente");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        cadMenuAmbiente.setText("Ambiente");
+        cadMenuAmbiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                cadMenuAmbienteActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(cadMenuAmbiente);
 
-        jMenuItem3.setText("Aula");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        cadMenuAula.setText("Aula");
+        cadMenuAula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                cadMenuAulaActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem3);
+        jMenu1.add(cadMenuAula);
 
-        jMenuItem5.setText("Curso");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        cadMenuCurso.setText("Curso");
+        cadMenuCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                cadMenuCursoActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem5);
+        jMenu1.add(cadMenuCurso);
 
-        jMenuItem6.setText("Disciplina");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+        cadMenuDisciplina.setText("Disciplina");
+        cadMenuDisciplina.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
+                cadMenuDisciplinaActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem6);
+        jMenu1.add(cadMenuDisciplina);
 
-        jMenuItem7.setText("Periodo");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+        cadMenuPeriodo.setText("Período");
+        cadMenuPeriodo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
+                cadMenuPeriodoActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem7);
+        jMenu1.add(cadMenuPeriodo);
 
-        jMenuItem4.setText("Pessoa");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        cadMenuPessoa.setText("Pessoa");
+        cadMenuPessoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                cadMenuPessoaActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem4);
+        jMenu1.add(cadMenuPessoa);
 
-        jMenuItem2.setText("Turma");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        cadMenuTurma.setText("Turma");
+        cadMenuTurma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                cadMenuTurmaActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        jMenu1.add(cadMenuTurma);
 
         jMenuBar1.add(jMenu1);
+
+        jMenu3.setText("Pesquisa");
+
+        pesMenuAmbiente.setText("Ambiente");
+        jMenu3.add(pesMenuAmbiente);
+
+        pesMenuAula.setText("Aula");
+        jMenu3.add(pesMenuAula);
+
+        pesMenuCurso.setText("Curso");
+        jMenu3.add(pesMenuCurso);
+
+        pesMenuDisciplina.setText("Disciplina");
+        jMenu3.add(pesMenuDisciplina);
+
+        pesMenuPeriodo.setText("Periodo");
+        jMenu3.add(pesMenuPeriodo);
+
+        pesMenuPessoa.setText("Pessoa");
+        jMenu3.add(pesMenuPessoa);
+
+        pesMenuTurma.setText("Turma");
+        jMenu3.add(pesMenuTurma);
+
+        jMenuBar1.add(jMenu3);
+
+        jMenu2.setText("Relatório");
+
+        relMenuAmbiente.setText("Ambiente");
+        relMenuAmbiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                relMenuAmbienteActionPerformed(evt);
+            }
+        });
+        jMenu2.add(relMenuAmbiente);
+
+        relMenuAula.setText("Aula");
+        jMenu2.add(relMenuAula);
+
+        relMenuCurso.setText("Curso");
+        jMenu2.add(relMenuCurso);
+
+        relMenuDisciplina.setText("Disciplina");
+        jMenu2.add(relMenuDisciplina);
+
+        relMenuPeriodo.setText("Período");
+        jMenu2.add(relMenuPeriodo);
+
+        relMenuPessoa.setText("Pessoa");
+        jMenu2.add(relMenuPessoa);
+
+        relMenuTurma.setText("Turma");
+        jMenu2.add(relMenuTurma);
+
+        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -112,50 +183,70 @@ public class Principal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void cadMenuAmbienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadMenuAmbienteActionPerformed
         AmbienteListagem tela = new AmbienteListagem();
         tela.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_cadMenuAmbienteActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void cadMenuAulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadMenuAulaActionPerformed
         AulaListagem tela = new AulaListagem();
         tela.setVisible(true);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_cadMenuAulaActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+    private void cadMenuCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadMenuCursoActionPerformed
         CursoListagem tela = new CursoListagem();
         tela.setVisible(true);
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    }//GEN-LAST:event_cadMenuCursoActionPerformed
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+    private void cadMenuDisciplinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadMenuDisciplinaActionPerformed
         DisciplinaListagem tela = new DisciplinaListagem();
         tela.setVisible(true);
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
+    }//GEN-LAST:event_cadMenuDisciplinaActionPerformed
 
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+    private void cadMenuPeriodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadMenuPeriodoActionPerformed
         PeriodoListagem tela = new PeriodoListagem();
         tela.setVisible(true);
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
+    }//GEN-LAST:event_cadMenuPeriodoActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void cadMenuPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadMenuPessoaActionPerformed
         PessoaListagem tela = new PessoaListagem();
         tela.setVisible(true);
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_cadMenuPessoaActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void cadMenuTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadMenuTurmaActionPerformed
         TurmaListagem tela = new TurmaListagem();
         tela.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_cadMenuTurmaActionPerformed
+
+    private void relMenuAmbienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relMenuAmbienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_relMenuAmbienteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem cadMenuAmbiente;
+    private javax.swing.JMenuItem cadMenuAula;
+    private javax.swing.JMenuItem cadMenuCurso;
+    private javax.swing.JMenuItem cadMenuDisciplina;
+    private javax.swing.JMenuItem cadMenuPeriodo;
+    private javax.swing.JMenuItem cadMenuPessoa;
+    private javax.swing.JMenuItem cadMenuTurma;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem pesMenuAmbiente;
+    private javax.swing.JMenuItem pesMenuAula;
+    private javax.swing.JMenuItem pesMenuCurso;
+    private javax.swing.JMenuItem pesMenuDisciplina;
+    private javax.swing.JMenuItem pesMenuPeriodo;
+    private javax.swing.JMenuItem pesMenuPessoa;
+    private javax.swing.JMenuItem pesMenuTurma;
+    private javax.swing.JMenuItem relMenuAmbiente;
+    private javax.swing.JMenuItem relMenuAula;
+    private javax.swing.JMenuItem relMenuCurso;
+    private javax.swing.JMenuItem relMenuDisciplina;
+    private javax.swing.JMenuItem relMenuPeriodo;
+    private javax.swing.JMenuItem relMenuPessoa;
+    private javax.swing.JMenuItem relMenuTurma;
     // End of variables declaration//GEN-END:variables
 }

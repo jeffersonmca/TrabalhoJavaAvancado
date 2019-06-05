@@ -9,7 +9,7 @@ import jeffersonmca.com.github.gerenciadorambiente.modelo.Disciplina;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Periodo;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Pessoa;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-06-05T17:04:30")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-06-05T18:03:22")
 @StaticMetamodel(Turma.class)
 public class Turma_ { 
 
