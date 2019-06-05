@@ -1,19 +1,13 @@
 package jeffersonmca.com.github.gerenciadorambiente.visao.turma;
 
-import jeffersonmca.com.github.gerenciadorambiente.visao.turma.*;
-import javax.swing.JFormattedTextField;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -31,17 +25,12 @@ import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
-import javax.swing.SpinnerNumberModel;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.MaskFormatter;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoDAO;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoServico;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoValidacao;
-import jeffersonmca.com.github.gerenciadorambiente.modelo.Ambiente;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Disciplina;
-import jeffersonmca.com.github.gerenciadorambiente.modelo.Turma;
-import jeffersonmca.com.github.gerenciadorambiente.modelo.EnumDiaSemana;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Periodo;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Pessoa;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Turma;
@@ -50,8 +39,6 @@ import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoPeriodo;
 import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoTurma;
 import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoPessoa;
 import jeffersonmca.com.github.gerenciadorambiente.util.Validacao;
-import jeffersonmca.com.github.gerenciadorambiente.visao.turma.aluno.AlunoEditar;
-import jeffersonmca.com.github.gerenciadorambiente.visao.turma.aluno.AlunoIncluir;
 
 public class TurmaEdita extends javax.swing.JDialog {
 
@@ -59,22 +46,38 @@ public class TurmaEdita extends javax.swing.JDialog {
     private ServicoDisciplina disServico;
     private ServicoPeriodo perServico;
     private ServicoPessoa proServico;
+    private ServicoPessoa aluServico;
     private Integer codigo;
-    private Turma turma;
+    private List<Pessoa> alunos;
     
     public TurmaEdita(java.awt.Frame parent, boolean modal, ServicoTurma servico, Turma turma) {
         super(parent, modal);
         initComponents();
         
-        this.turma = turma;
-        
         this.servico = servico;
-        disServico = new ServicoDisciplina();
-        perServico = new ServicoPeriodo();
-        proServico = new ServicoPessoa();
+        this.disServico = new ServicoDisciplina();
+        this.perServico = new ServicoPeriodo();
+        this.proServico = new ServicoPessoa();
+        this.aluServico = new ServicoPessoa();
+        this.alunos     = new ArrayList<>();
+        
+        // Solucao encontrada para o problema de que quando o usuario abria a tela de TurmaEdita e
+        // adicionava um aluno e depois cancelava, se ele abrisse a tela novamente aquele aluno que
+        // foi adicionado recentemente ainda estava la, e isso nao poderia ocorrer
+        for (Pessoa a : turma.getAlunos()) {
+            if (a != null) {
+                Pessoa aux = new Pessoa();
+                aux.setCodigo(a.getCodigo());
+                aux.setNome(a.getNome());
+                aux.setEmail(a.getEmail());
+                aux.setTipoPessoa(a.getTipoPessoa());
+                this.alunos.add(aux);
+            }
+        }
         
         PreencheComboBox();
         PreencheCampos(turma);
+        carregaTable();
     }
     
     private void PreencheComboBox() {
@@ -120,12 +123,30 @@ public class TurmaEdita extends javax.swing.JDialog {
         ComboBoxPeriodo.setSelectedItem(turma.getFkPeriodo());
         ComboBoxProfessor.setSelectedItem(turma.getFkProfessor());
     }
-    
-    private void carregaTable() {
-        AlunosTableModel atm = new AlunosTableModel(turma.getAlunos());
-        tableAlunos.setModel(atm);
-    }
 
+    private void carregaTable() {
+        AlunosTableModel atm = new AlunosTableModel(alunos);
+        tableAlunos.setModel(atm);
+        
+        atualizaComboAluno();
+    }
+    
+    private void atualizaComboAluno() {
+        List<Pessoa> lista4 = null;
+        try {
+            lista4 = aluServico.buscarAlunosForaDaGrid(alunos);
+        } catch (ExcecaoDAO ex) {}
+        
+        Vector<Pessoa> vetor4 = new Vector<>(lista4);
+        
+        DefaultComboBoxModel dcbmAluno =
+               new DefaultComboBoxModel(vetor4);
+        ComboBoxAluno.setModel(dcbmAluno);
+        
+        // Nao coloca o foco em nenhum nome
+        ComboBoxAluno.setSelectedIndex(-1);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -156,11 +177,12 @@ public class TurmaEdita extends javax.swing.JDialog {
         ComboBoxPeriodo = new JComboBox<>();
         jLabel9 = new JLabel();
         textNome = new JTextField();
-        buttonAdicionar = new JButton();
-        buttonAlterar = new JButton();
-        buttonRemover = new JButton();
         jScrollPane1 = new JScrollPane();
         tableAlunos = new JTable();
+        jLabel10 = new JLabel();
+        ComboBoxAluno = new JComboBox<>();
+        buttonAdicionar = new JButton();
+        buttonRemover = new JButton();
 
         jPanel2.setBorder(BorderFactory.createEtchedBorder());
 
@@ -270,27 +292,6 @@ public class TurmaEdita extends javax.swing.JDialog {
         jLabel9.setForeground(new Color(255, 0, 51));
         jLabel9.setText("Nome:");
 
-        buttonAdicionar.setText("Adicionar");
-        buttonAdicionar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                buttonAdicionarActionPerformed(evt);
-            }
-        });
-
-        buttonAlterar.setText("Alterar");
-        buttonAlterar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                buttonAlterarActionPerformed(evt);
-            }
-        });
-
-        buttonRemover.setText("Remover");
-        buttonRemover.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                buttonRemoverActionPerformed(evt);
-            }
-        });
-
         tableAlunos.setModel(new DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -304,91 +305,114 @@ public class TurmaEdita extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(tableAlunos);
 
+        jLabel10.setForeground(new Color(21, 5, 8));
+        jLabel10.setText("Aluno:");
+
+        buttonAdicionar.setText("Adicionar");
+        buttonAdicionar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                buttonAdicionarActionPerformed(evt);
+            }
+        });
+
+        buttonRemover.setText("Remover");
+        buttonRemover.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                buttonRemoverActionPerformed(evt);
+            }
+        });
+
         GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ComboBoxDisciplina, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel2))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                    .addComponent(ComboBoxPeriodo, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(ComboBoxProfessor, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE))))
-                        .addGap(295, 295, 295))
+                        .addComponent(buttonRemover)
+                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ComboBoxAluno, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonAdicionar)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 342, GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(buttonAdicionar)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(buttonAlterar)
-                                .addGap(6, 6, 6)
-                                .addComponent(buttonRemover))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(32, 32, 32)
-                                .addComponent(textNome, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(20, 20, 20)
+                                        .addComponent(jLabel9)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(textNome, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel3))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                            .addComponent(ComboBoxDisciplina, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(ComboBoxPeriodo, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(ComboBoxProfessor, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 10, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 342, GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(textNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(ComboBoxDisciplina, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(ComboBoxPeriodo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ComboBoxProfessor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                    .addComponent(textNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonRemover)
-                    .addComponent(buttonAlterar)
-                    .addComponent(buttonAdicionar))
+                    .addComponent(jLabel3)
+                    .addComponent(ComboBoxDisciplina, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(ComboBoxPeriodo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(ComboBoxProfessor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(ComboBoxAluno, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonAdicionar)
+                    .addComponent(jLabel10))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addComponent(buttonRemover)
+                .addGap(8, 8, 8)
                 .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 24, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addComponent(panelBotoes, GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+            .addComponent(panelBotoes, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 393, GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelBotoes, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         );
 
-        setSize(new Dimension(460, 412));
+        setSize(new Dimension(404, 493));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -442,24 +466,13 @@ public class TurmaEdita extends javax.swing.JDialog {
                           (Pessoa) ComboBoxProfessor.getSelectedItem()
         );
         
-        // Preenche a tabela N - N de aluno_turma
-        
-//        try {
-//            String sql = "INSERT INTO `GerenciadorAmbiente`.`ALUNO_TURMA` (`aluno_id`, `turma_id`) VALUES ('"+ codigo +"', '"++"');";
-//            return em.createQuery(sql).getResultList();
-//        } catch (Exception e) {
-//            throw new ExcecaoDAO("Houve erro ao pegar todos os registros!");
-//        }
+        t.setAlunos(alunos);
         
         try {
             servico.editar(t);
-        } catch (ExcecaoServico e) {
+        } catch (ExcecaoServico|ExcecaoDAO|ExcecaoValidacao e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             return;
-        } catch (ExcecaoDAO ex) {
-            Logger.getLogger(TurmaEdita.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ExcecaoValidacao ex) {
-            Logger.getLogger(TurmaEdita.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         setVisible(false);
@@ -476,7 +489,7 @@ public class TurmaEdita extends javax.swing.JDialog {
 
     private void buttonCancelarActionPerformed(ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
         this.setVisible(false);
-        this.dispose();
+        this.dispose();        
     }//GEN-LAST:event_buttonCancelarActionPerformed
 
     private void ComboBoxDisciplinaActionPerformed(ActionEvent evt) {//GEN-FIRST:event_ComboBoxDisciplinaActionPerformed
@@ -484,40 +497,24 @@ public class TurmaEdita extends javax.swing.JDialog {
     }//GEN-LAST:event_ComboBoxDisciplinaActionPerformed
 
     private void buttonAdicionarActionPerformed(ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarActionPerformed
-        AlunoIncluir dialog = new AlunoIncluir(null, true, turma.getAlunos());
-        dialog.setVisible(true);
-        carregaTable();
+
+        // Verifica se tem algum aluno selecionado
+        if (!(ComboBoxAluno.getSelectedIndex() <= -1)) {
+            alunos.add((Pessoa) ComboBoxAluno.getSelectedItem());
+            carregaTable();
+        }
     }//GEN-LAST:event_buttonAdicionarActionPerformed
 
-    private void buttonAlterarActionPerformed(ActionEvent evt) {//GEN-FIRST:event_buttonAlterarActionPerformed
+    private void buttonRemoverActionPerformed(ActionEvent evt) {//GEN-FIRST:event_buttonRemoverActionPerformed
 
         if (tableAlunos.getSelectedRow() == -1){
             JOptionPane.showMessageDialog(this, "Por favor, selecione um registro.");
             return;
         }
 
-        Pessoa a = turma.getAlunos().get(tableAlunos.getSelectedRow());
+        Pessoa aux = alunos.get(tableAlunos.getSelectedRow());
 
-        if (a == null){
-            JOptionPane.showMessageDialog(this, "Registro não encontrado.");
-            return;
-        }
-
-        AlunoEditar dialog = new AlunoEditar(null, true, a);
-        dialog.setVisible(true);
-        carregaTable();
-    }//GEN-LAST:event_buttonAlterarActionPerformed
-
-    private void buttonRemoverActionPerformed(ActionEvent evt) {//GEN-FIRST:event_buttonRemoverActionPerformed
-
-        if (tableAlunos.getSelectedRow() == -1) {
-            JOptionPane.showMessageDialog(this, "Por favor, selecione um registro.");
-            return;
-        }
-
-        Pessoa aux = turma.getAlunos().get(tableAlunos.getSelectedRow());
-
-        if (aux == null) {
+        if (aux == null){
             JOptionPane.showMessageDialog(this, "Registro não encontrado.");
             return;
         }
@@ -529,22 +526,23 @@ public class TurmaEdita extends javax.swing.JDialog {
             JOptionPane.YES_NO_OPTION
         )== JOptionPane.YES_OPTION )
         {
-            turma.getAlunos().remove(tableAlunos.getSelectedRow());
+            alunos.remove(tableAlunos.getSelectedRow());
             carregaTable();
         }
     }//GEN-LAST:event_buttonRemoverActionPerformed
 
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private JComboBox<String> ComboBoxAluno;
     private JComboBox<String> ComboBoxDisciplina;
     private JComboBox<String> ComboBoxPeriodo;
     private JComboBox<String> ComboBoxProfessor;
     private JComboBox<String> ComboBoxTipoAmbiente1;
     private JButton buttonAdicionar;
-    private JButton buttonAlterar;
     private JButton buttonCancelar;
     private JButton buttonRemover;
     private JButton buttonSalvar;
+    private JLabel jLabel10;
     private JLabel jLabel2;
     private JLabel jLabel3;
     private JLabel jLabel4;

@@ -74,6 +74,10 @@ public class ServicoTurma {
         }
     }
     
+    public Turma buscarPorCodigo(Turma turma) throws ExcecaoServico,  ExcecaoDAO {
+        return dao.buscarPorCodigo(turma);
+    }
+    
     
     public Turma remover(Integer codigo) throws ExcecaoDAO, ExcecaoServico {
         

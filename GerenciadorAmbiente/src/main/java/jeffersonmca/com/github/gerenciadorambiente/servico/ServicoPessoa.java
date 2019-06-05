@@ -2,12 +2,14 @@ package jeffersonmca.com.github.gerenciadorambiente.servico;
 
 import jeffersonmca.com.github.gerenciadorambiente.util.Validacao;
 import java.util.List;
+import javax.swing.table.TableModel;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Pessoa;
 import jeffersonmca.com.github.gerenciadorambiente.dao.DAOPessoa;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoConexao;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoDAO;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoServico;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoValidacao;
+import jeffersonmca.com.github.gerenciadorambiente.modelo.Turma;
 
 public class ServicoPessoa {
     
@@ -102,5 +104,13 @@ public class ServicoPessoa {
         }catch(Exception e) {
             throw new ExcecaoServico("Houve erro ao requisitar a remoção de uma pessoa!");
         }
+    }
+
+    public List<Pessoa> buscarPor(String opcao, String dado) throws ExcecaoDAO {
+        return dao.buscarPor(opcao, dado);
+    }
+
+    public List<Pessoa> buscarAlunosForaDaGrid(List<Pessoa> alunos) throws ExcecaoDAO {
+        return dao.buscarAlunosForaDaGrid(alunos);
     }
 }

@@ -90,7 +90,6 @@ public class AulaEdita extends javax.swing.JDialog {
     
     private void PreencheCampos(Aula aula) {
         codigo = aula.getCodigo();
-        codigo = aula.getCodigo();
         ComboBoxAmbiente.setSelectedItem(aula.getFkAmbiente());
         ComboBoxDiaSemana.setSelectedItem(aula.getDiaSemana());
         ComboBoxTurma.setSelectedItem(aula.getTurma());
