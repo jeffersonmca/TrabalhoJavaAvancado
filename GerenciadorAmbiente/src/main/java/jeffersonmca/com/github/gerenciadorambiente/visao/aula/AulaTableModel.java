@@ -11,7 +11,7 @@ import jeffersonmca.com.github.gerenciadorambiente.modelo.Turma;
 public class AulaTableModel  extends AbstractTableModel {
 
     private List<Aula> dados;
-    private String[] colunas = {"Código", "Ambiente", "Turma", "Dia da semana", "Início", "Fim"};
+    private String[] colunas = {"Código", "ID - Ambiente", "ID - Turma", "Dia da semana", "Início", "Fim"};
 
     public AulaTableModel(List<Aula> dados) {
         this.dados = dados;

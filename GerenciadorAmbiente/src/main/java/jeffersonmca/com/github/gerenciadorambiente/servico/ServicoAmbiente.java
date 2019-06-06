@@ -98,4 +98,8 @@ public class ServicoAmbiente {
             throw new ExcecaoServico("Houve erro ao requisitar a remoção de um ambiente!");
         }
     }
+
+    public List<Ambiente> buscarPor(String opcao, String dado) throws ExcecaoDAO {
+        return dao.buscarPor(opcao, dado);
+    }
 }

@@ -141,7 +141,7 @@ public class AmbienteEdita extends javax.swing.JDialog {
         );
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Editar registro");
+        setTitle("Edita Ambiente");
 
         jPanel1.setBorder(BorderFactory.createEtchedBorder());
 
@@ -274,7 +274,6 @@ public class AmbienteEdita extends javax.swing.JDialog {
     private JComboBox<String> ComboBoxTipoAmbiente;
     private JComboBox<String> ComboBoxTipoAmbiente1;
     private JButton buttonCancelar;
-    private JButton buttonSalvar;
     private JButton buttonSalvar1;
     private JLabel jLabel1;
     private JLabel jLabel2;

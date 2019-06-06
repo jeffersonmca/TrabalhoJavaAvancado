@@ -155,7 +155,7 @@ public class DisciplinaEdita extends javax.swing.JDialog {
         );
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Editar registro");
+        setTitle("Edita Disciplina");
 
         panelBotoes.setBorder(BorderFactory.createEtchedBorder());
 

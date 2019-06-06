@@ -1,17 +1,14 @@
 package jeffersonmca.com.github.gerenciadorambiente.visao.disciplina;
 
-import jeffersonmca.com.github.gerenciadorambiente.visao.curso.*;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Disciplina;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Curso;
-import jeffersonmca.com.github.gerenciadorambiente.modelo.EnumTipoAmbiente;
-import jeffersonmca.com.github.gerenciadorambiente.modelo.Periodo;
 
 public class DisciplinaTableModel  extends AbstractTableModel {
 
     private List<Disciplina> dados;
-    private String[] colunas = {"Código", "Nome", "Carga Horária", "Curso"};
+    private String[] colunas = {"Código", "Nome", "Carga Horária", "ID - Curso"};
 
     public DisciplinaTableModel(List<Disciplina> dados) {
         this.dados = dados;

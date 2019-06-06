@@ -76,36 +76,57 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ambiente"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pesMenuAmbienteActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="pesMenuAula">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Aula"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pesMenuAulaActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="pesMenuCurso">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Curso"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pesMenuCursoActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="pesMenuDisciplina">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Disciplina"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pesMenuDisciplinaActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="pesMenuPeriodo">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Periodo"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pesMenuPeriodoActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="pesMenuPessoa">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pessoa"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pesMenuPessoaActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="pesMenuTurma">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Turma"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pesMenuTurmaActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

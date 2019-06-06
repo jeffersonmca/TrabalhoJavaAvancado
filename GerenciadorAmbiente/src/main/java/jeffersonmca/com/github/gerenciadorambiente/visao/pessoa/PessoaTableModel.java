@@ -1,10 +1,8 @@
 package jeffersonmca.com.github.gerenciadorambiente.visao.pessoa;
 
-import jeffersonmca.com.github.gerenciadorambiente.visao.ambiente.*;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Pessoa;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import jeffersonmca.com.github.gerenciadorambiente.modelo.EnumTipoAmbiente;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.EnumTipoPessoa;
 
 public class PessoaTableModel  extends AbstractTableModel {

@@ -1,12 +1,19 @@
 package jeffersonmca.com.github.gerenciadorambiente.visao;
 
 import jeffersonmca.com.github.gerenciadorambiente.visao.ambiente.AmbienteListagem;
+import jeffersonmca.com.github.gerenciadorambiente.visao.ambiente.AmbientePesquisa;
 import jeffersonmca.com.github.gerenciadorambiente.visao.aula.AulaListagem;
+import jeffersonmca.com.github.gerenciadorambiente.visao.aula.AulaPesquisa;
 import jeffersonmca.com.github.gerenciadorambiente.visao.curso.CursoListagem;
+import jeffersonmca.com.github.gerenciadorambiente.visao.curso.CursoPesquisa;
 import jeffersonmca.com.github.gerenciadorambiente.visao.disciplina.DisciplinaListagem;
+import jeffersonmca.com.github.gerenciadorambiente.visao.disciplina.DisciplinaPesquisa;
 import jeffersonmca.com.github.gerenciadorambiente.visao.periodo.PeriodoListagem;
+import jeffersonmca.com.github.gerenciadorambiente.visao.periodo.PeriodoPesquisa;
 import jeffersonmca.com.github.gerenciadorambiente.visao.pessoa.PessoaListagem;
+import jeffersonmca.com.github.gerenciadorambiente.visao.pessoa.PessoaPesquisa;
 import jeffersonmca.com.github.gerenciadorambiente.visao.turma.TurmaListagem;
+import jeffersonmca.com.github.gerenciadorambiente.visao.turma.TurmaPesquisa;
 
 public class Principal extends javax.swing.JFrame {
 
@@ -114,24 +121,59 @@ public class Principal extends javax.swing.JFrame {
         jMenu3.setText("Pesquisa");
 
         pesMenuAmbiente.setText("Ambiente");
+        pesMenuAmbiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pesMenuAmbienteActionPerformed(evt);
+            }
+        });
         jMenu3.add(pesMenuAmbiente);
 
         pesMenuAula.setText("Aula");
+        pesMenuAula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pesMenuAulaActionPerformed(evt);
+            }
+        });
         jMenu3.add(pesMenuAula);
 
         pesMenuCurso.setText("Curso");
+        pesMenuCurso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pesMenuCursoActionPerformed(evt);
+            }
+        });
         jMenu3.add(pesMenuCurso);
 
         pesMenuDisciplina.setText("Disciplina");
+        pesMenuDisciplina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pesMenuDisciplinaActionPerformed(evt);
+            }
+        });
         jMenu3.add(pesMenuDisciplina);
 
         pesMenuPeriodo.setText("Periodo");
+        pesMenuPeriodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pesMenuPeriodoActionPerformed(evt);
+            }
+        });
         jMenu3.add(pesMenuPeriodo);
 
         pesMenuPessoa.setText("Pessoa");
+        pesMenuPessoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pesMenuPessoaActionPerformed(evt);
+            }
+        });
         jMenu3.add(pesMenuPessoa);
 
         pesMenuTurma.setText("Turma");
+        pesMenuTurma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pesMenuTurmaActionPerformed(evt);
+            }
+        });
         jMenu3.add(pesMenuTurma);
 
         jMenuBar1.add(jMenu3);
@@ -221,6 +263,41 @@ public class Principal extends javax.swing.JFrame {
     private void relMenuAmbienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relMenuAmbienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_relMenuAmbienteActionPerformed
+
+    private void pesMenuAmbienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesMenuAmbienteActionPerformed
+        AmbientePesquisa tela = new AmbientePesquisa();
+        tela.setVisible(true);
+    }//GEN-LAST:event_pesMenuAmbienteActionPerformed
+
+    private void pesMenuAulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesMenuAulaActionPerformed
+        AulaPesquisa tela = new AulaPesquisa();
+        tela.setVisible(true);
+    }//GEN-LAST:event_pesMenuAulaActionPerformed
+
+    private void pesMenuCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesMenuCursoActionPerformed
+        CursoPesquisa tela = new CursoPesquisa();
+        tela.setVisible(true);
+    }//GEN-LAST:event_pesMenuCursoActionPerformed
+
+    private void pesMenuDisciplinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesMenuDisciplinaActionPerformed
+        DisciplinaPesquisa tela = new DisciplinaPesquisa();
+        tela.setVisible(true);
+    }//GEN-LAST:event_pesMenuDisciplinaActionPerformed
+
+    private void pesMenuPeriodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesMenuPeriodoActionPerformed
+        PeriodoPesquisa tela = new PeriodoPesquisa();
+        tela.setVisible(true);
+    }//GEN-LAST:event_pesMenuPeriodoActionPerformed
+
+    private void pesMenuPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesMenuPessoaActionPerformed
+        PessoaPesquisa tela = new PessoaPesquisa();
+        tela.setVisible(true);
+    }//GEN-LAST:event_pesMenuPessoaActionPerformed
+
+    private void pesMenuTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesMenuTurmaActionPerformed
+        TurmaPesquisa tela = new TurmaPesquisa();
+        tela.setVisible(true);
+    }//GEN-LAST:event_pesMenuTurmaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem cadMenuAmbiente;

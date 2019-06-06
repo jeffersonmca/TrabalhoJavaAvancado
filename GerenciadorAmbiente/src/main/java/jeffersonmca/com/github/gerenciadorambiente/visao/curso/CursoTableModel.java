@@ -3,13 +3,12 @@ package jeffersonmca.com.github.gerenciadorambiente.visao.curso;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Curso;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import jeffersonmca.com.github.gerenciadorambiente.modelo.EnumTipoAmbiente;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Periodo;
 
 public class CursoTableModel  extends AbstractTableModel {
 
     private List<Curso> dados;
-    private String[] colunas = {"Código", "Nome", "Periodo"};
+    private String[] colunas = {"Código", "Nome", "ID- Periodo"};
 
     public CursoTableModel(List<Curso> dados) {
         this.dados = dados;

@@ -2,14 +2,11 @@ package jeffersonmca.com.github.gerenciadorambiente.servico;
 
 import jeffersonmca.com.github.gerenciadorambiente.util.Validacao;
 import java.util.List;
-import javax.swing.table.TableModel;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Pessoa;
 import jeffersonmca.com.github.gerenciadorambiente.dao.DAOPessoa;
-import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoConexao;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoDAO;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoServico;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoValidacao;
-import jeffersonmca.com.github.gerenciadorambiente.modelo.Turma;
 
 public class ServicoPessoa {
     

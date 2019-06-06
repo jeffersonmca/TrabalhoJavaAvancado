@@ -1,13 +1,8 @@
 package jeffersonmca.com.github.gerenciadorambiente.visao.turma;
 
-import jeffersonmca.com.github.gerenciadorambiente.visao.aula.*;
-import java.util.Date;
-import jeffersonmca.com.github.gerenciadorambiente.modelo.Turma;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import jeffersonmca.com.github.gerenciadorambiente.modelo.Ambiente;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Disciplina;
-import jeffersonmca.com.github.gerenciadorambiente.modelo.EnumDiaSemana;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Periodo;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Pessoa;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Turma;
@@ -15,7 +10,7 @@ import jeffersonmca.com.github.gerenciadorambiente.modelo.Turma;
 public class TurmaTableModel  extends AbstractTableModel {
 
     private List<Turma> dados;
-    private String[] colunas = {"Código", "Nome", "Disciplina", "Periodo", "Professor"};
+    private String[] colunas = {"Código", "Nome", "ID - Disciplina", "ID - Periodo", "ID - Professor"};
 
     public TurmaTableModel(List<Turma> dados) {
         this.dados = dados;

@@ -140,7 +140,7 @@ public class PeriodoEdita extends javax.swing.JDialog {
         );
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Editar registro");
+        setTitle("Edita Período");
 
         panelBotoes.setBorder(BorderFactory.createEtchedBorder());
 

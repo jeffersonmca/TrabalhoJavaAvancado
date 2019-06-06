@@ -4,7 +4,6 @@ import jeffersonmca.com.github.gerenciadorambiente.util.Validacao;
 import java.util.List;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Periodo;
 import jeffersonmca.com.github.gerenciadorambiente.dao.DAOPeriodo;
-import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoConexao;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoDAO;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoServico;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoValidacao;
@@ -98,5 +97,9 @@ public class ServicoPeriodo {
         }catch(Exception e) {
             throw new ExcecaoServico("Houve erro ao requisitar a remoção de um periodo!");
         }
+    }
+    
+    public List<Periodo> buscarPor(String opcao, String dado) throws ExcecaoDAO {
+        return dao.buscarPor(opcao, dado);
     }
 }

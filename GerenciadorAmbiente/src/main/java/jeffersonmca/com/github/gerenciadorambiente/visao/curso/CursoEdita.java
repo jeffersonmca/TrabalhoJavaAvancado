@@ -149,7 +149,7 @@ public class CursoEdita extends javax.swing.JDialog {
         );
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Editar registro");
+        setTitle("Edita Curso");
 
         panelBotoes.setBorder(BorderFactory.createEtchedBorder());
 

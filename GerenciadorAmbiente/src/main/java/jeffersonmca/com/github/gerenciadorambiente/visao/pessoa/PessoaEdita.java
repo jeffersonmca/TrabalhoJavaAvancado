@@ -141,7 +141,7 @@ public class PessoaEdita extends javax.swing.JDialog {
         );
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Editar registro");
+        setTitle("Edita Pessoa");
 
         panelBotoes.setBorder(BorderFactory.createEtchedBorder());
 
@@ -281,12 +281,7 @@ public class PessoaEdita extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JComboBox<String> ComboBoxTipoAmbiente1;
     private JComboBox<String> ComboBoxTipoPessoa;
-    private JButton buttonCancelar;
-    private JButton buttonCancelar1;
     private JButton buttonCancelar2;
-    private JButton buttonSalvar;
-    private JButton buttonSalvar1;
-    private JButton buttonSalvar2;
     private JButton buttonSalvar4;
     private JLabel jLabel1;
     private JLabel jLabel10;

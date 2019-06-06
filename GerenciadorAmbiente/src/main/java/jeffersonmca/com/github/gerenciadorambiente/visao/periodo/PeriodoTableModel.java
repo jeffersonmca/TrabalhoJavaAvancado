@@ -1,11 +1,8 @@
 package jeffersonmca.com.github.gerenciadorambiente.visao.periodo;
 
-import jeffersonmca.com.github.gerenciadorambiente.visao.curso.*;
-import jeffersonmca.com.github.gerenciadorambiente.modelo.Periodo;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.EnumSemestre;
-import jeffersonmca.com.github.gerenciadorambiente.modelo.EnumTipoAmbiente;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Periodo;
 
 public class PeriodoTableModel  extends AbstractTableModel {

@@ -98,4 +98,8 @@ public class ServicoCurso {
             throw new ExcecaoServico("Houve erro ao requisitar a remoção de um curso!");
         }
     }
+    
+    public List<Curso> buscarPor(String opcao, String dado) throws ExcecaoDAO {
+        return dao.buscarPor(opcao, dado);
+    }
 }

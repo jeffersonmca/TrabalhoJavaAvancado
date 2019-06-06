@@ -22,7 +22,7 @@ public class TurmaListagem extends javax.swing.JFrame {
         atualizaDados();
     }
 
-    private void atualizaDados(){
+    private void atualizaDados() {
         
         try {
             
@@ -39,7 +39,7 @@ public class TurmaListagem extends javax.swing.JFrame {
             }
 
             tabModel = new TurmaTableModel(dados);
-            jTable1.setModel(tabModel);
+            tableTurmas.setModel(tabModel);
         
         } finally {
             this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -65,10 +65,10 @@ public class TurmaListagem extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JToolBar.Separator();
         jbtnFechar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableTurmas = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Listagem de clientes");
+        setTitle("Listagem de Turma");
 
         jToolBar1.setRollover(true);
 
@@ -133,7 +133,7 @@ public class TurmaListagem extends javax.swing.JFrame {
         });
         jToolBar1.add(jbtnFechar);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableTurmas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -144,7 +144,7 @@ public class TurmaListagem extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableTurmas);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -179,32 +179,28 @@ public class TurmaListagem extends javax.swing.JFrame {
 
     private void jbtnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRemoverActionPerformed
         
-        if (jTable1.getSelectedRow() == -1){
+        if (tableTurmas.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(this, "Selecione um registro.", "Dica", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         
-        Turma aux = dados.get(jTable1.getSelectedRow());        
+        Turma aux = dados.get(tableTurmas.getSelectedRow());        
         
-        if (aux == null){            
+        if (aux == null) {            
           JOptionPane.showMessageDialog(this, "Registro não encontrado.");  
           return;   
         } 
         
         if (JOptionPane.showConfirmDialog(this,
                 "Confirma a remoção da " + aux.getNome() + "?",
-                "Remoção", 
-                  JOptionPane.YES_NO_OPTION
-                      )
-               == JOptionPane.YES_OPTION )
-              {
+                "Remoção",
+                JOptionPane.YES_NO_OPTION
+                ) == JOptionPane.YES_OPTION ) {
 
             try {              
                 service.remover(aux.getCodigo());
                 atualizaDados();
                 JOptionPane.showMessageDialog(this, "Registro removido com sucesso.");
-                return;
-                
             } catch (ExcecaoDAO|ExcecaoServico e) {
                 JOptionPane.showMessageDialog(this, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             }
@@ -213,21 +209,21 @@ public class TurmaListagem extends javax.swing.JFrame {
 
     private void jbtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnIncluirActionPerformed
         
-        TurmaIncluir tela = new TurmaIncluir(this, true, service);
+        TurmaInclui tela = new TurmaInclui(this, true, service);
         tela.setVisible(true);
         atualizaDados();
     }//GEN-LAST:event_jbtnIncluirActionPerformed
 
     private void jbtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEditarActionPerformed
 
-        if (jTable1.getSelectedRow() == -1){
+        if (tableTurmas.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(this, "Selecione um registro.", "Dica", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         
-        Turma aux = dados.get(jTable1.getSelectedRow());        
+        Turma aux = dados.get(tableTurmas.getSelectedRow());        
         
-        if (aux == null){            
+        if (aux == null) {            
           JOptionPane.showMessageDialog(this, "Registro não encontrado.");  
           return;   
         } 
@@ -242,12 +238,12 @@ public class TurmaListagem extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar.Separator jSeparator1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JButton jbtnAtualizar;
     private javax.swing.JButton jbtnEditar;
     private javax.swing.JButton jbtnFechar;
     private javax.swing.JButton jbtnIncluir;
     private javax.swing.JButton jbtnRemover;
+    private javax.swing.JTable tableTurmas;
     // End of variables declaration//GEN-END:variables
 }

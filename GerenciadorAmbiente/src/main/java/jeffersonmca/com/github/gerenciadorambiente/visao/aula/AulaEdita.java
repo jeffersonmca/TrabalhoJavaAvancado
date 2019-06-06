@@ -190,7 +190,7 @@ public class AulaEdita extends javax.swing.JDialog {
         );
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Editar registro");
+        setTitle("Edita Aula");
 
         panelBotoes.setBorder(BorderFactory.createEtchedBorder());
 

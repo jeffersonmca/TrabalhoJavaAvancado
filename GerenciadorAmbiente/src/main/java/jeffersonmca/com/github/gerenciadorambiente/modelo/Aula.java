@@ -25,7 +25,7 @@ public class Aula {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "aul_codigo")
     private Integer codigo;    
-
+    
     @Temporal(TemporalType.TIME)
     @Column(name = "aul_horarioInicio", nullable = false)
     private Date horarioInicio;

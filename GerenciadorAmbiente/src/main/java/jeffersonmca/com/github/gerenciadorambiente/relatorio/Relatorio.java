@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jeffersonmca.com.github.gerenciadorambiente.relatorio;
 
 import java.io.FileNotFoundException;
@@ -55,35 +50,34 @@ public class Relatorio {
             exportar.exportReport();
         }    
     }
- 
     
     public void geraRelatorio(boolean visualizar, String nomeRelatorio, HashMap<String, Object> parametros, Connection conexao) throws JRException, FileNotFoundException, Exception {
-
+               
         InputStream arquivo = getClass().getResourceAsStream("/Relatorios/" + nomeRelatorio + ".jasper");
-
+              
         if (arquivo == null)
             throw new Exception("Relatório não encontrado!");
-                  
+        
         JasperPrint imprimir = JasperFillManager.fillReport(arquivo, parametros, conexao);
         
         // Quer visualizar?
-        if (visualizar) {
-            JasperViewer ver = new JasperViewer(imprimir,false);
+        if (visualizar){
+            JasperViewer ver = new JasperViewer(imprimir, false);
             ver.setTitle("Relatório-" + nomeRelatorio);
             ver.setExtendedState(JasperViewer.MAXIMIZED_BOTH);
             ver.setVisible(true);
-        }else{
+        }else {
             
             JRPdfExporter exportar = new JRPdfExporter(DefaultJasperReportsContext.getInstance());
-            exportar.setExporterInput( new SimpleExporterInput(imprimir));
+            exportar.setExporterInput(new SimpleExporterInput(imprimir));
             exportar.setExporterOutput(
                     new SimpleOutputStreamExporterOutput(
                     new FileOutputStream(nomeRelatorio + ".pdf")));
             
             SimplePdfReportConfiguration configuracao = new SimplePdfReportConfiguration();
-            exportar.setConfiguration(configuracao);            
-            
+            exportar.setConfiguration(configuracao);
+                        
             exportar.exportReport();
-        }
+        }    
     }
 }

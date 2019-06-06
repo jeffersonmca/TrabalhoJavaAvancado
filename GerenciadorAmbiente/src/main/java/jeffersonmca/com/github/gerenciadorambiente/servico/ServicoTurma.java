@@ -72,12 +72,7 @@ public class ServicoTurma {
         }catch(Exception e){
             throw new ExcecaoServico("Houve erro ao requisitar a busca de uma turma!");
         }
-    }
-    
-    public Turma buscarPorCodigo(Turma turma) throws ExcecaoServico,  ExcecaoDAO {
-        return dao.buscarPorCodigo(turma);
-    }
-    
+    }    
     
     public Turma remover(Integer codigo) throws ExcecaoDAO, ExcecaoServico {
         
@@ -101,5 +96,9 @@ public class ServicoTurma {
         }catch(Exception e) {
             throw new ExcecaoServico("Houve erro ao requisitar a remoção de uma turma!");
         }
+    }
+    
+    public List<Turma> buscarPor(String opcao, String dado) throws ExcecaoDAO {
+        return dao.buscarPor(opcao, dado);
     }
 }

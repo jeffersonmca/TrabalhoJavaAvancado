@@ -236,7 +236,7 @@ public class TurmaEdita extends javax.swing.JDialog {
         );
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Editar registro");
+        setTitle("Edita Turma");
 
         panelBotoes.setBorder(BorderFactory.createEtchedBorder());
 
@@ -258,11 +258,11 @@ public class TurmaEdita extends javax.swing.JDialog {
 
         buttonCancelar.setText("Cancelar");
         buttonCancelar.addMouseListener(new MouseAdapter() {
-            public void mouseExited(MouseEvent evt) {
-                buttonCancelarMouseExited(evt);
-            }
             public void mouseEntered(MouseEvent evt) {
                 buttonCancelarMouseEntered(evt);
+            }
+            public void mouseExited(MouseEvent evt) {
+                buttonCancelarMouseExited(evt);
             }
         });
         buttonCancelar.addActionListener(new ActionListener() {
@@ -329,9 +329,6 @@ public class TurmaEdita extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(buttonRemover)
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ComboBoxAluno, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)
@@ -340,6 +337,9 @@ public class TurmaEdita extends javax.swing.JDialog {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(buttonRemover)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
