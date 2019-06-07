@@ -47,10 +47,15 @@ public class PessoaEdita extends javax.swing.JDialog {
         PreencheCampos(pessoa);
     }
     
-    private void PreencheComboBox() {
-        
+    // Preenche combo box do Enum Tipo Pessoa
+    private void PreencheComboBoxTipoPessoa() {
         DefaultComboBoxModel dcbmTipoPessoa = new DefaultComboBoxModel(EnumTipoPessoa.values());
         ComboBoxTipoPessoa.setModel(dcbmTipoPessoa);
+    }
+    
+    // Preenche todos os cambo box da tela
+    private void PreencheComboBox() {
+        PreencheComboBoxTipoPessoa();
     }
     
     private void PreencheCampos(Pessoa pessoa) {

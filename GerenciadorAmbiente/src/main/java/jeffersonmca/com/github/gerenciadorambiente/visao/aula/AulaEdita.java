@@ -60,32 +60,45 @@ public class AulaEdita extends javax.swing.JDialog {
         PreencheCampos(aula);
     }
     
-    private void PreencheComboBox() {
-        
+    // Preenche combo box do Enum Dia Semana
+    private void PreencheComboBoxDiaSemana() {
         DefaultComboBoxModel dcbmDiaSemana = new DefaultComboBoxModel(EnumDiaSemana.values());
         ComboBoxDiaSemana.setModel(dcbmDiaSemana);
-        
-        List<Ambiente> lista1 = null;
+    }
+    
+    // Preenche combo box do Ambiente
+    private void PreencheComboBoxAmbiente() {
+        List<Ambiente> lista = null;
         try {
-            lista1 = ambServico.buscarTodos();
+            lista = ambServico.buscarTodos();
         } catch (ExcecaoDAO ex) {}
         
-        Vector<Ambiente> vetor1 = new Vector<>(lista1);
+        Vector<Ambiente> vetor = new Vector<>(lista);
         
         DefaultComboBoxModel dcbmAmbiente =
-               new DefaultComboBoxModel(vetor1);
+               new DefaultComboBoxModel(vetor);
         ComboBoxAmbiente.setModel(dcbmAmbiente);
-        
-        List<Turma> lista2 = null;
+    }
+    
+    // Preenche combo box da Turma
+    private void PreencheComboBoxTurma() {
+        List<Turma> lista = null;
         try {
-            lista2 = turServico.buscarTodos();
+            lista = turServico.buscarTodos();
         } catch (ExcecaoDAO ex) {}
         
-        Vector<Turma> vetor2 = new Vector<>(lista2);
+        Vector<Turma> vetor = new Vector<>(lista);
         
         DefaultComboBoxModel dcbmTurma =
-               new DefaultComboBoxModel(vetor2);
+               new DefaultComboBoxModel(vetor);
         ComboBoxTurma.setModel(dcbmTurma);
+    }
+    
+    // Preenche todos os cambo box da tela
+    private void PreencheComboBox() {
+        PreencheComboBoxDiaSemana();
+        PreencheComboBoxAmbiente();
+        PreencheComboBoxTurma();
     }
     
     private void PreencheCampos(Aula aula) {

@@ -39,10 +39,15 @@ public class PessoaInclui extends javax.swing.JDialog {
         PreencheComboBox();
     }
     
-    private void PreencheComboBox() {
-        
+    // Preenche combo box do Enum Tipo Pessoa
+    private void PreencheComboBoxTipoPessoa() {
         DefaultComboBoxModel dcbmTipoPessoa = new DefaultComboBoxModel(EnumTipoPessoa.values());
         ComboBoxTipoPessoa.setModel(dcbmTipoPessoa);
+    }
+    
+    // Preenche todos os cambo box da tela
+    private void PreencheComboBox() {
+        PreencheComboBoxTipoPessoa();
     }
     
     @SuppressWarnings("unchecked")

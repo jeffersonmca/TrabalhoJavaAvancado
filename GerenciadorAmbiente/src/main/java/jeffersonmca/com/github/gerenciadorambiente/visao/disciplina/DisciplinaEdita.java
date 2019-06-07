@@ -53,8 +53,8 @@ public class DisciplinaEdita extends javax.swing.JDialog {
         PreencheCampos(disciplina);
     }
     
-    private void PreencheComboBox() {
-                
+    // Preenche combo box do Curso
+    private void PreencheComboBoxCurso() {
         List<Curso> lista = null;
         try {
             lista = curServico.buscarTodos();
@@ -65,6 +65,11 @@ public class DisciplinaEdita extends javax.swing.JDialog {
         DefaultComboBoxModel dcbmCurso =
                new DefaultComboBoxModel(vetor);
         ComboBoxCurso.setModel(dcbmCurso);
+    }
+    
+    // Preenche todos os cambo box da tela
+    private void PreencheComboBox() {
+        PreencheComboBoxCurso();
     }
     
     private void PreencheCampos(Disciplina disciplina) {

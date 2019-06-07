@@ -58,40 +58,53 @@ public class TurmaInclui extends javax.swing.JDialog {
         carregaTable();
     }
     
-    private void PreencheComboBox() {
-        
-        List<Disciplina> lista1 = null;
+    // Preenche combo box da Disciplina
+    private void PreencheComboBoxDisciplina() {
+        List<Disciplina> lista = null;
         try {
-            lista1 = disServico.buscarTodos();
+            lista = disServico.buscarTodos();
         } catch (ExcecaoDAO ex) {}
         
-        Vector<Disciplina> vetor1 = new Vector<>(lista1);
+        Vector<Disciplina> vetor = new Vector<>(lista);
         
         DefaultComboBoxModel dcbmDisciplina =
-               new DefaultComboBoxModel(vetor1);
+               new DefaultComboBoxModel(vetor);
         ComboBoxDisciplina.setModel(dcbmDisciplina);
-        
-        List<Periodo> lista2 = null;
+    }
+    
+    // Preenche combo box do Periodo
+    private void PreencheComboBoxPeriodo() {
+        List<Periodo> lista = null;
         try {
-            lista2 = perServico.buscarTodos();
+            lista = perServico.buscarTodos();
         } catch (ExcecaoDAO ex) {}
         
-        Vector<Periodo> vetor2 = new Vector<>(lista2);
+        Vector<Periodo> vetor = new Vector<>(lista);
         
         DefaultComboBoxModel dcbmPeriodo =
-               new DefaultComboBoxModel(vetor2);
+               new DefaultComboBoxModel(vetor);
         ComboBoxPeriodo.setModel(dcbmPeriodo);
-        
-        List<Pessoa> lista3 = null;
+    }
+    
+    // Preenche combo box do Professor
+    private void PreencheComboBoxProfessor() {
+        List<Pessoa> lista = null;
         try {
-            lista3 = proServico.buscarTodosProfessores();
+            lista = proServico.buscarTodosProfessores();
         } catch (ExcecaoDAO ex) {}
         
-        Vector<Pessoa> vetor3 = new Vector<>(lista3);
+        Vector<Pessoa> vetor = new Vector<>(lista);
         
         DefaultComboBoxModel dcbmProfessor =
-               new DefaultComboBoxModel(vetor3);
+               new DefaultComboBoxModel(vetor);
         ComboBoxProfessor.setModel(dcbmProfessor);
+    }
+    
+    // Preenche todos os cambo box da tela
+    private void PreencheComboBox() {
+        PreencheComboBoxDisciplina();
+        PreencheComboBoxPeriodo();
+        PreencheComboBoxProfessor();
     }
     
     private void carregaTable() {

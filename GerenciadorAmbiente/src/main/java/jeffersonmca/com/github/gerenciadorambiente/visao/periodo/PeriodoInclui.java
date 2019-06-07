@@ -43,10 +43,15 @@ public class PeriodoInclui extends javax.swing.JDialog {
         PreencheComboBox();
     }
     
-    private void PreencheComboBox() {
-                
+    // Preenche combo box do Enum Semestre
+    private void PreencheComboBoxSemestre() {
         DefaultComboBoxModel dcbmSemestre = new DefaultComboBoxModel(EnumSemestre.values());
         ComboBoxSemestre.setModel(dcbmSemestre);
+    }
+    
+    // Preenche todos os cambo box da tela
+    private void PreencheComboBox() {
+        PreencheComboBoxSemestre();
     }
     
     @SuppressWarnings("unchecked")

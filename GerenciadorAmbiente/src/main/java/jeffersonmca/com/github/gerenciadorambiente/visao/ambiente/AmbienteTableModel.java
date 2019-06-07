@@ -57,20 +57,18 @@ public class AmbienteTableModel  extends AbstractTableModel {
         }       
     }
     
-   public void addRow(Ambiente c){
-       
+   public void addRow(Ambiente c) {       
        dados.add(c);
        this.fireTableDataChanged();
    } 
    
-   public void removeRow(int linha){
-       
+   public void removeRow(int linha) {       
        dados.remove(linha);
        this.fireTableDataChanged();
    } 
    
     @Override
-    public String getColumnName(int column) {
+    public String getColumnName(int column) {        
         return colunas[column]; 
     }
 }

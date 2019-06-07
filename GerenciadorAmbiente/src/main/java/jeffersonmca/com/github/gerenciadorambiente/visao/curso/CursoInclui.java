@@ -10,6 +10,7 @@ import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -35,15 +36,20 @@ public class CursoInclui extends javax.swing.JDialog {
     private ServicoPeriodo perServico;
     
     public CursoInclui(java.awt.Frame parent, boolean modal, ServicoCurso servico) {
+        
         super(parent, modal);
         initComponents();
+        
         this.servico = servico;
         this.perServico = new ServicoPeriodo();
+        
+        // Preenche todos os cambo box da tela
         PreencheComboBox();
     }
     
-    private void PreencheComboBox() {
-                
+    // Preenche combo box do Periodo
+    private void PreencheComboBoxPeriodo() {
+        
         List<Periodo> lista = null;
         try {
             lista = perServico.buscarTodos();
@@ -54,6 +60,17 @@ public class CursoInclui extends javax.swing.JDialog {
         DefaultComboBoxModel dcbmPeriodo =
                new DefaultComboBoxModel(vetor);
         ComboBoxPeriodo.setModel(dcbmPeriodo);
+    }
+    
+    // Preenche todos os cambo box da tela
+    private void PreencheComboBox() {
+        PreencheComboBoxPeriodo();
+    }
+    
+    // Fecha a tela e sai da mesma
+    private void sair() {
+        setVisible(false);
+        dispose();
     }
     
     @SuppressWarnings("unchecked")
@@ -67,13 +84,14 @@ public class CursoInclui extends javax.swing.JDialog {
         jLabel1 = new JLabel();
         textNome = new JTextField();
         ComboBoxPeriodo = new JComboBox<>();
-        jLabel5 = new JLabel();
+        jLabel9 = new JLabel();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Inclui Curso");
 
-        jPanel2.setBorder(BorderFactory.createEtchedBorder());
+        jPanel2.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
 
+        buttonSalvar.setIcon(new ImageIcon(getClass().getResource("/imagens/images/Salvar.png"))); // NOI18N
         buttonSalvar.setText("Salvar");
         buttonSalvar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -82,6 +100,7 @@ public class CursoInclui extends javax.swing.JDialog {
         });
         jPanel2.add(buttonSalvar);
 
+        buttonCancelar.setIcon(new ImageIcon(getClass().getResource("/imagens/images/cancelar.png"))); // NOI18N
         buttonCancelar.setText("Cancelar");
         buttonCancelar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -90,13 +109,13 @@ public class CursoInclui extends javax.swing.JDialog {
         });
         jPanel2.add(buttonCancelar);
 
-        jPanel1.setBorder(BorderFactory.createEtchedBorder());
+        jPanel1.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
 
         jLabel1.setForeground(new Color(255, 0, 0));
         jLabel1.setText("Nome:");
 
-        jLabel5.setForeground(new Color(255, 0, 0));
-        jLabel5.setText("Período:");
+        jLabel9.setForeground(new Color(255, 0, 0));
+        jLabel9.setText("Período:");
 
         GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -105,50 +124,48 @@ public class CursoInclui extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel5))
-                .addGap(41, 41, 41)
-                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                    .addComponent(textNome, GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                    .addComponent(ComboBoxPeriodo, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(97, Short.MAX_VALUE))
+                    .addComponent(jLabel9))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(textNome)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(ComboBoxPeriodo, GroupLayout.PREFERRED_SIZE, 214, GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(textNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(23, 23, 23)
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(textNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(ComboBoxPeriodo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel9))
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel2, GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
+            .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addGap(93, 93, 93))
+                .addComponent(jPanel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         );
 
-        setSize(new Dimension(424, 202));
+        setSize(new Dimension(424, 186));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonSalvarActionPerformed(ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
         
+        // Valida os campos obrigatorios antes de salvar
         if (Validacao.Vazio(textNome.getText())) {
             
             JOptionPane.showMessageDialog(this, 
@@ -166,25 +183,31 @@ public class CursoInclui extends javax.swing.JDialog {
             return;
         }
         
+        // Todos os campos obrigatorios estao preenchidos
+        // Instancia um novo objeto do tipo Curso
         Curso c = new Curso();
         
+        // Preenche esse objeto com os dados da tela
         c.setNome(textNome.getText());
         c.setFkPeriodo((Periodo) ComboBoxPeriodo.getSelectedItem());
         
         try {
+            // Salva no banco de dados o novo Curso
             servico.salvar(c);
         } catch (ExcecaoDAO|ExcecaoValidacao|ExcecaoServico e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
-        setVisible(false);
-        dispose();
+        JOptionPane.showMessageDialog(this, "Registro incluído com sucesso!", "Inclusão", JOptionPane.INFORMATION_MESSAGE);
+        
+        // Fecha a tela e sai da mesma
+        sair();
     }//GEN-LAST:event_buttonSalvarActionPerformed
 
     private void buttonCancelarActionPerformed(ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
-        setVisible(false);
-        this.dispose();
+        // Fecha a tela e sai da mesma
+        sair();
     }//GEN-LAST:event_buttonCancelarActionPerformed
 
    
@@ -193,7 +216,7 @@ public class CursoInclui extends javax.swing.JDialog {
     private JButton buttonCancelar;
     private JButton buttonSalvar;
     private JLabel jLabel1;
-    private JLabel jLabel5;
+    private JLabel jLabel9;
     private JPanel jPanel1;
     private JPanel jPanel2;
     private JTextField textNome;
