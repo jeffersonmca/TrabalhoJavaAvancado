@@ -11,6 +11,7 @@ import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -36,10 +37,13 @@ public class PeriodoInclui extends javax.swing.JDialog {
     private ServicoPeriodo servico;
     
     public PeriodoInclui(java.awt.Frame parent, boolean modal, ServicoPeriodo servico) {
+        
         super(parent, modal);
         initComponents();
+        
         this.servico = servico;
         
+        // Preenche todos os cambo box da tela
         PreencheComboBox();
     }
     
@@ -54,6 +58,12 @@ public class PeriodoInclui extends javax.swing.JDialog {
         PreencheComboBoxSemestre();
     }
     
+    // Fecha a tela e sai da mesma
+    private void sair() {
+        setVisible(false);
+        dispose();
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -62,16 +72,17 @@ public class PeriodoInclui extends javax.swing.JDialog {
         buttonSalvar = new JButton();
         buttonCancelar = new JButton();
         jPanel1 = new JPanel();
+        jLabel1 = new JLabel();
         ComboBoxSemestre = new JComboBox<>();
         jLabel9 = new JLabel();
         spinnerAno = new JSpinner();
-        jLabel1 = new JLabel();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Inclui Período");
 
-        jPanel2.setBorder(BorderFactory.createEtchedBorder());
+        jPanel2.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
 
+        buttonSalvar.setIcon(new ImageIcon(getClass().getResource("/imagens/images/Salvar.png"))); // NOI18N
         buttonSalvar.setText("Salvar");
         buttonSalvar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -80,6 +91,7 @@ public class PeriodoInclui extends javax.swing.JDialog {
         });
         jPanel2.add(buttonSalvar);
 
+        buttonCancelar.setIcon(new ImageIcon(getClass().getResource("/imagens/images/cancelar.png"))); // NOI18N
         buttonCancelar.setText("Cancelar");
         buttonCancelar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -88,43 +100,42 @@ public class PeriodoInclui extends javax.swing.JDialog {
         });
         jPanel2.add(buttonCancelar);
 
-        jPanel1.setBorder(BorderFactory.createEtchedBorder());
+        jPanel1.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
+
+        jLabel1.setForeground(new Color(245, 14, 14));
+        jLabel1.setText("Ano:");
 
         jLabel9.setForeground(new Color(255, 0, 0));
         jLabel9.setText("Semestre:");
 
         spinnerAno.setModel(new SpinnerNumberModel(2019, 0, null, 1));
 
-        jLabel1.setForeground(new Color(1, 1, 1));
-        jLabel1.setText("Ano:");
-
         GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jLabel9)
-                        .addGap(41, 41, 41)
+                        .addGap(4, 4, 4)
                         .addComponent(ComboBoxSemestre, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
                         .addComponent(jLabel1)
-                        .addGap(41, 41, 41)
-                        .addComponent(spinnerAno, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(spinnerAno, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
                     .addComponent(spinnerAno, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(ComboBoxSemestre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel9)
+                    .addComponent(ComboBoxSemestre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -136,18 +147,19 @@ public class PeriodoInclui extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 10, Short.MAX_VALUE)
                 .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        setSize(new Dimension(424, 202));
+        setSize(new Dimension(424, 194));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonSalvarActionPerformed(ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
         
+        // Valida os campos obrigatorios antes de salvar
         if (ComboBoxSemestre.getSelectedIndex() <= -1) {
             JOptionPane.showMessageDialog(this, 
                     "Informe o semestre",
@@ -156,25 +168,31 @@ public class PeriodoInclui extends javax.swing.JDialog {
             return;
         }
         
+        // Todos os campos obrigatorios estao preenchidos
+        // Instancia um novo objeto do tipo Periodo
         Periodo p = new Periodo();
         
+        // Preenche esse objeto com os dados da tela
         p.setAno((Integer) spinnerAno.getValue());
         p.setSemestre((EnumSemestre) ComboBoxSemestre.getSelectedItem());
         
         try {
+            // Salva no banco de dados o novo Periodo
             servico.salvar(p);
         } catch (ExcecaoDAO|ExcecaoValidacao|ExcecaoServico e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
-        setVisible(false);
-        dispose();
+        JOptionPane.showMessageDialog(this, "Registro incluído com sucesso!", "Inclusão", JOptionPane.INFORMATION_MESSAGE);
+        
+        // Fecha a tela e sai da mesma
+        sair();
     }//GEN-LAST:event_buttonSalvarActionPerformed
 
     private void buttonCancelarActionPerformed(ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
-        setVisible(false);
-        this.dispose();
+        // Fecha a tela e sai da mesma
+        sair();
     }//GEN-LAST:event_buttonCancelarActionPerformed
 
    

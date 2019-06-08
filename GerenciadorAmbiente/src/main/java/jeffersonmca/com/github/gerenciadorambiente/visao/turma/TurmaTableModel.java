@@ -38,8 +38,7 @@ public class TurmaTableModel  extends AbstractTableModel {
               case 3 : return a.getFkPeriodo();
               case 4 : return a.getFkProfessor();
               default: return null;
-          }
-          
+          }          
     }
     
     @Override
@@ -59,14 +58,12 @@ public class TurmaTableModel  extends AbstractTableModel {
         }       
     }
     
-   public void addRow(Turma c){
-       
-       dados.add(c);
+   public void addRow(Turma t) {
+       dados.add(t);
        this.fireTableDataChanged();
    } 
    
-   public void removeRow(int linha){
-       
+   public void removeRow(int linha) {
        dados.remove(linha);
        this.fireTableDataChanged();
    } 

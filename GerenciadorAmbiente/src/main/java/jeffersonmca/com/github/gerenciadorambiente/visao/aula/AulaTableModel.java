@@ -40,8 +40,7 @@ public class AulaTableModel  extends AbstractTableModel {
               case 4 : return a.getHorarioInicio();
               case 5 : return a.getHorarioTermino();
               default: return null;
-          }
-          
+          }          
     }
     
     @Override
@@ -62,14 +61,12 @@ public class AulaTableModel  extends AbstractTableModel {
         }       
     }
     
-   public void addRow(Aula c){
-       
-       dados.add(c);
+   public void addRow(Aula a) {
+       dados.add(a);
        this.fireTableDataChanged();
    } 
    
-   public void removeRow(int linha){
-       
+   public void removeRow(int linha) {
        dados.remove(linha);
        this.fireTableDataChanged();
    } 

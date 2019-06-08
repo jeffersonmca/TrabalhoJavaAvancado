@@ -5,6 +5,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.BorderFactory;
@@ -29,11 +33,16 @@ import jeffersonmca.com.github.gerenciadorambiente.modelo.Periodo;
 import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoCurso;
 import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoPeriodo;
 import jeffersonmca.com.github.gerenciadorambiente.util.Validacao;
+import jeffersonmca.com.github.gerenciadorambiente.visao.periodo.PeriodoInclui;
 
 public class CursoInclui extends javax.swing.JDialog {
 
     private ServicoCurso servico;
     private ServicoPeriodo perServico;
+    private boolean ctrl;
+    private PeriodoInclui telaPeriodo;
+    private java.awt.Frame parent;
+    private boolean entrou;
     
     public CursoInclui(java.awt.Frame parent, boolean modal, ServicoCurso servico) {
         
@@ -42,6 +51,10 @@ public class CursoInclui extends javax.swing.JDialog {
         
         this.servico = servico;
         this.perServico = new ServicoPeriodo();
+        this.ctrl = false;
+        this.telaPeriodo = null;
+        this.parent = parent;
+        this.entrou = false;
         
         // Preenche todos os cambo box da tela
         PreencheComboBox();
@@ -114,6 +127,20 @@ public class CursoInclui extends javax.swing.JDialog {
         jLabel1.setForeground(new Color(255, 0, 0));
         jLabel1.setText("Nome:");
 
+        ComboBoxPeriodo.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                ComboBoxPeriodoMouseClicked(evt);
+            }
+        });
+        ComboBoxPeriodo.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent evt) {
+                ComboBoxPeriodoKeyPressed(evt);
+            }
+            public void keyReleased(KeyEvent evt) {
+                ComboBoxPeriodoKeyReleased(evt);
+            }
+        });
+
         jLabel9.setForeground(new Color(255, 0, 0));
         jLabel9.setText("Período:");
 
@@ -155,7 +182,7 @@ public class CursoInclui extends javax.swing.JDialog {
         layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         );
 
@@ -209,6 +236,56 @@ public class CursoInclui extends javax.swing.JDialog {
         // Fecha a tela e sai da mesma
         sair();
     }//GEN-LAST:event_buttonCancelarActionPerformed
+
+    private void ComboBoxPeriodoMouseClicked(MouseEvent evt) {//GEN-FIRST:event_ComboBoxPeriodoMouseClicked
+
+        // Se pressionou Ctrl e a tela ainda nao foi instanciada
+        if (ctrl && telaPeriodo == null) {
+
+            // Instancia o tela de incluir do Periodo
+            telaPeriodo = new PeriodoInclui(parent, true, new ServicoPeriodo());
+
+            // Faz ela ficar visivel
+            telaPeriodo.setVisible(true);
+
+            // A tela foi instanciada
+            entrou = true;
+
+            // Para de apertar Ctrl
+            ctrl = false;
+
+            // Preenche combo box do Periodo
+            PreencheComboBoxPeriodo();
+
+            // Se pressionou Ctrl e a tela foi instanciada
+        }else if (ctrl && entrou) {
+
+            // Se ela foi fechada
+            if (!telaPeriodo.isActive()) {
+
+                // Faz ela ficar visivel
+                telaPeriodo.setVisible(true);
+
+                // Para de apertar Ctrl
+                ctrl = false;
+
+                // Preenche combo box do Periodo
+                PreencheComboBoxPeriodo();
+            }
+        }
+    }//GEN-LAST:event_ComboBoxPeriodoMouseClicked
+
+    private void ComboBoxPeriodoKeyPressed(KeyEvent evt) {//GEN-FIRST:event_ComboBoxPeriodoKeyPressed
+        // Pressionou Ctrl
+        if (evt.getKeyCode() == KeyEvent.VK_CONTROL)
+        ctrl = true;
+    }//GEN-LAST:event_ComboBoxPeriodoKeyPressed
+
+    private void ComboBoxPeriodoKeyReleased(KeyEvent evt) {//GEN-FIRST:event_ComboBoxPeriodoKeyReleased
+        // Parou de pressionar Ctrl
+        if (evt.getKeyCode() == KeyEvent.VK_CONTROL)
+        ctrl = false;
+    }//GEN-LAST:event_ComboBoxPeriodoKeyReleased
 
    
     // Variables declaration - do not modify//GEN-BEGIN:variables

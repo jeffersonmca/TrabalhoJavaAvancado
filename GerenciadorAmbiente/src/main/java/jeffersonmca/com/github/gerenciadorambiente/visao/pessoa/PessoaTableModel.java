@@ -35,8 +35,7 @@ public class PessoaTableModel  extends AbstractTableModel {
               case 2 : return a.getEmail();
               case 3 : return a.getTipoPessoa();
               default: return null;
-          }
-          
+          }          
     }
     
     @Override
@@ -55,14 +54,12 @@ public class PessoaTableModel  extends AbstractTableModel {
         }       
     }
     
-   public void addRow(Pessoa c){
-       
-       dados.add(c);
+   public void addRow(Pessoa p) {
+       dados.add(p);
        this.fireTableDataChanged();
    } 
    
-   public void removeRow(int linha){
-       
+   public void removeRow(int linha) {
        dados.remove(linha);
        this.fireTableDataChanged();
    } 

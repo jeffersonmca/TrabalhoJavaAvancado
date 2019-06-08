@@ -34,8 +34,7 @@ public class CursoTableModel  extends AbstractTableModel {
               case 1 : return a.getNome();
               case 2 : return a.getFkPeriodo();
               default: return null;
-          }
-          
+          }          
     }
     
     @Override
@@ -53,14 +52,12 @@ public class CursoTableModel  extends AbstractTableModel {
         }       
     }
     
-   public void addRow(Curso c){
-       
+   public void addRow(Curso c) {
        dados.add(c);
        this.fireTableDataChanged();
    } 
    
-   public void removeRow(int linha){
-       
+   public void removeRow(int linha) {
        dados.remove(linha);
        this.fireTableDataChanged();
    } 

@@ -4,11 +4,16 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -28,17 +33,30 @@ import jeffersonmca.com.github.gerenciadorambiente.modelo.Periodo;
 import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoCurso;
 import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoDisciplina;
 import jeffersonmca.com.github.gerenciadorambiente.util.Validacao;
+import jeffersonmca.com.github.gerenciadorambiente.visao.curso.CursoInclui;
 
 public class DisciplinaInclui extends javax.swing.JDialog {
 
     private ServicoDisciplina servico;
     private ServicoCurso curServico;
+    private boolean ctrl;
+    private CursoInclui telaCurso;
+    private java.awt.Frame parent;
+    private boolean entrou;
     
     public DisciplinaInclui(java.awt.Frame parent, boolean modal, ServicoDisciplina servico) {
+        
         super(parent, modal);
         initComponents();
+        
         this.servico = servico;
         this.curServico = new ServicoCurso();
+        this.ctrl = false;
+        this.telaCurso = null;
+        this.parent = parent;
+        this.entrou = false;
+        
+        // Preenche todos os cambo box da tela
         PreencheComboBox();
     }
     
@@ -61,6 +79,12 @@ public class DisciplinaInclui extends javax.swing.JDialog {
         PreencheComboBoxCurso();
     }
     
+    // Fecha a tela e sai da mesma
+    private void sair() {
+        setVisible(false);
+        dispose();
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -72,15 +96,16 @@ public class DisciplinaInclui extends javax.swing.JDialog {
         jLabel1 = new JLabel();
         textNome = new JTextField();
         ComboBoxCurso = new JComboBox<>();
-        jLabel5 = new JLabel();
+        jLabel9 = new JLabel();
         spinnerCargaHoraria = new JSpinner();
-        jLabel6 = new JLabel();
+        jLabel12 = new JLabel();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Inclui Disciplina");
 
-        jPanel2.setBorder(BorderFactory.createEtchedBorder());
+        jPanel2.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
 
+        buttonSalvar.setIcon(new ImageIcon(getClass().getResource("/imagens/images/Salvar.png"))); // NOI18N
         buttonSalvar.setText("Salvar");
         buttonSalvar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -89,6 +114,7 @@ public class DisciplinaInclui extends javax.swing.JDialog {
         });
         jPanel2.add(buttonSalvar);
 
+        buttonCancelar.setIcon(new ImageIcon(getClass().getResource("/imagens/images/cancelar.png"))); // NOI18N
         buttonCancelar.setText("Cancelar");
         buttonCancelar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -97,18 +123,32 @@ public class DisciplinaInclui extends javax.swing.JDialog {
         });
         jPanel2.add(buttonCancelar);
 
-        jPanel1.setBorder(BorderFactory.createEtchedBorder());
+        jPanel1.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
 
         jLabel1.setForeground(new Color(255, 0, 0));
         jLabel1.setText("Nome:");
 
-        jLabel5.setForeground(new Color(255, 0, 0));
-        jLabel5.setText("Curso:");
+        ComboBoxCurso.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                ComboBoxCursoMouseClicked(evt);
+            }
+        });
+        ComboBoxCurso.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent evt) {
+                ComboBoxCursoKeyPressed(evt);
+            }
+            public void keyReleased(KeyEvent evt) {
+                ComboBoxCursoKeyReleased(evt);
+            }
+        });
+
+        jLabel9.setForeground(new Color(255, 0, 0));
+        jLabel9.setText("Curso:");
 
         spinnerCargaHoraria.setModel(new SpinnerNumberModel(0, 0, null, 1));
 
-        jLabel6.setForeground(new Color(1, 1, 1));
-        jLabel6.setText("Carga horaria:");
+        jLabel12.setForeground(new Color(1, 1, 1));
+        jLabel12.setText("Carga horaria:");
 
         GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -117,63 +157,59 @@ public class DisciplinaInclui extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textNome)
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(85, 85, 85)
-                                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                    .addComponent(spinnerCargaHoraria, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textNome, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel6))
-                        .addGap(0, 50, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(85, 85, 85)
-                        .addComponent(ComboBoxCurso, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addComponent(jLabel12)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(spinnerCargaHoraria, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ComboBoxCurso, 0, 267, Short.MAX_VALUE)))
+                        .addGap(85, 85, 85))))
         );
         jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                     .addComponent(textNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel12)
                     .addComponent(spinnerCargaHoraria, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(ComboBoxCurso, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel9)
+                    .addComponent(ComboBoxCurso, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+            .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+            .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63))
+                .addComponent(jPanel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         );
 
-        setSize(new Dimension(424, 245));
+        setSize(new Dimension(424, 238));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonSalvarActionPerformed(ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
         
+        // Valida os campos obrigatorios antes de salvar
         if (Validacao.Vazio(textNome.getText())) {
             
             JOptionPane.showMessageDialog(this, 
@@ -191,27 +227,83 @@ public class DisciplinaInclui extends javax.swing.JDialog {
             return;
         }
         
+        // Todos os campos obrigatorios estao preenchidos
+        // Instancia um novo objeto do tipo Disciplina
         Disciplina d = new Disciplina();
         
+        // Preenche esse objeto com os dados da tela
         d.setNome(textNome.getText());
         d.setCargaHoraria((Integer) spinnerCargaHoraria.getValue());
         d.setFkCurso((Curso) ComboBoxCurso.getSelectedItem());
         
         try {
+            // Salva no banco de dados o novo Curso
             servico.salvar(d);
         } catch (ExcecaoDAO|ExcecaoValidacao|ExcecaoServico e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
-        setVisible(false);
-        dispose();
+        JOptionPane.showMessageDialog(this, "Registro incluído com sucesso!", "Inclusão", JOptionPane.INFORMATION_MESSAGE);
+        
+        // Fecha a tela e sai da mesma
+        sair();
     }//GEN-LAST:event_buttonSalvarActionPerformed
 
     private void buttonCancelarActionPerformed(ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
-        setVisible(false);
-        this.dispose();
+        // Fecha a tela e sai da mesma
+        sair();
     }//GEN-LAST:event_buttonCancelarActionPerformed
+
+    private void ComboBoxCursoMouseClicked(MouseEvent evt) {//GEN-FIRST:event_ComboBoxCursoMouseClicked
+
+        // Se pressionou Ctrl e a tela ainda nao foi instanciada
+        if (ctrl && telaCurso == null) {
+
+            // Instancia o tela de incluir do Curso
+            telaCurso = new CursoInclui(parent, true, new ServicoCurso());
+
+            // Faz ela ficar visivel
+            telaCurso.setVisible(true);
+
+            // A tela foi instanciada
+            entrou = true;
+
+            // Para de apertar Ctrl
+            ctrl = false;
+
+            // Preenche combo box do Curso
+            PreencheComboBoxCurso();
+
+            // Se pressionou Ctrl e a tela foi instanciada
+        }else if (ctrl && entrou) {
+
+            // Se ela foi fechada
+            if (!telaCurso.isActive()) {
+
+                // Faz ela ficar visivel
+                telaCurso.setVisible(true);
+
+                // Para de apertar Ctrl
+                ctrl = false;
+
+                // Preenche combo box do Curso
+                PreencheComboBoxCurso();
+            }
+        }
+    }//GEN-LAST:event_ComboBoxCursoMouseClicked
+
+    private void ComboBoxCursoKeyPressed(KeyEvent evt) {//GEN-FIRST:event_ComboBoxCursoKeyPressed
+        // Pressionou Ctrl
+        if (evt.getKeyCode() == KeyEvent.VK_CONTROL)
+        ctrl = true;
+    }//GEN-LAST:event_ComboBoxCursoKeyPressed
+
+    private void ComboBoxCursoKeyReleased(KeyEvent evt) {//GEN-FIRST:event_ComboBoxCursoKeyReleased
+        // Pressionou Ctrl
+        if (evt.getKeyCode() == KeyEvent.VK_CONTROL)
+        ctrl = false;
+    }//GEN-LAST:event_ComboBoxCursoKeyReleased
 
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -219,8 +311,8 @@ public class DisciplinaInclui extends javax.swing.JDialog {
     private JButton buttonCancelar;
     private JButton buttonSalvar;
     private JLabel jLabel1;
-    private JLabel jLabel5;
-    private JLabel jLabel6;
+    private JLabel jLabel12;
+    private JLabel jLabel9;
     private JPanel jPanel1;
     private JPanel jPanel2;
     private JSpinner spinnerCargaHoraria;

@@ -34,8 +34,7 @@ public class PeriodoTableModel  extends AbstractTableModel {
               case 1 : return a.getAno();
               case 2 : return a.getSemestre();
               default: return null;
-          }
-          
+          }          
     }
     
     @Override
@@ -53,14 +52,12 @@ public class PeriodoTableModel  extends AbstractTableModel {
         }       
     }
     
-   public void addRow(Periodo c){
-       
-       dados.add(c);
+   public void addRow(Periodo p) {       
+       dados.add(p);
        this.fireTableDataChanged();
    } 
    
-   public void removeRow(int linha){
-       
+   public void removeRow(int linha) {       
        dados.remove(linha);
        this.fireTableDataChanged();
    } 

@@ -32,8 +32,7 @@ public class AlunosTableModel  extends AbstractTableModel{
               case 1 : return e.getNome();
               case 2 : return e.getEmail();
               default: return null;
-          }
-          
+          }          
     }
     
    @Override
@@ -50,14 +49,12 @@ public class AlunosTableModel  extends AbstractTableModel{
        }       
    } 
     
-   public void addRow(Pessoa c){
-       
-       dados.add(c);
+   public void addRow(Pessoa p) {
+       dados.add(p);
        this.fireTableDataChanged();
    } 
    
-   public void removeRow(int linha){
-       
+   public void removeRow(int linha) {
        dados.remove(linha);
        this.fireTableDataChanged();
    } 

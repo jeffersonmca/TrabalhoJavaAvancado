@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -32,10 +33,13 @@ public class PessoaInclui extends javax.swing.JDialog {
     private ServicoPessoa servico;    
     
     public PessoaInclui(java.awt.Frame parent, boolean modal, ServicoPessoa servico) {
+        
         super(parent, modal);
         initComponents();
+        
         this.servico = servico;
         
+        // Preenche todos os cambo box da tela
         PreencheComboBox();
     }
     
@@ -48,6 +52,12 @@ public class PessoaInclui extends javax.swing.JDialog {
     // Preenche todos os cambo box da tela
     private void PreencheComboBox() {
         PreencheComboBoxTipoPessoa();
+    }
+    
+    // Fecha a tela e sai da mesma
+    private void sair() {
+        setVisible(false);
+        dispose();
     }
     
     @SuppressWarnings("unchecked")
@@ -68,8 +78,9 @@ public class PessoaInclui extends javax.swing.JDialog {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Inclui Pessoa");
 
-        jPanel2.setBorder(BorderFactory.createEtchedBorder());
+        jPanel2.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
 
+        buttonSalvar.setIcon(new ImageIcon(getClass().getResource("/imagens/images/Salvar.png"))); // NOI18N
         buttonSalvar.setText("Salvar");
         buttonSalvar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -78,6 +89,7 @@ public class PessoaInclui extends javax.swing.JDialog {
         });
         jPanel2.add(buttonSalvar);
 
+        buttonCancelar.setIcon(new ImageIcon(getClass().getResource("/imagens/images/cancelar.png"))); // NOI18N
         buttonCancelar.setText("Cancelar");
         buttonCancelar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -86,7 +98,7 @@ public class PessoaInclui extends javax.swing.JDialog {
         });
         jPanel2.add(buttonCancelar);
 
-        jPanel1.setBorder(BorderFactory.createEtchedBorder());
+        jPanel1.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
 
         jLabel1.setForeground(new Color(255, 0, 0));
         jLabel1.setText("Nome:");
@@ -103,56 +115,58 @@ public class PessoaInclui extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel9))
-                .addGap(29, 29, 29)
-                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                    .addComponent(textNome, GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                    .addComponent(ComboBoxTipoPessoa, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textEmail))
-                .addContainerGap(85, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textNome))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(3, 3, 3)
+                        .addComponent(ComboBoxTipoPessoa, GroupLayout.PREFERRED_SIZE, 206, GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textEmail)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                     .addComponent(textNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addGap(11, 11, 11)
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                     .addComponent(textEmail, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(ComboBoxTipoPessoa, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGap(11, 11, 11)
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel10)
+                    .addComponent(ComboBoxTipoPessoa, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
                 .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         );
 
-        setSize(new Dimension(424, 291));
+        setSize(new Dimension(424, 223));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonSalvarActionPerformed(ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
         
+        // Valida os campos obrigatorios antes de salvar
         if (Validacao.Vazio(textNome.getText())) {
             
             JOptionPane.showMessageDialog(this, 
@@ -179,26 +193,32 @@ public class PessoaInclui extends javax.swing.JDialog {
             return;
         }
         
+        // Todos os campos obrigatorios estao preenchidos
+        // Instancia um novo objeto do tipo Pessoa
         Pessoa p = new Pessoa();
         
+        // Preenche esse objeto com os dados da tela
         p.setNome(textNome.getText());
         p.setEmail(textEmail.getText());
         p.setTipoPessoa((EnumTipoPessoa) ComboBoxTipoPessoa.getSelectedItem());
         
         try {
+            // Salva no banco de dados a nova Pessoa
             servico.salvar(p);
         } catch (ExcecaoDAO|ExcecaoValidacao|ExcecaoServico e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
-        setVisible(false);
-        dispose();
+        JOptionPane.showMessageDialog(this, "Registro incluído com sucesso!", "Inclusão", JOptionPane.INFORMATION_MESSAGE);
+        
+        // Fecha a tela e sai da mesma
+        sair();
     }//GEN-LAST:event_buttonSalvarActionPerformed
 
     private void buttonCancelarActionPerformed(ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
-        setVisible(false);
-        this.dispose();
+        // Fecha a tela e sai da mesma
+        sair();
     }//GEN-LAST:event_buttonCancelarActionPerformed
 
    

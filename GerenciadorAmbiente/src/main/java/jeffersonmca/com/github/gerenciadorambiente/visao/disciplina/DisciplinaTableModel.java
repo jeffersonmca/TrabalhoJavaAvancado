@@ -35,8 +35,7 @@ public class DisciplinaTableModel  extends AbstractTableModel {
               case 2 : return a.getCargaHoraria();
               case 3 : return a.getFkCurso();
               default: return null;
-          }
-          
+          }          
     }
     
     @Override
@@ -55,14 +54,12 @@ public class DisciplinaTableModel  extends AbstractTableModel {
         }       
     }
     
-   public void addRow(Disciplina c){
-       
-       dados.add(c);
+   public void addRow(Disciplina d) {
+       dados.add(d);
        this.fireTableDataChanged();
    } 
    
-   public void removeRow(int linha){
-       
+   public void removeRow(int linha) {
        dados.remove(linha);
        this.fireTableDataChanged();
    } 
