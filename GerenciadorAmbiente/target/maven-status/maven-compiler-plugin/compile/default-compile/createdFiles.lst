@@ -71,6 +71,7 @@ jeffersonmca/com/github/gerenciadorambiente/visao/periodo/PeriodoInclui$1.class
 jeffersonmca/com/github/gerenciadorambiente/visao/ambiente/AmbienteListagem.class
 jeffersonmca/com/github/gerenciadorambiente/visao/pessoa/PessoaPesquisa$4.class
 jeffersonmca/com/github/gerenciadorambiente/modelo/Curso.class
+jeffersonmca/com/github/gerenciadorambiente/visao/turma/TurmaListagem$6.class
 jeffersonmca/com/github/gerenciadorambiente/visao/periodo/PeriodoPesquisa$2.class
 jeffersonmca/com/github/gerenciadorambiente/visao/aula/AulaInclui.class
 jeffersonmca/com/github/gerenciadorambiente/visao/disciplina/DisciplinaListagem.class
@@ -158,6 +159,7 @@ jeffersonmca/com/github/gerenciadorambiente/visao/turma/TurmaListagem.class
 jeffersonmca/com/github/gerenciadorambiente/visao/disciplina/DisciplinaListagem$3.class
 jeffersonmca/com/github/gerenciadorambiente/visao/aula/AulaPesquisa.class
 jeffersonmca/com/github/gerenciadorambiente/visao/periodo/PeriodoInclui.class
+jeffersonmca/com/github/gerenciadorambiente/visao/turma/TurmaListagem$7.class
 jeffersonmca/com/github/gerenciadorambiente/visao/aula/AulaListagem$5.class
 jeffersonmca/com/github/gerenciadorambiente/visao/aula/AulaEdita$3.class
 jeffersonmca/com/github/gerenciadorambiente/visao/curso/CursoEdita$1.class

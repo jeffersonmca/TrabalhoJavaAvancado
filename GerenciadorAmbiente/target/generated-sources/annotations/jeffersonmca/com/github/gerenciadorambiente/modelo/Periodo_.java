@@ -5,7 +5,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.EnumSemestre;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-06-08T11:15:56")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-06-08T15:17:35")
 @StaticMetamodel(Periodo.class)
 public class Periodo_ { 
 

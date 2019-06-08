@@ -2,18 +2,25 @@ package jeffersonmca.com.github.gerenciadorambiente.visao.turma;
 
 import jeffersonmca.com.github.gerenciadorambiente.visao.aula.*;
 import java.awt.Cursor;
+import java.awt.event.KeyEvent;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Turma;
 import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoTurma;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoDAO;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoServico;
+import jeffersonmca.com.github.gerenciadorambiente.modelo.Pessoa;
 
 public class TurmaListagem extends javax.swing.JFrame {
 
     private ServicoTurma service;
     private List<Turma> dados;
+    private List<Pessoa> dadosAlunos;
     private TurmaTableModel tabModel;
+    private AlunosTableModel tabModelAlunos;
     
     public TurmaListagem() {
         
@@ -24,9 +31,15 @@ public class TurmaListagem extends javax.swing.JFrame {
         // Atualiza os dados da grid
         atualizaDados();
     }
-
-    // Atualiza os dados da grid
+    
+    // Atualiza os dados das grids
     private void atualizaDados() {
+        atualizaDadosTurma();
+        atualizaDadosAlunos();
+    }
+
+    // Atualiza os dados da grid de Turma
+    private void atualizaDadosTurma() {
         
         try {
             
@@ -50,6 +63,44 @@ public class TurmaListagem extends javax.swing.JFrame {
         }
     }
     
+    // Atualiza os dados da grid dos Alunos
+    private void atualizaDadosAlunos() {
+
+        try {
+            
+            this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+
+            Integer codigo = tableTurmas.getSelectedRow();
+            System.out.println(codigo);
+            if (codigo == -1)
+                return;
+            codigo = (Integer) tableTurmas.getValueAt(tableTurmas.getSelectedRow(), 0);
+            
+            Turma t = null;
+            
+            try {
+                t = service.buscarPorCodigo(codigo);
+            } catch (ExcecaoDAO e) {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                return ;
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Houve um erro ao buscar todos os registros.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return ;
+            }
+
+            if (t == null)
+                return ;
+
+            dadosAlunos = t.getAlunos();
+
+            tabModelAlunos = new AlunosTableModel(dadosAlunos);
+            tableAlunos.setModel(tabModelAlunos);
+        
+        } finally {
+            this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -67,6 +118,9 @@ public class TurmaListagem extends javax.swing.JFrame {
         jbtnAtualizar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         jbtnFechar = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tableAlunos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Listagem de Turma");
@@ -84,6 +138,16 @@ public class TurmaListagem extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tableTurmas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableTurmasMouseClicked(evt);
+            }
+        });
+        tableTurmas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tableTurmasKeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableTurmas);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -92,7 +156,7 @@ public class TurmaListagem extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -184,22 +248,60 @@ public class TurmaListagem extends javax.swing.JFrame {
         });
         jToolBar1.add(jbtnFechar);
 
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        tableAlunos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tableAlunos.setEnabled(false);
+        jScrollPane2.setViewportView(tableAlunos);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        setSize(new java.awt.Dimension(564, 495));
+        setSize(new java.awt.Dimension(1036, 495));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -209,7 +311,7 @@ public class TurmaListagem extends javax.swing.JFrame {
         TurmaInclui tela = new TurmaInclui(this, true, service);
         tela.setVisible(true);
 
-        // Apos a inclusao, atualiza a grid
+        // Apos a inclusao, atualiza as grids
         atualizaDados();
     }//GEN-LAST:event_jbtnIncluirActionPerformed
 
@@ -235,7 +337,7 @@ public class TurmaListagem extends javax.swing.JFrame {
         TurmaEdita tela = new TurmaEdita(this, true, service, aux);
         tela.setVisible(true);
 
-        // Apos a edicao, atualiza a grid
+        // Apos a edicao, atualiza as grids
         atualizaDados();
     }//GEN-LAST:event_jbtnEditarActionPerformed
 
@@ -266,7 +368,7 @@ public class TurmaListagem extends javax.swing.JFrame {
             try {
                 // Caso a escolha fora sim entao o Turma sera removido
                 service.remover(aux.getCodigo());
-                // Atualiza a grid
+                // Atualiza as grids
                 atualizaDados();
                 JOptionPane.showMessageDialog(this, "Registro removido com sucesso.");
             } catch (ExcecaoDAO|ExcecaoServico e) {
@@ -276,7 +378,7 @@ public class TurmaListagem extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnRemoverActionPerformed
 
     private void jbtnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAtualizarActionPerformed
-        // Atualiza os dados da grid
+        // Atualiza os dados das grids
         atualizaDados();
     }//GEN-LAST:event_jbtnAtualizarActionPerformed
 
@@ -284,10 +386,24 @@ public class TurmaListagem extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jbtnFecharActionPerformed
 
+    private void tableTurmasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableTurmasMouseClicked
+        // Atualiza os dados da grid dos Alunos
+        atualizaDadosAlunos();
+    }//GEN-LAST:event_tableTurmasMouseClicked
+
+    private void tableTurmasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableTurmasKeyReleased
+        // Atualiza os dados da grid dos Alunos
+        System.out.println(evt.getKeyCode());
+        if ((evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN))
+            atualizaDadosAlunos();
+    }//GEN-LAST:event_tableTurmasKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
@@ -298,6 +414,7 @@ public class TurmaListagem extends javax.swing.JFrame {
     private javax.swing.JButton jbtnFechar;
     private javax.swing.JButton jbtnIncluir;
     private javax.swing.JButton jbtnRemover;
+    private javax.swing.JTable tableAlunos;
     private javax.swing.JTable tableTurmas;
     // End of variables declaration//GEN-END:variables
 }
