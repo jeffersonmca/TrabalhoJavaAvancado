@@ -1,11 +1,14 @@
 package jeffersonmca.com.github.gerenciadorambiente.visao;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoDAO;
+import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoServico;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Login;
+import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoLogin;
+import jeffersonmca.com.github.gerenciadorambiente.util.Conversoes;
+import jeffersonmca.com.github.gerenciadorambiente.util.Validacao;
 import jeffersonmca.com.github.gerenciadorambiente.visao.ambiente.AmbienteListagem;
 import jeffersonmca.com.github.gerenciadorambiente.visao.ambiente.AmbientePesquisa;
 import jeffersonmca.com.github.gerenciadorambiente.visao.aula.AulaListagem;
@@ -27,31 +30,22 @@ public class Principal extends javax.swing.JFrame {
 
     private Login login;
     
-    public Principal() {
+    public Principal(Login login) {
         
         initComponents();
         
-//        this.login = login;
+        this.login = login;
         
         // Preenche informacoes
-//        PreencheInformacoes();
+        PreencheInformacoes();
     }
     
     // Preenche informacoes
     private void PreencheInformacoes() {
         
+        labelIdLogado.setText(login.getId());
         labelUsuarioLogado.setText(login.getUsuario().getNome());
-
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date aux = new Date();
-
-        try {
-            aux = sdf.parse(aux.toString());
-        } catch (ParseException ex) {
-            
-        }
-        
-        labelData.setText(sdf.format(aux));
+        labelData.setText(Conversoes.dateToStr(new Date()));
     }
 
     @SuppressWarnings("unchecked")
@@ -63,6 +57,8 @@ public class Principal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         labelData = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        labelIdLogado = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         cadMenuAmbiente = new javax.swing.JMenuItem();
@@ -91,9 +87,16 @@ public class Principal extends javax.swing.JFrame {
         relMenuPeriodo = new javax.swing.JMenuItem();
         relMenuPessoa = new javax.swing.JMenuItem();
         relMenuTurma = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        conMenuLogout = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                formFocusGained(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -101,15 +104,21 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel3.setText("Data:");
 
+        jLabel1.setText("id:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelIdLogado, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
+                .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -120,17 +129,21 @@ public class Principal extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelIdLogado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
                         .addComponent(labelData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        jMenu1.setText("Cadastro");
+        jMenu1.setText("Listagem");
 
         cadMenuAmbiente.setText("Ambiente");
         cadMenuAmbiente.addActionListener(new java.awt.event.ActionListener() {
@@ -299,6 +312,18 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu4.setText("Configurações");
+
+        conMenuLogout.setText("Logout");
+        conMenuLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                conMenuLogoutActionPerformed(evt);
+            }
+        });
+        jMenu4.add(conMenuLogout);
+
+        jMenuBar1.add(jMenu4);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -393,7 +418,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_pesMenuTurmaActionPerformed
 
     private void cadMenuLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadMenuLoginActionPerformed
-        LoginListagem tela = new LoginListagem();
+        LoginListagem tela = new LoginListagem(login);
         tela.setVisible(true);
     }//GEN-LAST:event_cadMenuLoginActionPerformed
 
@@ -401,6 +426,26 @@ public class Principal extends javax.swing.JFrame {
         LoginPesquisa tela = new LoginPesquisa();
         tela.setVisible(true);
     }//GEN-LAST:event_pesMenuLoginActionPerformed
+
+    private void conMenuLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conMenuLogoutActionPerformed
+        
+        this.setVisible(false);
+        this.dispose();
+        
+        VisaoLogin tela = new VisaoLogin();
+        tela.setVisible(true);
+    }//GEN-LAST:event_conMenuLogoutActionPerformed
+
+    private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
+        
+        ServicoLogin servico = new ServicoLogin();
+        try {
+            login = servico.buscarPorCodigo(login.getCodigo());
+        } catch (ExcecaoDAO|ExcecaoServico ex) {}
+        
+        if (Validacao.Alocado(login))
+            PreencheInformacoes();
+    }//GEN-LAST:event_formFocusGained
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem cadMenuAmbiente;
@@ -411,14 +456,18 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem cadMenuPeriodo;
     private javax.swing.JMenuItem cadMenuPessoa;
     private javax.swing.JMenuItem cadMenuTurma;
+    private javax.swing.JMenuItem conMenuLogout;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelData;
+    private javax.swing.JLabel labelIdLogado;
     private javax.swing.JLabel labelUsuarioLogado;
     private javax.swing.JMenuItem pesMenuAmbiente;
     private javax.swing.JMenuItem pesMenuAula;

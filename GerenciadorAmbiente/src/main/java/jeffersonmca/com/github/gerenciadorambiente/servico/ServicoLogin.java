@@ -145,4 +145,32 @@ public class ServicoLogin {
         
         return null;
     }
+
+    public boolean existeLogin(Login login) throws ExcecaoDAO {
+        
+        Login l = dao.buscarPorId(login.getId());
+        
+        // Achou algum login no banco de dados
+        if (Validacao.Alocado(l))
+             return true;
+        else return false;
+    }
+
+    public boolean existeLoginEdita(Login login, String idAntes) throws ExcecaoDAO {
+        
+        Login l = dao.buscarPorId(login.getId());
+        
+        // Achou algum login no banco de dados E ele eh diferente do ja cadastrado
+        if (Validacao.Alocado(l) && !idAntes.equals(login.getId()))
+             return true;
+        else return false;
+    }
+
+    public boolean logar(Login login, String senha) {
+        
+        // Se as senhas baterem entao ele pode logar
+        if (login.getSenha().equals(senha))
+             return true;
+        else return false;
+    }
 }

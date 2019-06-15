@@ -11,14 +11,17 @@ import jeffersonmca.com.github.gerenciadorambiente.renderizadores.StrippedTableC
 
 public class LoginListagem extends javax.swing.JFrame {
 
+    private Login login;
     private ServicoLogin service;
     private List<Login> dados;
     private LoginTableModel tabModel;
     
-    public LoginListagem() {
+    public LoginListagem(Login login) {
         
         initComponents();
-        service = new ServicoLogin();
+        
+        this.login = login;
+        this.service = new ServicoLogin();
         
         // Atualiza os dados da grid
         atualizaDados();
@@ -250,6 +253,12 @@ public class LoginListagem extends javax.swing.JFrame {
 
         // Pega a linha que ele selecionou e transforma em um objeto do tipo Login
         Login aux = dados.get(tableLogins.getSelectedRow());
+        
+        // Nao pode remover o usuario que esta logado no momento
+        if (login.equals(aux)) {
+            JOptionPane.showMessageDialog(this, "Não é permitido remover o usuário logado no momento!");
+            return;
+        }
 
         // Precaucao caso algo de errado
         if (aux == null) {

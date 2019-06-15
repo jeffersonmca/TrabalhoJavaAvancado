@@ -186,49 +186,64 @@ public class VisaoLogin extends javax.swing.JFrame {
 
     private void buttonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEntrarActionPerformed
 
-        // Pega o usuario e senha digitados
-        String usuario = textUsuario.getText();
-        String senha = String.valueOf(passwordSenha.getPassword());
+        try {
+            
+            this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
         
-//        if (Validacao.Vazio(usuario)) {
-//
-//            JOptionPane.showMessageDialog(this,
-//                "Informe o usuário",
-//                "Dica",
-//                JOptionPane.ERROR_MESSAGE);
-//            return;
-//        }
-//        
-//        if (Validacao.Vazio(senha)) {
-//
-//            JOptionPane.showMessageDialog(this,
-//                "Informe a senha",
-//                "Dica",
-//                JOptionPane.ERROR_MESSAGE);
-//            return;
-//        }
-//        
-//        ServicoLogin servico = new ServicoLogin();
-//        Login l = null;
-//        try {
-//            l = servico.buscarPorId(textUsuario.getText());
-//            System.out.println(l);
-//        } catch (ExcecaoDAO|ExcecaoServico ex) {
-//            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-//            return;
-//        }
-//        
-//        if (!Validacao.Alocado(l)) {
-//            JOptionPane.showMessageDialog(this, "Usuário não encontrado!", "Aviso", JOptionPane.WARNING_MESSAGE);
-//            return ;
-//        }
+            // Pega o usuario e senha digitados
+            String usuario = textUsuario.getText();
+            String senha = String.valueOf(passwordSenha.getPassword());
+
+            if (Validacao.Vazio(usuario)) {
+
+                JOptionPane.showMessageDialog(this,
+                    "Informe o usuário",
+                    "Dica",
+                    JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (Validacao.Vazio(senha)) {
+
+                JOptionPane.showMessageDialog(this,
+                    "Informe a senha",
+                    "Dica",
+                    JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            ServicoLogin servico = new ServicoLogin();
+            Login l = null;
+            try {
+                l = servico.buscarPorId(textUsuario.getText());
+            } catch (ExcecaoDAO|ExcecaoServico ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // NAO achou um usuario com este login
+            if (!Validacao.Alocado(l)) {
+                JOptionPane.showMessageDialog(this, "Usuário não encontrado!", "Aviso", JOptionPane.WARNING_MESSAGE);
+                return ;
+            }
+
+            // Verifica se a senha esta correta
+            if (servico.logar(l, senha)) {
+
+                // Fecha a tela de login
+                this.setVisible(false);
+                this.dispose();                
+
+                // Abre a tela principal do programa
+                Principal telaPrincipal = new Principal(l);
+                telaPrincipal.setVisible(true);
+            }else {
+                JOptionPane.showMessageDialog(this, "Senha esta errada!", "Aviso", JOptionPane.WARNING_MESSAGE);
+            }
         
-        // Fecha a tela de login
-        this.dispose();
-        
-        // Abre a tela principal do programa
-        Principal telaPrincipal = new Principal();
-        telaPrincipal.setVisible(true);
+        } finally {
+            this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
     }//GEN-LAST:event_buttonEntrarActionPerformed
 
     private void buttonSairMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSairMouseEntered

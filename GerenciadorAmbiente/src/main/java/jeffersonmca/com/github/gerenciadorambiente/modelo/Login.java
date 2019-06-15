@@ -25,7 +25,7 @@ public class Login {
     @Column(name = "log_codigo")
     private Integer codigo;
     
-    @Column(name = "log_id", nullable = false, length = TAMANHO_ID)
+    @Column(name = "log_id", nullable = false, unique = true, length = TAMANHO_ID)
     private String id;
     
     @Column(name = "log_senha", nullable = false, length = TAMANHO_SENHA)

@@ -12,6 +12,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
@@ -240,6 +242,17 @@ public class LoginInclui extends javax.swing.JDialog {
         l.setId(textId.getText());
         l.setSenha(String.valueOf(passwordSenha.getPassword()));
         l.setUsuario((Pessoa) ComboBoxPessoa.getSelectedItem());
+                
+        try {
+            // Verifica se ja existe este login cadastrado
+            if (servico.existeLogin(l)) {
+                JOptionPane.showMessageDialog(this, "Já tem um cadastro com este id!", "Dica", JOptionPane.ERROR_MESSAGE);
+                return ;
+            }
+        } catch (ExcecaoDAO ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            return ;
+        }
         
         try {
             // Salva no banco de dados o novo Login

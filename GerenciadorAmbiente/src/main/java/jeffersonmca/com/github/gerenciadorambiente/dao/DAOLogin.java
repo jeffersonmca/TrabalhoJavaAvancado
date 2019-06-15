@@ -3,6 +3,7 @@ package jeffersonmca.com.github.gerenciadorambiente.dao;
 import java.util.List;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoDAO;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Login;
+import jeffersonmca.com.github.gerenciadorambiente.util.Validacao;
 
 public class DAOLogin extends DAOGenerico<Login, Integer> {
 
@@ -36,12 +37,20 @@ public class DAOLogin extends DAOGenerico<Login, Integer> {
         try {            
             String sql = "select l from Login l "
                     + " where (1 = 1) "
-                    + " and l.id like '" + id + "'";
+                    + " and l.id = '" + id + "'";
             
-            return em.createQuery(sql, Login.class).getSingleResult();
+            List<Login> logins = em.createQuery(sql, Login.class).getResultList();            
+            for (Login l : logins) {
+                
+                if (Validacao.Alocado(l)) {
+                    return l;
+                }
+            }
+            
+            return null;
             
         } catch (Exception e) {
-            throw new ExcecaoDAO("Houve erro ao pegar o registro!");
+            throw new ExcecaoDAO("Houve erro ao pegar os registros!");
         }
     }
 }

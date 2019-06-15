@@ -1,3 +1,4 @@
+INSERT INTO `GerenciadorAmbiente`.`PERIODO` (`per_ano`, `per_semestre`) VALUES ('2019', 'PRIMEIRO');
 INSERT INTO `GerenciadorAmbiente`.`PERIODO` (`per_ano`, `per_semestre`) VALUES ('2019', 'SEGUNDO');
 
 INSERT INTO `GerenciadorAmbiente`.`CURSO` (`cur_nome`, `cur_perCodigo`) VALUES ('Ciência da Computação', '1');

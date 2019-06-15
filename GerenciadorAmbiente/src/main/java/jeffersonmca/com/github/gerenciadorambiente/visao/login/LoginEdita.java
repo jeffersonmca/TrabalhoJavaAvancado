@@ -308,11 +308,24 @@ public class LoginEdita extends javax.swing.JDialog {
             return;
         }
         
+        String idAntes = login.getId();
+        
         // Todos os campos obrigatorios estao preenchidos
         // Preenche esse objeto com os dados da tela
         login.setId(textId.getText());
         login.setSenha(String.valueOf(passwordSenha.getPassword()));
         login.setUsuario((Pessoa) ComboBoxPessoa.getSelectedItem());
+                
+        try {
+            // Verifica se ja existe este login cadastrado
+            if (servico.existeLoginEdita(login, idAntes)) {
+                JOptionPane.showMessageDialog(this, "Já tem um cadastro com este id!", "Dica", JOptionPane.ERROR_MESSAGE);
+                return ;
+            }
+        } catch (ExcecaoDAO ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            return ;
+        }
 
         try {
             // Salva no banco de dados o Login

@@ -23,9 +23,27 @@ public class Conversoes {
         }
     } 
     
-    public static String timeToStr(Date data) {
+    public static String timeToStr(Date hora) {
         
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");        
+        return sdf.format(hora);
+    }
+    
+    public static Date strToDate(String texto) {
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        
+        try {
+            return sdf.parse(texto);
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(null, "Data está errada!");
+            return null;
+        }
+    } 
+    
+    public static String dateToStr(Date data) {
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");        
         return sdf.format(data);
     }
 }

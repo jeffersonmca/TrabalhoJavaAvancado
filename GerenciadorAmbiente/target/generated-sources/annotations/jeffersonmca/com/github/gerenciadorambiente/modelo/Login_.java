@@ -5,7 +5,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Pessoa;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-06-15T17:56:41")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-06-15T20:28:53")
 @StaticMetamodel(Login.class)
 public class Login_ { 
 
