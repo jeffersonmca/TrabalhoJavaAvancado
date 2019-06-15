@@ -6,7 +6,7 @@ import jeffersonmca.com.github.gerenciadorambiente.modelo.Turma;
 
 public class DAOTurma extends DAOGenerico<Turma, Integer> {
 
-    public List<Turma> buscarPor(String opcao, String dado) throws ExcecaoDAO {
+    public List<Turma> buscarPor(String opcao, Object dado) throws ExcecaoDAO {
         
         try {         
             
@@ -16,19 +16,19 @@ public class DAOTurma extends DAOGenerico<Turma, Integer> {
             if (!(opcao.equals("SEM FILTRO"))) {
                
                 if (opcao.equals("CODIGO")) {
-                    sql += " and t.codigo = " + Integer.parseInt(dado);
+                    sql += " and t.codigo = " + dado;
                 }else if (opcao.equals("NOME")) {
-                    sql += " and t.nome like '%" + (String) dado + "%'";
+                    sql += " and t.nome like '%" + dado + "%'";
                 }else if (opcao.equals("ID DISCIPLINA")) {
-                    sql += " and t.fkDisciplina = " + Integer.parseInt(dado);
+                    sql += " and t.fkDisciplina.codigo = " + dado;
                 }else if (opcao.equals("ID PERIODO")) {
-                    sql += " and t.fkPeriodo = " + Integer.parseInt(dado);
+                    sql += " and t.fkPeriodo.codigo = " + dado;
                 }else if (opcao.equals("ID PROFESSOR")) {
-                    sql += " and t.fkProfessor = " + Integer.parseInt(dado);
+                    sql += " and t.fkProfessor.codigo = " + dado;
                 }
             }
             
-            return em.createQuery(sql).getResultList();
+            return em.createQuery(sql, Turma.class).getResultList();
             
         } catch (Exception e) {
             throw new ExcecaoDAO("Houve erro ao pegar os registros!");

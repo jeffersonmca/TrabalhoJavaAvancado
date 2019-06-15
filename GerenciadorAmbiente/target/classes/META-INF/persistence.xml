@@ -7,6 +7,7 @@
     <class>jeffersonmca.com.github.gerenciadorambiente.modelo.Aula</class>
     <class>jeffersonmca.com.github.gerenciadorambiente.modelo.Curso</class>
     <class>jeffersonmca.com.github.gerenciadorambiente.modelo.Disciplina</class>
+    <class>jeffersonmca.com.github.gerenciadorambiente.modelo.Login</class>
     <class>jeffersonmca.com.github.gerenciadorambiente.modelo.Periodo</class>
     <class>jeffersonmca.com.github.gerenciadorambiente.modelo.Pessoa</class>
     <class>jeffersonmca.com.github.gerenciadorambiente.modelo.Turma</class>

@@ -37,6 +37,7 @@ import jeffersonmca.com.github.gerenciadorambiente.modelo.Disciplina;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Periodo;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Pessoa;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Turma;
+import jeffersonmca.com.github.gerenciadorambiente.renderizadores.StrippedTableCellHandler;
 import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoDisciplina;
 import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoPeriodo;
 import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoTurma;
@@ -194,6 +195,9 @@ public class TurmaEdita extends javax.swing.JDialog {
         AlunosTableModel atm = new AlunosTableModel(alunos);
         tableAlunos.setModel(atm);
         
+        // Melhorando o aspecto da grid
+        tableAlunos.setDefaultRenderer(Object.class, new StrippedTableCellHandler());
+        
         // Preenche combo box do Aluno
         PreencheComboBoxAluno();
     }
@@ -299,11 +303,11 @@ public class TurmaEdita extends javax.swing.JDialog {
         buttonSalvar.setIcon(new ImageIcon(getClass().getResource("/imagens/images/Salvar.png"))); // NOI18N
         buttonSalvar.setText("Salvar");
         buttonSalvar.addMouseListener(new MouseAdapter() {
-            public void mouseExited(MouseEvent evt) {
-                buttonSalvarMouseExited(evt);
-            }
             public void mouseEntered(MouseEvent evt) {
                 buttonSalvarMouseEntered(evt);
+            }
+            public void mouseExited(MouseEvent evt) {
+                buttonSalvarMouseExited(evt);
             }
         });
         buttonSalvar.addActionListener(new ActionListener() {
@@ -574,7 +578,7 @@ public class TurmaEdita extends javax.swing.JDialog {
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new Dimension(430, 665));
+        setSize(new Dimension(430, 668));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

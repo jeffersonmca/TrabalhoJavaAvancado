@@ -43,6 +43,7 @@ import jeffersonmca.com.github.gerenciadorambiente.modelo.Turma;
 import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoAmbiente;
 import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoAula;
 import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoTurma;
+import jeffersonmca.com.github.gerenciadorambiente.util.Conversoes;
 import jeffersonmca.com.github.gerenciadorambiente.util.Validacao;
 import jeffersonmca.com.github.gerenciadorambiente.visao.ambiente.AmbienteInclui;
 import jeffersonmca.com.github.gerenciadorambiente.visao.turma.TurmaInclui;
@@ -131,8 +132,8 @@ public class AulaEdita extends javax.swing.JDialog {
         ComboBoxAmbiente.setSelectedItem(aula.getFkAmbiente());
         ComboBoxDiaSemana.setSelectedItem(aula.getDiaSemana());
         ComboBoxTurma.setSelectedItem(aula.getTurma());
-        textHorarioInicio.setText(aula.getHorarioInicio().toString());
-        textHorarioTermino.setText(aula.getHorarioTermino().toString());
+        textHorarioInicio.setText(Conversoes.timeToStr(aula.getHorarioInicio()));
+        textHorarioTermino.setText(Conversoes.timeToStr(aula.getHorarioTermino()));
     }
     
     // Fecha a tela e sai da mesma
@@ -375,7 +376,7 @@ public class AulaEdita extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelBotoes, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         );
@@ -420,14 +421,8 @@ public class AulaEdita extends javax.swing.JDialog {
         }
                        
         // Transforma string para hora
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-        Date aux1 = null;
-        Date aux2 = null;
-        
-        try {
-             aux1 = sdf.parse(textHorarioInicio.getText());
-             aux2 = sdf.parse(textHorarioTermino.getText());
-        } catch (ParseException e) {}
+        Date aux1 = Conversoes.strToTime(textHorarioInicio.getText());
+        Date aux2 = Conversoes.strToTime(textHorarioTermino.getText());
         
         if (!Validacao.Alocado(aux1)) {
 
@@ -453,7 +448,7 @@ public class AulaEdita extends javax.swing.JDialog {
         aula.setTurma((Turma) ComboBoxTurma.getSelectedItem());
         aula.setDiaSemana((EnumDiaSemana) ComboBoxDiaSemana.getSelectedItem());
         aula.setHorarioInicio(aux1);
-        aula.setHorarioTermino(aux2);      
+        aula.setHorarioTermino(aux2);
         
         try {
             // Salva no banco de dados a Aula

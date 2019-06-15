@@ -7,6 +7,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoDAO;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Aula;
+import jeffersonmca.com.github.gerenciadorambiente.renderizadores.DateTableCellHandler;
+import jeffersonmca.com.github.gerenciadorambiente.renderizadores.StrippedTableCellHandler;
 import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoAula;
 import jeffersonmca.com.github.gerenciadorambiente.util.GerenciaRelatorio;
 
@@ -29,9 +31,14 @@ public class AulaPesquisa extends javax.swing.JFrame {
         try {
             
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-
+            
             try {
                 dados = service.buscarPor((String) ComboBoxOpcao.getSelectedItem(), textDado.getText());
+                
+                // Caso vier null, nao tem nada para atualizar
+                if (dados == null)
+                    return ;
+                
             } catch (ExcecaoDAO e) {
                 JOptionPane.showMessageDialog(this, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return ;
@@ -42,6 +49,13 @@ public class AulaPesquisa extends javax.swing.JFrame {
 
             tabModel = new AulaTableModel(dados);
             tableAulas.setModel(tabModel);
+            
+            // Modificando os campos de hora
+            tableAulas.getColumnModel().getColumn(4).setCellRenderer(new DateTableCellHandler());
+            tableAulas.getColumnModel().getColumn(5).setCellRenderer(new DateTableCellHandler());
+            
+            // Melhorando o aspecto da grid
+            tableAulas.setDefaultRenderer(Object.class, new StrippedTableCellHandler());
         
         } finally {
             this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -78,7 +92,7 @@ public class AulaPesquisa extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        ComboBoxOpcao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SEM FILTRO", "HORARIO INICIO", "HORARIO TERMINO", "DIA SEMANA", "ID AMBIENTE", "ID TURMA" }));
+        ComboBoxOpcao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SEM FILTRO", "CODIGO", "HORARIO INICIO", "HORARIO TERMINO", "DIA SEMANA", "ID AMBIENTE", "ID TURMA" }));
 
         jLabel1.setText("Pesquisar Por:");
 
@@ -86,6 +100,23 @@ public class AulaPesquisa extends javax.swing.JFrame {
         buttonPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonPesquisarActionPerformed(evt);
+            }
+        });
+
+        textDado.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                textDadoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                textDadoFocusLost(evt);
+            }
+        });
+        textDado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                textDadoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                textDadoMouseExited(evt);
             }
         });
 
@@ -250,6 +281,32 @@ public class AulaPesquisa extends javax.swing.JFrame {
         setVisible(false);
         this.dispose();
     }//GEN-LAST:event_buttonSairActionPerformed
+
+    private void textDadoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textDadoFocusGained
+        
+        
+    }//GEN-LAST:event_textDadoFocusGained
+
+    private void textDadoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textDadoFocusLost
+        
+        
+    }//GEN-LAST:event_textDadoFocusLost
+
+    private void textDadoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textDadoMouseEntered
+        
+        // Campo ganhou o "foco" e a opcao eh pesquisar por horario
+        if ((ComboBoxOpcao.getSelectedItem().equals("HORARIO INICIO")) ||
+            (ComboBoxOpcao.getSelectedItem().equals("HORARIO TERMINO"))) {
+        
+            textDado.setToolTipText("Por favor, pesquisa utilizando este formato hora:minutos. Ex: 13:30");
+        }
+    }//GEN-LAST:event_textDadoMouseEntered
+
+    private void textDadoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textDadoMouseExited
+        
+        // Campo perdeu "foco"
+        textDado.setToolTipText("");
+    }//GEN-LAST:event_textDadoMouseExited
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboBoxOpcao;

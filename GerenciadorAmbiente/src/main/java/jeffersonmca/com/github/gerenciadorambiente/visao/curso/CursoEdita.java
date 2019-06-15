@@ -258,12 +258,13 @@ public class CursoEdita extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelBotoes, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addComponent(panelBotoes, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        setSize(new Dimension(418, 186));
+        setSize(new Dimension(418, 181));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -282,7 +283,7 @@ public class CursoEdita extends javax.swing.JDialog {
         if (ComboBoxPeriodo.getSelectedIndex() <= -1) {
             JOptionPane.showMessageDialog(this, 
                     "Informe o periodo",
-                    "Inclusão",
+                    "Edição",
                     JOptionPane.ERROR_MESSAGE);
             return;
         }

@@ -37,6 +37,7 @@ import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoAula;
 import javax.swing.text.MaskFormatter;
 import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoAmbiente;
 import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoTurma;
+import jeffersonmca.com.github.gerenciadorambiente.util.Conversoes;
 import jeffersonmca.com.github.gerenciadorambiente.util.Validacao;
 import jeffersonmca.com.github.gerenciadorambiente.visao.ambiente.AmbienteInclui;
 import jeffersonmca.com.github.gerenciadorambiente.visao.turma.TurmaInclui;
@@ -277,7 +278,7 @@ public class AulaInclui extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         );
@@ -292,7 +293,7 @@ public class AulaInclui extends javax.swing.JDialog {
         if (ComboBoxAmbiente.getSelectedIndex() <= -1) {
             JOptionPane.showMessageDialog(this, 
                     "Informe o ambiente",
-                    "Edição",
+                    "Inclusão",
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -300,7 +301,7 @@ public class AulaInclui extends javax.swing.JDialog {
         if (ComboBoxTurma.getSelectedIndex() <= -1) {
             JOptionPane.showMessageDialog(this, 
                     "Informe a turma",
-                    "Edição",
+                    "Inclusão",
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -308,26 +309,20 @@ public class AulaInclui extends javax.swing.JDialog {
         if (ComboBoxDiaSemana.getSelectedIndex() <= -1) {
             JOptionPane.showMessageDialog(this, 
                     "Informe o dia da semana",
-                    "Edição",
+                    "Inclusão",
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
                        
         // Transforma string para hora
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-        Date aux1 = null;
-        Date aux2 = null;
-        
-        try {
-             aux1 = sdf.parse(textHorarioInicio.getText());
-             aux2 = sdf.parse(textHorarioTermino.getText());
-        } catch (ParseException e) {}
+        Date aux1 = Conversoes.strToTime(textHorarioInicio.getText());
+        Date aux2 = Conversoes.strToTime(textHorarioTermino.getText());
         
         if (!Validacao.Alocado(aux1)) {
 
             JOptionPane.showMessageDialog(this,
                 "Informe o horário de início da aula",
-                "Edição",
+                "Inclusão",
                 JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -336,7 +331,7 @@ public class AulaInclui extends javax.swing.JDialog {
 
             JOptionPane.showMessageDialog(this,
                 "Informe o horário de término da aula",
-                "Edição",
+                "Inclusão",
                 JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -350,7 +345,7 @@ public class AulaInclui extends javax.swing.JDialog {
         a.setDiaSemana((EnumDiaSemana) ComboBoxDiaSemana.getSelectedItem());
         a.setTurma((Turma) ComboBoxTurma.getSelectedItem());
         a.setHorarioInicio(aux1);
-        a.setHorarioInicio(aux2);
+        a.setHorarioTermino(aux2);
         
         try {
             // Salva no banco de dados a nova Aula

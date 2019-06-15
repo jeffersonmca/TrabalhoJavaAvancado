@@ -1,5 +1,6 @@
 package jeffersonmca.com.github.gerenciadorambiente.visao.ambiente;
 
+import jeffersonmca.com.github.gerenciadorambiente.renderizadores.StrippedTableCellHandler;
 import java.awt.Cursor;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Ambiente;
 import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoAmbiente;
@@ -43,6 +44,9 @@ public class AmbienteListagem extends javax.swing.JFrame {
 
             tabModel = new AmbienteTableModel(dados);
             tableAmbientes.setModel(tabModel);
+            
+            // Melhorando o aspecto da grid
+            tableAmbientes.setDefaultRenderer(Object.class, new StrippedTableCellHandler());
         
         } finally {
             this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));

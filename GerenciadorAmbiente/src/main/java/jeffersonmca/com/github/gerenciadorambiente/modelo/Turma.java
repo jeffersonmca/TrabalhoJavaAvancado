@@ -145,6 +145,6 @@ public class Turma {
 
     @Override
     public String toString() {
-        return this.nome;
+        return this.codigo + "-" + this.nome;
     }
 }

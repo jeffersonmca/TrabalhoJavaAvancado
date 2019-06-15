@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoDAO;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoServico;
+import jeffersonmca.com.github.gerenciadorambiente.renderizadores.StrippedTableCellHandler;
 
 public class CursoListagem extends javax.swing.JFrame {
 
@@ -42,6 +43,9 @@ public class CursoListagem extends javax.swing.JFrame {
 
             tabModel = new CursoTableModel(dados);
             tableCursos.setModel(tabModel);
+            
+            // Melhorando o aspecto da grid
+            tableCursos.setDefaultRenderer(Object.class, new StrippedTableCellHandler());
         
         } finally {
             this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));

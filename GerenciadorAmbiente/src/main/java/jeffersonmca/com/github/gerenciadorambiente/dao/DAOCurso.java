@@ -6,7 +6,7 @@ import jeffersonmca.com.github.gerenciadorambiente.modelo.Curso;
 
 public class DAOCurso extends DAOGenerico<Curso, Integer> {
 
-    public List<Curso> buscarPor(String opcao, String dado) throws ExcecaoDAO {
+    public List<Curso> buscarPor(String opcao, Object dado) throws ExcecaoDAO {
         
         try {         
             
@@ -16,15 +16,15 @@ public class DAOCurso extends DAOGenerico<Curso, Integer> {
             if (!(opcao.equals("SEM FILTRO"))) {
                
                 if (opcao.equals("CODIGO")) {
-                    sql += " and c.codigo = " + Integer.parseInt(dado);
+                    sql += " and c.codigo = " + dado;
                 }else if (opcao.equals("NOME")) {
-                    sql += " and c.nome like '%" + (String) dado + "%'";
+                    sql += " and c.nome like '%" + dado + "%'";
                 }else if (opcao.equals("ID PERIODO")) {
-                    sql += " and c.fkPeriodo = " + Integer.parseInt(dado);
+                    sql += " and c.fkPeriodo.codigo = " + dado;
                 }
             }
             
-            return em.createQuery(sql).getResultList();
+            return em.createQuery(sql, Curso.class).getResultList();
             
         } catch (Exception e) {
             throw new ExcecaoDAO("Houve erro ao pegar os registros!");

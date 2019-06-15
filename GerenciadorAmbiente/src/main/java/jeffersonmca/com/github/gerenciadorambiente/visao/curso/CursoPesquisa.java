@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoDAO;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Curso;
+import jeffersonmca.com.github.gerenciadorambiente.renderizadores.StrippedTableCellHandler;
 import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoCurso;
 import jeffersonmca.com.github.gerenciadorambiente.util.GerenciaRelatorio;
 
@@ -32,6 +33,11 @@ public class CursoPesquisa extends javax.swing.JFrame {
 
             try {
                 dados = service.buscarPor((String) ComboBoxOpcao.getSelectedItem(), textDado.getText());
+                
+                // Caso vier null, nao tem nada para atualizar
+                if (dados == null)
+                    return ;
+                
             } catch (ExcecaoDAO e) {
                 JOptionPane.showMessageDialog(this, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return ;
@@ -42,6 +48,9 @@ public class CursoPesquisa extends javax.swing.JFrame {
 
             tabModel = new CursoTableModel(dados);
             tableCursos.setModel(tabModel);
+            
+            // Melhorando o aspecto da grid
+            tableCursos.setDefaultRenderer(Object.class, new StrippedTableCellHandler());
         
         } finally {
             this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));

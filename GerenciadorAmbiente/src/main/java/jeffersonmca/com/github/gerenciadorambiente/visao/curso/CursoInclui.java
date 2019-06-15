@@ -197,7 +197,7 @@ public class CursoInclui extends javax.swing.JDialog {
             
             JOptionPane.showMessageDialog(this, 
                     "Informe o nome do curso",
-                    "Edição",
+                    "Inclusão",
                     JOptionPane.ERROR_MESSAGE);
             return;
         }

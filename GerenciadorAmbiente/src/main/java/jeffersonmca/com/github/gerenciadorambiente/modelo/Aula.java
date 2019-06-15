@@ -43,7 +43,7 @@ public class Aula {
     private Ambiente fkAmbiente;
     
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(name = "aul_turCodigo", nullable = false)
     private Turma turma;
 
     public Aula() {

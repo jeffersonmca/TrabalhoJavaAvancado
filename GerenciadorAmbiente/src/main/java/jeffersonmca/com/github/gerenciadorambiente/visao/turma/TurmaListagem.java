@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoDAO;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoServico;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Pessoa;
+import jeffersonmca.com.github.gerenciadorambiente.renderizadores.StrippedTableCellHandler;
 
 public class TurmaListagem extends javax.swing.JFrame {
 
@@ -57,6 +58,9 @@ public class TurmaListagem extends javax.swing.JFrame {
 
             tabModel = new TurmaTableModel(dados);
             tableTurmas.setModel(tabModel);
+            
+            // Melhorando o aspecto da grid
+            tableTurmas.setDefaultRenderer(Object.class, new StrippedTableCellHandler());
         
         } finally {
             this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -71,9 +75,10 @@ public class TurmaListagem extends javax.swing.JFrame {
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
 
             Integer codigo = tableTurmas.getSelectedRow();
-            System.out.println(codigo);
+
             if (codigo == -1)
                 return;
+            
             codigo = (Integer) tableTurmas.getValueAt(tableTurmas.getSelectedRow(), 0);
             
             Turma t = null;
@@ -95,6 +100,9 @@ public class TurmaListagem extends javax.swing.JFrame {
 
             tabModelAlunos = new AlunosTableModel(dadosAlunos);
             tableAlunos.setModel(tabModelAlunos);
+            
+            // Melhorando o aspecto da grid
+            tableAlunos.setDefaultRenderer(Object.class, new StrippedTableCellHandler());
         
         } finally {
             this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -393,7 +401,6 @@ public class TurmaListagem extends javax.swing.JFrame {
 
     private void tableTurmasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableTurmasKeyReleased
         // Atualiza os dados da grid dos Alunos
-        System.out.println(evt.getKeyCode());
         if ((evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN))
             atualizaDadosAlunos();
     }//GEN-LAST:event_tableTurmasKeyReleased

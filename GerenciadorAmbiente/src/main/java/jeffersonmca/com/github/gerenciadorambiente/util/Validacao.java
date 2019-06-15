@@ -1,16 +1,18 @@
 package jeffersonmca.com.github.gerenciadorambiente.util;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.List;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.EnumTipoPessoa;
-import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoValidacao;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Ambiente;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Aula;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Curso;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Disciplina;
+import jeffersonmca.com.github.gerenciadorambiente.modelo.Login;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Periodo;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Pessoa;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Turma;
@@ -94,7 +96,7 @@ public class Validacao {
         if (Alocado(id)) {
                   
             // Argumento eh do tipo esperado?
-            if (id instanceof Integer) {
+            if (id instanceof Integer) {            
 
                 // Eh valido para BD?
                 if ((Integer)id > 0) {
@@ -134,11 +136,20 @@ public class Validacao {
         return false;
     }
     
-    public static boolean Hora(Date hora) {
+    public static boolean Hora(String hora) {
         
         // Argumento esta vazio?
         if (Alocado(hora)) {
-           return true;
+        	
+            // Esta no formato correto ?
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        
+            try {
+                sdf.parse(hora);
+                return true;
+            } catch (ParseException ex) {
+                return false;
+            }
         }
         
         return false;
@@ -177,13 +188,13 @@ public class Validacao {
     	
     	// Argumento esta vazio?
         if (Alocado(instancia)) {
-
+            
             // Verifica se a hora eh valida
-            if (Validacao.Hora(instancia.getHorarioInicio())) {
+            if (Validacao.Hora(Conversoes.timeToStr(instancia.getHorarioInicio()))) {
 
                 // Verifica se a hora eh valida
-                if (Validacao.Hora(instancia.getHorarioTermino())) {
-
+                if (Validacao.Hora(Conversoes.timeToStr(instancia.getHorarioTermino()))) {
+                    
                     // Verifica se foi o enum esta preenchido
                     if (!(Validacao.Vazio(instancia.getDiaSemana()))) {
 
@@ -279,6 +290,42 @@ public class Validacao {
             // Verifica se o identificador eh valido
             if (Validacao.Identificador(instancia.getCodigo())) {
                 return Disciplina(instancia);
+            }
+        }
+        
+        return false;
+    }
+    
+    public static boolean Login(Login instancia) {
+    	
+    	// Argumento esta vazio?
+        if (Alocado(instancia)) {
+		        
+            // Verifica se existe um id
+            if (!Validacao.Vazio(instancia.getId())) {
+
+                // Verifica se existe uma senha
+                if (!Validacao.Vazio(instancia.getSenha())) {
+                    
+                    // Verifica se a pessoa eh valida
+                    if (Validacao.Pessoa(instancia.getUsuario())) {
+                        return true;
+                    }
+                }
+            }
+        }
+	    
+        return false;
+    }
+    
+    public static boolean LoginEdita(Login instancia) {
+    	
+    	// Argumento esta vazio?
+        if (Alocado(instancia)) {
+            
+            // Verifica se o identificador eh valido
+            if (Validacao.Identificador(instancia.getCodigo())) {
+                return Login(instancia);
             }
         }
         

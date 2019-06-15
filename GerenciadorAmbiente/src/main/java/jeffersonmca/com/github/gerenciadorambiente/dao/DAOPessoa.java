@@ -3,7 +3,6 @@ package jeffersonmca.com.github.gerenciadorambiente.dao;
 import java.util.List;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoDAO;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Pessoa;
-import jeffersonmca.com.github.gerenciadorambiente.modelo.Turma;
 
 public class DAOPessoa extends DAOGenerico<Pessoa, Integer> {
 
@@ -19,7 +18,7 @@ public class DAOPessoa extends DAOGenerico<Pessoa, Integer> {
         }
     }
 
-    public List<Pessoa> buscarPor(String opcao, String dado) throws ExcecaoDAO {
+    public List<Pessoa> buscarPor(String opcao, Object dado) throws ExcecaoDAO {
         
         try {         
             
@@ -29,20 +28,20 @@ public class DAOPessoa extends DAOGenerico<Pessoa, Integer> {
             if (!(opcao.equals("SEM FILTRO"))) {
                
                 if (opcao.equals("CODIGO")) {
-                    sql += " and p.codigo = " + Integer.parseInt(dado);
+                    sql += " and p.codigo = " + dado;
                 }else if (opcao.equals("NOME")) {
-                    sql += " and p.nome like '%" + (String) dado + "%'";
+                    sql += " and p.nome like '%" + dado + "%'";
                 }else if (opcao.equals("E-MAIL")) {
-                    sql += " and p.email like '%" + (String) dado + "%'";
+                    sql += " and p.email like '%" + dado + "%'";
                 }else if (opcao.equals("TIPO PESSOA")) {
-                    sql += " and p.tipoPessoa like '%" + (String) dado + "%'";
+                    sql += " and p.tipoPessoa like '%" + dado + "%'";
                 }
             }
             
-            return em.createQuery(sql).getResultList();
+            return em.createQuery(sql, Pessoa.class).getResultList();
             
         } catch (Exception e) {
-            throw new ExcecaoDAO("Houve erro ao pegar os alunos!");
+            throw new ExcecaoDAO("Houve erro ao pegar os registros!");
         }
     }
 

@@ -100,6 +100,31 @@ public class ServicoPeriodo {
     }
     
     public List<Periodo> buscarPor(String opcao, String dado) throws ExcecaoDAO {
-        return dao.buscarPor(opcao, dado);
+        
+        // Se a opcao for SEM FILTRO, nao importa se o resto esta vazio
+        if (opcao.equals("SEM FILTRO")) {
+            return dao.buscarPor(opcao, null);
+        }
+        
+        // Se a opcao NAO for SEM FILTRO, agora iremos verificar se o campo esta vazio
+        if  (!(opcao.equals("SEM FILTRO")) && (!Validacao.Vazio(dado))) {
+            
+            // Devem ser INTEGER
+            if ((opcao.equals("CODIGO")) ||
+                (opcao.equals("ANO"))) {
+                
+                // Verifica se string eh numero
+                boolean ehNumero = dado.matches("[0-9]+");
+                
+                if (ehNumero)                
+                    return dao.buscarPor(opcao, Integer.parseInt(dado));
+            }
+            
+            // Devem ser STRING
+            if (opcao.equals("SEMESTRE"))
+                return dao.buscarPor(opcao, dado);
+        }
+        
+        return null;
     }
 }

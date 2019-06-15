@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoDAO;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoServico;
+import jeffersonmca.com.github.gerenciadorambiente.renderizadores.StrippedTableCellHandler;
 
 public class PeriodoListagem extends javax.swing.JFrame {
 
@@ -44,6 +45,9 @@ public class PeriodoListagem extends javax.swing.JFrame {
 
             tabModel = new PeriodoTableModel(dados);
             tablePeriodos.setModel(tabModel);
+            
+            // Melhorando o aspecto da grid
+            tablePeriodos.setDefaultRenderer(Object.class, new StrippedTableCellHandler());
         
         } finally {
             this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));

@@ -1,28 +1,64 @@
 package jeffersonmca.com.github.gerenciadorambiente.modelo;
 
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
+@Entity
 public class Login {
     
-    private Integer id;
+    // Constantes contendo o tamanho das colunas no banco de dados
+    @Transient
+    private final int TAMANHO_ID = 40;
+    
+    @Transient
+    private final int TAMANHO_SENHA = 20;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "log_codigo")
+    private Integer codigo;
+    
+    @Column(name = "log_id", nullable = false, length = TAMANHO_ID)
+    private String id;
+    
+    @Column(name = "log_senha", nullable = false, length = TAMANHO_SENHA)
     private String senha;
+    
+    @ManyToOne
+    @JoinColumn(name = "log_pesCodigo", nullable = false)
     private Pessoa usuario;
 
     public Login() {
         
-    }
-
-    public Login(Integer id, String senha, Pessoa usuario) {
+    }    
+    
+    public Login(Integer codigo, String id, String senha, Pessoa usuario) {
+        this.codigo = codigo;
         this.id = id;
         this.senha = senha;
         this.usuario = usuario;
     }
 
-    public Integer getId() {
+    public Integer getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -45,7 +81,7 @@ public class Login {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 11 * hash + Objects.hashCode(this.id);
+        hash = 29 * hash + Objects.hashCode(this.codigo);
         return hash;
     }
 
@@ -61,7 +97,7 @@ public class Login {
             return false;
         }
         final Login other = (Login) obj;
-        if (!Objects.equals(this.id, other.id)) {
+        if (!Objects.equals(this.codigo, other.codigo)) {
             return false;
         }
         return true;
@@ -69,6 +105,6 @@ public class Login {
 
     @Override
     public String toString() {
-        return this.usuario.toString();
-    }
+        return this.id;
+    }   
 }

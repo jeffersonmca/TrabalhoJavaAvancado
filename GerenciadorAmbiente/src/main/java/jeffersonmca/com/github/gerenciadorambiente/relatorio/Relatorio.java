@@ -22,8 +22,9 @@ public class Relatorio {
 
     public void geraRelatorio(boolean visualizar, String nomeRelatorio, HashMap<String, Object> parametros, List dados) throws JRException, FileNotFoundException, Exception {
                
-        InputStream arquivo = getClass().getResourceAsStream("/Relatorios/" + nomeRelatorio + ".jasper");
-              
+//        InputStream arquivo = getClass().getResourceAsStream("/Relatorios/MyReports" + nomeRelatorio + ".jasper");
+        InputStream arquivo = this.getClass().getResourceAsStream("/" + nomeRelatorio + ".jasper");
+        
         if (arquivo == null)
             throw new Exception("Relatório não encontrado!");
       
@@ -53,7 +54,7 @@ public class Relatorio {
     
     public void geraRelatorio(boolean visualizar, String nomeRelatorio, HashMap<String, Object> parametros, Connection conexao) throws JRException, FileNotFoundException, Exception {
                
-        InputStream arquivo = getClass().getResourceAsStream("/Relatorios/" + nomeRelatorio + ".jasper");
+        InputStream arquivo = getClass().getResourceAsStream("/Relatorios/MyReports" + nomeRelatorio + ".jasper");
               
         if (arquivo == null)
             throw new Exception("Relatório não encontrado!");

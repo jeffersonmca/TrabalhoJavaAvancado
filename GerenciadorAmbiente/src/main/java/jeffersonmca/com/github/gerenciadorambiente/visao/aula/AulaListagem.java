@@ -1,5 +1,7 @@
 package jeffersonmca.com.github.gerenciadorambiente.visao.aula;
 
+import jeffersonmca.com.github.gerenciadorambiente.renderizadores.DateTableCellHandler;
+import jeffersonmca.com.github.gerenciadorambiente.renderizadores.StrippedTableCellHandler;
 import java.awt.Cursor;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Aula;
 import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoAula;
@@ -43,6 +45,13 @@ public class AulaListagem extends javax.swing.JFrame {
 
             tabModel = new AulaTableModel(dados);
             tableAulas.setModel(tabModel);
+            
+            // Modificando os campos de hora
+            tableAulas.getColumnModel().getColumn(4).setCellRenderer(new DateTableCellHandler());
+            tableAulas.getColumnModel().getColumn(5).setCellRenderer(new DateTableCellHandler());
+            
+            // Melhorando o aspecto da grid
+            tableAulas.setDefaultRenderer(Object.class, new StrippedTableCellHandler());
         
         } finally {
             this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));

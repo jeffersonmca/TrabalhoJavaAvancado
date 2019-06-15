@@ -6,7 +6,7 @@ import jeffersonmca.com.github.gerenciadorambiente.modelo.Periodo;
 
 public class DAOPeriodo extends DAOGenerico<Periodo, Integer> {
 
-    public List<Periodo> buscarPor(String opcao, String dado) throws ExcecaoDAO {
+    public List<Periodo> buscarPor(String opcao, Object dado) throws ExcecaoDAO {
         
         try {         
             
@@ -16,15 +16,15 @@ public class DAOPeriodo extends DAOGenerico<Periodo, Integer> {
             if (!(opcao.equals("SEM FILTRO"))) {
                
                 if (opcao.equals("CODIGO")) {
-                    sql += " and p.codigo = " + Integer.parseInt(dado);
+                    sql += " and p.codigo = " + dado;
                 }else if (opcao.equals("ANO")) {
-                    sql += " and p.ano = " + Integer.parseInt(dado);
+                    sql += " and p.ano = " + dado;
                 }else if (opcao.equals("SEMESTRE")) {
-                    sql += " and p.semestre like '%" + (String) dado + "%'";
+                    sql += " and p.semestre like '%" + dado + "%'";
                 }
             }
             
-            return em.createQuery(sql).getResultList();
+            return em.createQuery(sql, Periodo.class).getResultList();
             
         } catch (Exception e) {
             throw new ExcecaoDAO("Houve erro ao pegar os registros!");

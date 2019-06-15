@@ -6,31 +6,31 @@ import jeffersonmca.com.github.gerenciadorambiente.modelo.Aula;
 
 public class DAOAula extends DAOGenerico<Aula, Integer> {
     
-    public List<Aula> buscarPor(String opcao, String dado) throws ExcecaoDAO {
+    public List<Aula> buscarPor(String opcao, Object dado) throws ExcecaoDAO {
         
         try {         
             
             String sql = "select a from Aula a "
-                    + " where (1 = 1) ";
+                    + " where (1 = 1)";
         
             if (!(opcao.equals("SEM FILTRO"))) {
                
                 if (opcao.equals("CODIGO")) {
-                    sql += " and a.codigo = " + Integer.parseInt(dado);
+                    sql += " and a.codigo = " + dado;
                 }else if (opcao.equals("HORARIO INICIO")) {
-                    sql += " and a.horarioInicio like '%" + (String) dado + "%'";
+                    sql += " and a.horarioInicio like '%" + dado + "%'";
                 }else if (opcao.equals("HORARIO TERMINO")) {
-                    sql += " and a.horarioTermino like '%" + (String) dado + "%'";
+                    sql += " and a.horarioTermino like '%" + dado + "%'";
                 }else if (opcao.equals("DIA SEMANA")) {
-                    sql += " and a.diaSemana like '%" + (String) dado + "%'";
+                    sql += " and a.diaSemana like '%" + dado + "%'";
                 }else if (opcao.equals("ID AMBIENTE")) {
-                    sql += " and a.fkAmbiente = " + Integer.parseInt(dado);
+                    sql += " and a.fkAmbiente.codigo = " + dado;
                 }else if (opcao.equals("ID TURMA")) {
-                    sql += " and a.turma = " + Integer.parseInt(dado);
+                    sql += " and a.turma.codigo = " + dado;
                 }
             }
             
-            return em.createQuery(sql).getResultList();
+            return em.createQuery(sql, Aula.class).getResultList();
             
         } catch (Exception e) {
             throw new ExcecaoDAO("Houve erro ao pegar os registros!");

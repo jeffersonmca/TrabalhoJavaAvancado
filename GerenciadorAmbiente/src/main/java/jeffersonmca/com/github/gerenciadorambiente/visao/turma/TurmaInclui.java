@@ -33,6 +33,7 @@ import jeffersonmca.com.github.gerenciadorambiente.modelo.Turma;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Disciplina;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Periodo;
 import jeffersonmca.com.github.gerenciadorambiente.modelo.Pessoa;
+import jeffersonmca.com.github.gerenciadorambiente.renderizadores.StrippedTableCellHandler;
 import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoDisciplina;
 import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoPeriodo;
 import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoPessoa;
@@ -160,6 +161,9 @@ public class TurmaInclui extends javax.swing.JDialog {
     private void carregaTable() {
         AlunosTableModel atm = new AlunosTableModel(alunos);
         tableAlunos.setModel(atm);
+        
+        // Melhorando o aspecto da grid
+        tableAlunos.setDefaultRenderer(Object.class, new StrippedTableCellHandler());
         
         // Preenche combo box do Aluno
         PreencheComboBoxAluno();
@@ -428,7 +432,7 @@ public class TurmaInclui extends javax.swing.JDialog {
         jPanel6Layout.setVerticalGroup(jPanel6Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -459,12 +463,13 @@ public class TurmaInclui extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 164, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1))
         );
 
-        setSize(new Dimension(436, 664));
+        setSize(new Dimension(436, 676));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
