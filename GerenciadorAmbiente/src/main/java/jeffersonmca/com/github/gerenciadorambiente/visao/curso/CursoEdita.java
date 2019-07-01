@@ -91,7 +91,7 @@ public class CursoEdita extends javax.swing.JDialog {
     }
     
     // Como esta editando os dados de um Ambiente especifico, os campos seram preenchidos
-        // com os dados desse objeto para entao poder edita-los
+    // com os dados desse objeto para entao poder edita-los
     private void PreencheCampos(Curso curso) {
         textNome.setText(curso.getNome());
         ComboBoxPeriodo.setSelectedItem(curso.getFkPeriodo());

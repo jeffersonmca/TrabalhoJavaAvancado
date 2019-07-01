@@ -3,6 +3,7 @@ package jeffersonmca.com.github.gerenciadorambiente.visao.ambiente;
 import java.awt.Cursor;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import javax.swing.JOptionPane;
 import jeffersonmca.com.github.gerenciadorambiente.excecoes.ExcecaoDAO;
@@ -56,13 +57,106 @@ public class AmbientePesquisa extends javax.swing.JFrame {
             this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
         
-        valoresPadrao();
+//        valoresPadrao();
     }
     
     // Sempre que atualizar a grid ira selecionar a opcao "SEM FILTRO" e limpar o campo text
     private void valoresPadrao() {
         ComboBoxOpcao.setSelectedIndex(0);
         textDado.setText("");
+    }
+    
+    // Abre o relatorio na tela ou gera o pdf do mesmo
+    private void Relatorio(boolean visualizar) {
+        
+        try {
+            
+            GerenciaRelatorio g = new GerenciaRelatorio();
+            
+            // Qual campo do BD vai ser pesquisado
+            String pAtributo = null;
+            
+            // Dado que foi pesquisado que esta no text
+            String pDado = textDado.getText();
+            
+            // Hash contendo o campo pesquisado pelo valor pesquisado 
+            HashMap<String, Object> parametros = new HashMap<String, Object>();
+            
+            // Selecionou qual campo do BD?
+            switch (ComboBoxOpcao.getSelectedItem().toString()) {
+                
+                // Busca todos os dados
+                case "SEM FILTRO":
+                    pAtributo = "1";
+                    pDado = "1";
+                    parametros.put("pAtributo", pAtributo);
+                    parametros.put("pDado", pDado);
+                    g.configuraRelatorio(visualizar, "Ambientes", parametros);
+                    break;
+                case "CODIGO":
+                    pAtributo = "amb_codigo";
+                    parametros.put("pAtributo", pAtributo);
+                    parametros.put("pDado", pDado);
+                    g.configuraRelatorio(visualizar, "Ambientes", parametros);
+                    break;
+                case "NOME":
+                    pAtributo = "amb_nome";
+                    parametros.put("pAtributo", pAtributo);
+                    parametros.put("pDado", pDado);
+                    g.configuraRelatorio(visualizar, "AmbientesLike", parametros);
+                    break;
+                case "TIPO AMBIENTE":
+                    pAtributo = "amb_tipCodigo";
+                    parametros.put("pAtributo", pAtributo);
+                    parametros.put("pDado", pDado);
+                    g.configuraRelatorio(visualizar, "AmbientesLike", parametros);
+                    break;
+                case "CAPACIDADE":
+                    pAtributo = "amb_capacidade";
+                    parametros.put("pAtributo", pAtributo);
+                    parametros.put("pDado", pDado);
+                    g.configuraRelatorio(visualizar, "Ambientes", parametros);
+                    break;
+                case "LOCALIZAÇÃO":
+                    pAtributo = "amb_localizacao";
+                    parametros.put("pAtributo", pAtributo);
+                    parametros.put("pDado", pDado);
+                    g.configuraRelatorio(visualizar, "AmbientesLike", parametros);
+                    break;
+            }
+            
+        } catch (SQLException|FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    // Abre o relatorio na tela ou gera o pdf do mesmo
+    private void RelatorioGrafico(boolean visualizar) {
+        
+        try {
+            
+            GerenciaRelatorio g = new GerenciaRelatorio();
+            
+            // Qual campo do BD vai ser pesquisado
+            String pAtributo = null;
+            
+            // Dado que foi pesquisado que esta no text
+            String pDado = textDado.getText();
+            
+            // Hash contendo o campo pesquisado pelo valor pesquisado 
+            HashMap<String, Object> parametros = new HashMap<String, Object>();
+            
+            parametros.put("pAtributo", "Nulo");
+            parametros.put("pDado", "Nulo");
+            g.configuraRelatorio(visualizar, "AmbientesGrafico", parametros);
+            
+        } catch (SQLException|FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     @SuppressWarnings("unchecked")
@@ -81,6 +175,7 @@ public class AmbientePesquisa extends javax.swing.JFrame {
         buttonVisualizarRelatorio = new javax.swing.JButton();
         buttonImprimirRelatorio = new javax.swing.JButton();
         buttonSair = new javax.swing.JButton();
+        checkBoxGraficoTipoAmbiente = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pesquisa de Ambiente");
@@ -146,8 +241,8 @@ public class AmbientePesquisa extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,12 +275,16 @@ public class AmbientePesquisa extends javax.swing.JFrame {
             }
         });
 
+        checkBoxGraficoTipoAmbiente.setText("Gráfico Tipo Ambiente");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(checkBoxGraficoTipoAmbiente)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonImprimirRelatorio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonVisualizarRelatorio)
@@ -198,7 +297,8 @@ public class AmbientePesquisa extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(buttonSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonVisualizarRelatorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(buttonImprimirRelatorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(buttonImprimirRelatorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(checkBoxGraficoTipoAmbiente))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -235,30 +335,20 @@ public class AmbientePesquisa extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonSairActionPerformed
 
     private void buttonVisualizarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVisualizarRelatorioActionPerformed
-        
-        try {
-            
-            GerenciaRelatorio g = new GerenciaRelatorio();
-            g.configuraRelatorio(true, "Ambientes");
-            
-        } catch (SQLException|FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        if (!checkBoxGraficoTipoAmbiente.isSelected()) {
+            // Abre o relatorio na tela ou gera o pdf do mesmo
+            Relatorio(true);
+        } else {
+            RelatorioGrafico(true);
         }
     }//GEN-LAST:event_buttonVisualizarRelatorioActionPerformed
 
     private void buttonImprimirRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonImprimirRelatorioActionPerformed
-        
-        try {
-            
-            GerenciaRelatorio g = new GerenciaRelatorio();
-            g.configuraRelatorio(false, "Ambientes");
-            
-        } catch (SQLException|FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        if (!checkBoxGraficoTipoAmbiente.isSelected()) {
+            // Abre o relatorio na tela ou gera o pdf do mesmo
+            Relatorio(false);
+        } else {
+            RelatorioGrafico(false);
         }
     }//GEN-LAST:event_buttonImprimirRelatorioActionPerformed
 
@@ -268,6 +358,7 @@ public class AmbientePesquisa extends javax.swing.JFrame {
     private javax.swing.JButton buttonPesquisar;
     private javax.swing.JButton buttonSair;
     private javax.swing.JButton buttonVisualizarRelatorio;
+    private javax.swing.JCheckBox checkBoxGraficoTipoAmbiente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

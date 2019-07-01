@@ -159,15 +159,15 @@ public class TurmaEdita extends javax.swing.JDialog {
     
     // Preenche combo box do Aluno
     private void PreencheComboBoxAluno() {
-        List<Pessoa> lista4 = null;
+        List<Pessoa> lista = null;
         try {
-            lista4 = aluServico.buscarAlunosForaDaGrid(alunos);
+            lista = aluServico.buscarAlunosForaDaGrid(alunos);
         } catch (ExcecaoDAO ex) {}
         
-        Vector<Pessoa> vetor4 = new Vector<>(lista4);
+        Vector<Pessoa> vetor = new Vector<>(lista);
         
         DefaultComboBoxModel dcbmAluno =
-               new DefaultComboBoxModel(vetor4);
+               new DefaultComboBoxModel(vetor);
         ComboBoxAluno.setModel(dcbmAluno);
         
         // Nao coloca o foco em nenhum nome

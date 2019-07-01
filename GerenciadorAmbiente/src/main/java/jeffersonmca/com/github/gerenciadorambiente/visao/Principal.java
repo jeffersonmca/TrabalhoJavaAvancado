@@ -78,15 +78,6 @@ public class Principal extends javax.swing.JFrame {
         pesMenuPeriodo = new javax.swing.JMenuItem();
         pesMenuPessoa = new javax.swing.JMenuItem();
         pesMenuTurma = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        relMenuAmbiente = new javax.swing.JMenuItem();
-        relMenuAula = new javax.swing.JMenuItem();
-        relMenuCurso = new javax.swing.JMenuItem();
-        relMenuDisciplina = new javax.swing.JMenuItem();
-        relMenuLogin = new javax.swing.JMenuItem();
-        relMenuPeriodo = new javax.swing.JMenuItem();
-        relMenuPessoa = new javax.swing.JMenuItem();
-        relMenuTurma = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         conMenuLogout = new javax.swing.JMenuItem();
 
@@ -132,10 +123,11 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelIdLogado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(labelUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
@@ -279,39 +271,6 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
-        jMenu2.setText("Relatório");
-
-        relMenuAmbiente.setText("Ambiente");
-        relMenuAmbiente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                relMenuAmbienteActionPerformed(evt);
-            }
-        });
-        jMenu2.add(relMenuAmbiente);
-
-        relMenuAula.setText("Aula");
-        jMenu2.add(relMenuAula);
-
-        relMenuCurso.setText("Curso");
-        jMenu2.add(relMenuCurso);
-
-        relMenuDisciplina.setText("Disciplina");
-        jMenu2.add(relMenuDisciplina);
-
-        relMenuLogin.setText("Login");
-        jMenu2.add(relMenuLogin);
-
-        relMenuPeriodo.setText("Período");
-        jMenu2.add(relMenuPeriodo);
-
-        relMenuPessoa.setText("Pessoa");
-        jMenu2.add(relMenuPessoa);
-
-        relMenuTurma.setText("Turma");
-        jMenu2.add(relMenuTurma);
-
-        jMenuBar1.add(jMenu2);
-
         jMenu4.setText("Configurações");
 
         conMenuLogout.setText("Logout");
@@ -377,10 +336,6 @@ public class Principal extends javax.swing.JFrame {
         TurmaListagem tela = new TurmaListagem();
         tela.setVisible(true);
     }//GEN-LAST:event_cadMenuTurmaActionPerformed
-
-    private void relMenuAmbienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relMenuAmbienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_relMenuAmbienteActionPerformed
 
     private void pesMenuAmbienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesMenuAmbienteActionPerformed
         AmbientePesquisa tela = new AmbientePesquisa();
@@ -461,7 +416,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
@@ -477,13 +431,5 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem pesMenuPeriodo;
     private javax.swing.JMenuItem pesMenuPessoa;
     private javax.swing.JMenuItem pesMenuTurma;
-    private javax.swing.JMenuItem relMenuAmbiente;
-    private javax.swing.JMenuItem relMenuAula;
-    private javax.swing.JMenuItem relMenuCurso;
-    private javax.swing.JMenuItem relMenuDisciplina;
-    private javax.swing.JMenuItem relMenuLogin;
-    private javax.swing.JMenuItem relMenuPeriodo;
-    private javax.swing.JMenuItem relMenuPessoa;
-    private javax.swing.JMenuItem relMenuTurma;
     // End of variables declaration//GEN-END:variables
 }

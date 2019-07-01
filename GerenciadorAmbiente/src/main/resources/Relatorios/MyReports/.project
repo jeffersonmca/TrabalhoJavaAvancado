@@ -20,4 +20,26 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>net.sf.jasperreports.nature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>AmbientesGrafico.jasper</name>
+			<type>1</type>
+			<location>/home/jefferson/Downloads/TrabalhoJavaAvancado/GerenciadorAmbiente/src/main/resources/Relatorios/MyReports/AmbientesGrafico.jasper</location>
+		</link>
+		<link>
+			<name>AmbientesGrafico.jrxml</name>
+			<type>1</type>
+			<location>/home/jefferson/Downloads/TrabalhoJavaAvancado/GerenciadorAmbiente/src/main/resources/Relatorios/MyReports/AmbientesGrafico.jrxml</location>
+		</link>
+		<link>
+			<name>AmbientesLike.jasper</name>
+			<type>1</type>
+			<location>/home/jefferson/Downloads/TrabalhoJavaAvancado/GerenciadorAmbiente/src/main/resources/Relatorios/MyReports/AmbientesLike.jasper</location>
+		</link>
+		<link>
+			<name>AmbientesLike.jrxml</name>
+			<type>1</type>
+			<location>/home/jefferson/Downloads/TrabalhoJavaAvancado/GerenciadorAmbiente/src/main/resources/Relatorios/MyReports/AmbientesLike.jrxml</location>
+		</link>
+	</linkedResources>
 </projectDescription>
