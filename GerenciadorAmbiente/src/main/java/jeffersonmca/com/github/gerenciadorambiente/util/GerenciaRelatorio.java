@@ -5,11 +5,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
-import jeffersonmca.com.github.gerenciadorambiente.modelo.Ambiente;
 import jeffersonmca.com.github.gerenciadorambiente.relatorio.Relatorio;
-import jeffersonmca.com.github.gerenciadorambiente.servico.ServicoAmbiente;
 import net.sf.jasperreports.engine.JRException;
 
 public class GerenciaRelatorio {
@@ -42,9 +39,6 @@ public class GerenciaRelatorio {
         
         // Classe auxiliar para gerar o relatorio
         Relatorio relatorio = new Relatorio();
-        
-        ServicoAmbiente servico = new ServicoAmbiente();
-        List<Ambiente> ambientes = servico.buscarTodos();
         
         if (opcao)
              relatorio.geraRelatorio(opcao, nomeRelatorio, parametros, conexao);
